@@ -12,7 +12,7 @@ except IOError:
 # line, it's possible required libraries won't be in your searchable path
 #
 
-from . import application
+from __init__.py import application
 
 #
 # Below for testing only
