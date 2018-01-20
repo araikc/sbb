@@ -12,6 +12,10 @@ except IOError:
 # line, it's possible required libraries won't be in your searchable path
 #
 
+import sys
+curDir = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, curDir)
+
 from app import application
 
 #
