@@ -18,7 +18,6 @@ import os
 application = Flask(__name__)
 admin = Admin(application, index_view=MyAdminIndexView(), base_template='admin/my_master.html', template_mode='bootstrap3')
 
-from lib import filters
 
 # config
 application.config.from_object('config.DevelopConfig')
@@ -76,6 +75,8 @@ def inject_finance():
 			ern += i.currentBalance - i.initialInvestment
 		return dict(g_investment=inv, g_earning=ern)
 	return dict()
+
+from lib import filters
 
 # register views
 application.register_blueprint(home)
