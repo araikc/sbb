@@ -1,7 +1,7 @@
 from flask import Blueprint, flash, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
-from ..lib.decorators import check_confirmed
-from ..forms import DepositForm, csrf
+from lib.decorators import check_confirmed
+from forms import DepositForm, csrf
 import datetime
 
 userprofile = Blueprint('userprofile', __name__)
@@ -16,8 +16,8 @@ def profile():
 @login_required
 @check_confirmed
 def dashboard():
-	from .. import db
-	from ..models import PaymentSystems
+	from app import db
+	from models import PaymentSystems
 	#investments = AccountInvestments.query.filter_by(accountId=current_user.account.id).limit(5)
 	investments = current_user.account.investments
 	return render_template('profile/dashboard.html', 
@@ -28,9 +28,9 @@ def dashboard():
 @login_required
 @check_confirmed
 def makedeposit():
-	from .. import db
-	from ..models import InvestmentPlan
-	from ..models import PaymentSystems
+	from app import db
+	from models import InvestmentPlan
+	from models import PaymentSystems
 	ps = PaymentSystems.query.all()
 	investmentPlans = InvestmentPlan.query.all()
 	return render_template('profile/makedeposit.html', 
@@ -92,7 +92,7 @@ def confirm_deposit():
 @csrf.exempt
 def validate_deposit():
 	if request.method == 'POST':
-		from .. import application
+		from app import application
 		import hashlib
 
 		pmsecrethash = hashlib.md5(application.config['PMSECRET']).hexdigest().upper()
@@ -175,7 +175,7 @@ def validate_deposit():
 					####
 
 					#send email to user
-					from ..lib.email2 import send_email
+					from lib.email2 import send_email
 					html = render_template('home/deposit_success_email.html', pam=pam, pu=pu, pyacc=pyacc, pbn=pbn, pracc=pracc)
 					subject = "Congradulations! You have successfully deposited."
 					send_email(current_user.email, subject, html, application.config)
@@ -200,7 +200,7 @@ def success_deposit():
 		if pyacc and pam and pu and pbn and pracc and pid and ts and v2:
 			
 			#TEMP
-			from .. import application
+			from app import application
 			import hashlib
 
 			pmsecrethash = hashlib.md5(application.config['PMSECRET']).hexdigest().upper()
@@ -208,11 +208,11 @@ def success_deposit():
 			verhash = hashlib.md5(ver).hexdigest().upper()
 
 			if v2 == verhash:
-				from .. import db
-				from ..models import Transaction
-				from ..models import AccountInvestments
-				from ..models import Referral
-				from ..models import ReferralBonuses
+				from app import db
+				from models import Transaction
+				from models import AccountInvestments
+				from models import Referral
+				from models import ReferralBonuses
 
 				trans = Transaction.query.filter_by(id=pid).first()
 				if trans.status == 0:
@@ -294,7 +294,7 @@ def success_deposit():
 					####
 
 					#send email to user
-					from ..lib.email2 import send_email
+					from lib.email2 import send_email
 					html = render_template('home/deposit_success_email.html', pam=pam, pu=pu, pyacc=pyacc, pbn=pbn, pracc=pracc)
 					subject = "Congradulations! You have successfully deposited."
 					send_email(current_user.email, subject, html, application.config)
@@ -345,8 +345,8 @@ def fail_deposit():
 @login_required
 @check_confirmed
 def deposits():
-	from .. import db
-	from ..models import AccountInvestments
+	from app import db
+	from models import AccountInvestments
 	investments = current_user.account.investments.filter_by(isActive=True).order_by(AccountInvestments.endDatetime.desc()).limit(5)
 	return render_template('profile/deposits.html', 
 							accId=current_user.account.id,
@@ -356,8 +356,8 @@ def deposits():
 @login_required
 @check_confirmed
 def activity():
-	from .. import db
-	from ..models import Transaction
+	from app import db
+	from models import Transaction
 	acts = current_user.account.transactions.order_by(Transaction.execDatetime.desc()).limit(5)
 	return render_template('profile/activity.html', 
 							accId=current_user.account.id,
@@ -368,9 +368,9 @@ def activity():
 @login_required
 @check_confirmed
 def referrals():
-	from .. import db
-	from ..models import Account
-	from ..models import ReferralBonuses
+	from app import db
+	from models import Account
+	from models import ReferralBonuses
 
 	data = []
 	for rb in current_user.account.referralBonuses.order_by(ReferralBonuses.dateTime.desc()).limit(5):
@@ -389,10 +389,10 @@ def referrals():
 @login_required
 @check_confirmed
 def wallets():
-	from .. import db
-	from ..models import Wallet
-	from ..models import AccountWallets
-	from ..forms import WalletsForm
+	from app import db
+	from models import Wallet
+	from models import AccountWallets
+	from forms import WalletsForm
 
 	sql_cmd = '''select wallet.id, wallet.name, account_wallets.walletValue as value, wallet.unit, wallet.paymentSystemId as psid
 	from wallet left join account_wallets 
@@ -447,8 +447,8 @@ def wallets():
 @login_required
 @check_confirmed
 def withdraw():
-	from .. import db
-	from ..models import Wallet
+	from app import db
+	from models import Wallet
 	accWallets = current_user.account.wallets.all()
 
 	accWallets = None if len(accWallets) == 0 else accWallets
@@ -461,17 +461,16 @@ def withdraw():
 @login_required
 @check_confirmed
 def confirm_withdraw():
-	from .. import db
-	from .. import application
+	from app import db, application
 
 	accWallets = current_user.account.wallets.all()
 
 	accWallets = None if len(accWallets) == 0 else accWallets
 
-	from ..models import AccountWallets
-	from ..forms import WithdrawForm
-	from ..models import TransactionType
-	from ..models import Transaction
+	from models import AccountWallets
+	from forms import WithdrawForm
+	from models import TransactionType
+	from models import Transaction
 
 	form = WithdrawForm(request.form)
 	if form.validate():
@@ -513,17 +512,16 @@ def confirm_withdraw():
 @check_confirmed
 def make_withdraw():
 
-	from .. import db
-	from .. import application
+	from app import db, application
 	accWallets = current_user.account.wallets.all()
 
 	accWallets = None if len(accWallets) == 0 else accWallets
 
-	from ..models import AccountWallets
-	from ..models import Withdraws
-	from ..models import Transaction
-	from ..models import TransactionType
-	from ..forms import ConfirmWithdrawForm
+	from models import AccountWallets
+	from models import Withdraws
+	from models import Transaction
+	from models import TransactionType
+	from forms import ConfirmWithdrawForm
 
 	form = ConfirmWithdrawForm(request.form)
 	if form.validate():
@@ -551,7 +549,7 @@ def make_withdraw():
 				return render_template('profile/withdraw.html', 
 								accWallets=accWallets)
 		else:
-			from ..lib.email2 import send_email
+			from lib.email2 import send_email
 			html = render_template('home/withdraw_request_email.html', account=current_user.account, amount=amount, accW=accW)
 			subject = "New withdraw request"
 			send_email(application.config['ADMIN_EMAIL'], subject, html, application.config)
@@ -580,7 +578,7 @@ def make_withdraw():
 @login_required
 @check_confirmed
 def withdraws_history():
-	from ..models import Withdraws
+	from models import Withdraws
 
 	withs = current_user.account.withdraws.order_by(Withdraws.dateTime.desc()).limit(5)
 

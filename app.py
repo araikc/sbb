@@ -8,18 +8,17 @@ from flask_mail import Mail
 # from flask_wtf.csrf import CSRFProtect
 from forms import csrf
 from werkzeug.contrib.fixers import ProxyFix
-from .views.home import home
-from .views.profile import userprofile
-from .views.admin import MyAdminIndexView, UserModelView, AccountModelView, WithdrawModelView
+from views.home import home
+from views.profile import userprofile
+from views.admin import MyAdminIndexView, UserModelView, AccountModelView, WithdrawModelView
 
 import datetime
 import os
-import appconfig
 
 application = Flask(__name__)
 admin = Admin(application, index_view=MyAdminIndexView(), base_template='admin/my_master.html', template_mode='bootstrap3')
 
-from .lib import filters
+from lib import filters
 
 # config
 application.config.from_object('config.DevelopConfig')

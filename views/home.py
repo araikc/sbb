@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request, session, g
 from flask_login import login_user, logout_user, login_required, current_user
-from ..forms import LoginForm, RegistrationForm, RequestResetPassordForm, ResetPassordForm
+from forms import LoginForm, RegistrationForm, RequestResetPassordForm, ResetPassordForm
 from datetime import datetime
-from ..lib.token2 import generate_confirmation_token, confirm_token
-from ..lib.decorators import check_confirmed, logout_required
+from lib.token2 import generate_confirmation_token, confirm_token
+from lib.decorators import check_confirmed, logout_required
 from datetime import datetime
 
 home = Blueprint('home', __name__)
@@ -97,10 +97,10 @@ def register():
 @home.route('/login',methods=['GET','POST'])
 @logout_required
 def login():
-	from .. import db
-	from ..models import User
-	from ..models import Transaction
-	from ..models import TransactionType
+	from app import db
+	from models import User
+	from models import Transaction
+	from models import TransactionType
 	if request.method == 'GET':
 	    return render_template('home/login.html')
 	form = LoginForm(request.form)
@@ -144,8 +144,8 @@ def view_reset_pass():
 
 @home.route('/confirm/<token>')
 def confirm_email(token):
-	from .. import application, db
-	from ..models import User
+	from app import application, db
+	from models import User
 	email = None
 	try:
 		email = confirm_token(token=token, config=application.config)
@@ -165,7 +165,7 @@ def confirm_email(token):
 
 @home.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
-	from .. import application
+	from app import application
 	email = None
 	try:
 	    email = confirm_token(token=token, config=application.config)
@@ -176,9 +176,9 @@ def reset_password(token):
 
 @home.route('/send_reset_pass', methods=['GET', 'POST'])
 def send_reset_pass():
-	from ..lib.email2 import send_email
-	from ..models import User
-	from .. import application
+	from lib.email2 import send_email
+	from models import User
+	from app import application
 	form = RequestResetPassordForm(request.form)
 	if request.method == 'POST' and form.validate():
 		user = User.query.filter_by(email=form.email.data).first()
@@ -196,11 +196,11 @@ def send_reset_pass():
 
 @home.route('/save_reset_pass', methods=['POST'])
 def save_reset_pass():
-	from ..lib.email2 import send_email
-	from ..models import User
-	from ..models import Transaction
-	from ..models import TransactionType
-	from .. import application, db
+	from lib.email2 import send_email
+	from models import User
+	from models import Transaction
+	from models import TransactionType
+	from app import application, db
 	form = ResetPassordForm(request.form)
 	if form.validate():
 		user = User.query.filter_by(email=request.form['email']).first()
@@ -223,8 +223,8 @@ def save_reset_pass():
 @home.route('/resend')
 @login_required
 def resend_confirmation():
-	from .. import application
-	from ..lib.email2 import send_email
+	from app import application
+	from lib.email2 import send_email
 	token = generate_confirmation_token(current_user.email, application.config)
 	confirm_url = url_for('home.confirm_email', token=token, _external=True)
 	html = render_template('home/activate_email.html', confirm_url=confirm_url)
@@ -236,9 +236,9 @@ def resend_confirmation():
 @home.route('/logout')
 @login_required
 def logout():
-	from .. import db
-	from ..models import Transaction
-	from ..models import TransactionType
+	from app import db
+	from models import Transaction
+	from models import TransactionType
 	trType = TransactionType.query.filter_by(id=2).first()
 	logout_act = Transaction(
 							date=datetime.now(),

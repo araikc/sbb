@@ -12,7 +12,7 @@ except IOError:
 # line, it's possible required libraries won't be in your searchable path
 #
 
-from __init__.py import application
+from app import application
 
 #
 # Below for testing only
@@ -22,3 +22,4 @@ if __name__ == '__main__':
     httpd = make_server('127.0.0.1', 8051, application)
     # Wait for a single request, serve it and quit.
     httpd.serve_forever()
+    print 'running'

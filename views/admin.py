@@ -3,7 +3,7 @@ import flask_admin as admin
 from flask_login import logout_user, login_required
 from flask_admin import helpers, expose
 from flask_admin.contrib import sqla
-from ..lib.decorators import required_roles
+from lib.decorators import required_roles
 from wtforms import PasswordField
 from flask_admin.actions import action
 
@@ -61,7 +61,7 @@ class UserModelView(sqla.ModelView):
         return form_class
 
     def on_model_change(self, form, model, is_created):
-        from ..models import User
+        from models import User
 
         # If the password field isn't blank...
         if len(model.password2):
@@ -90,14 +90,14 @@ class WithdrawModelView(sqla.ModelView):
 
     @action('approve', 'Approve', 'Are you sure you want to approve withdraws to selected accounts?')
     def withdraw_accounts(self, ids):
-        from ..models import Withdraws
-        from ..models import Account
-        from ..models import AccountWallets
-        from ..models import Transaction
-        from ..models import TransactionType
-        from .. import db
-        from .. import application
-        from ..lib.email2 import send_email
+        from models import Withdraws
+        from models import Account
+        from models import AccountWallets
+        from models import Transaction
+        from models import TransactionType
+        from app import db
+        from app import application
+        from lib.email2 import send_email
         
         try:
             wths = Withdraws.query.filter(Withdraws.id.in_(ids), Withdraws.status==0).all()
