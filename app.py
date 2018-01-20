@@ -33,13 +33,6 @@ csrf.init_app(application)
 # DB manager
 db = SQLAlchemy(application)
 
-from models import User
-admin.add_view(UserModelView(User, db.session))
-from models import Account
-admin.add_view(AccountModelView(Account, db.session))
-from models import Withdraws
-admin.add_view(WithdrawModelView(Withdraws, db.session))
-
 # Email
 mail = Mail(application)
 
@@ -77,6 +70,13 @@ def inject_finance():
 	return dict()
 
 from lib import filters
+
+from models import User
+admin.add_view(UserModelView(User, db.session))
+from models import Account
+admin.add_view(AccountModelView(Account, db.session))
+from models import Withdraws
+admin.add_view(WithdrawModelView(Withdraws, db.session))
 
 # register views
 application.register_blueprint(home)
