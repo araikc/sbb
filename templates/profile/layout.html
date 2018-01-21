@@ -71,8 +71,12 @@
  -->
 	<div class="main-area">
 		<nav class="navbar navbar-default sidebar" role="navigation">
+<!-- 				<div class="close_menu">
+		      		<span class="showopacity glyphicon glyphicon-transfer"></span>
+		      	</div> -->
 		    <div class="container-fluid">
 		      <ul class="nav left-side-nav">
+
 		        <li {{active_link('dashboard')}}><a href="{{url_for('userprofile.dashboard')}}">My Account <span style="font-size:16px;" class="pull-right  showopacity glyphicon glyphicon-user"></span></a></li>
 		        <li {{active_link('makedeposit')}}><a href="{{url_for('userprofile.makedeposit')}}">Make Deposit <span style="font-size:16px;" class="pull-right  showopacity glyphicon glyphicon-plus"></span></a></li>
 		        <li {{active_link('deposits')}}><a href="{{url_for('userprofile.deposits')}}">Deposits <span style="font-size:16px;" class="pull-right  showopacity glyphicon glyphicon-th-list"></span></a></li>

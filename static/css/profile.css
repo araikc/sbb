@@ -91,6 +91,14 @@ body,html{
       opacity: 0;
     }
   /*}*/
+/*
+    nav.sidebar.active {
+      margin-left: 0px;
+    }
+
+    nav.sidebar.passive {
+      margin-left: -210px;
+    }*/
    
   @media (min-width: 992px) {
 
@@ -302,8 +310,20 @@ Footer Section CSS
 .social-link {
     padding-bottom: 24px;
 }
+
 .footer-logo img {
     height: 80px;
 }
 
+.close_menu {
+  position: relative;
+  top:0px;
+  left:230px;
+}
+
+@media (min-width: 992px) {
+  .close_menu {
+    display: none;
+  }
+}
 
