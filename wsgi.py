@@ -16,7 +16,7 @@ import sys
 curDir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, curDir)
 
-from app import application
+from sbb import application
 
 #
 # Below for testing only
@@ -26,4 +26,3 @@ if __name__ == '__main__':
     httpd = make_server('127.0.0.1', 8051, application)
     # Wait for a single request, serve it and quit.
     httpd.serve_forever()
-    print 'running'

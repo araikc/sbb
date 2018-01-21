@@ -1,6 +1,6 @@
 # This will be used in JINJA2 for filtering data from {{ }}
 
-from app import application
+from sbb import application
 
 @application.template_filter('make_caps')
 def caps(text):

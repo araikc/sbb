@@ -16,7 +16,7 @@ def profile():
 @login_required
 @check_confirmed
 def dashboard():
-	from app import db
+	from sbb import db
 	from models import PaymentSystems
 	#investments = AccountInvestments.query.filter_by(accountId=current_user.account.id).limit(5)
 	investments = current_user.account.investments
@@ -28,7 +28,7 @@ def dashboard():
 @login_required
 @check_confirmed
 def makedeposit():
-	from app import db
+	from sbb import db
 	from models import InvestmentPlan
 	from models import PaymentSystems
 	ps = PaymentSystems.query.all()
@@ -92,7 +92,7 @@ def confirm_deposit():
 @csrf.exempt
 def validate_deposit():
 	if request.method == 'POST':
-		from app import application
+		from sbb import application
 		import hashlib
 
 		pmsecrethash = hashlib.md5(application.config['PMSECRET']).hexdigest().upper()
@@ -200,7 +200,7 @@ def success_deposit():
 		if pyacc and pam and pu and pbn and pracc and pid and ts and v2:
 			
 			#TEMP
-			from app import application
+			from sbb import application
 			import hashlib
 
 			pmsecrethash = hashlib.md5(application.config['PMSECRET']).hexdigest().upper()
@@ -208,7 +208,7 @@ def success_deposit():
 			verhash = hashlib.md5(ver).hexdigest().upper()
 
 			if v2 == verhash:
-				from app import db
+				from sbb import db
 				from models import Transaction
 				from models import AccountInvestments
 				from models import Referral
@@ -345,7 +345,7 @@ def fail_deposit():
 @login_required
 @check_confirmed
 def deposits():
-	from app import db
+	from sbb import db
 	from models import AccountInvestments
 	investments = current_user.account.investments.filter_by(isActive=True).order_by(AccountInvestments.endDatetime.desc()).limit(5)
 	return render_template('profile/deposits.html', 
@@ -356,7 +356,7 @@ def deposits():
 @login_required
 @check_confirmed
 def activity():
-	from app import db
+	from sbb import db
 	from models import Transaction
 	acts = current_user.account.transactions.order_by(Transaction.execDatetime.desc()).limit(5)
 	return render_template('profile/activity.html', 
@@ -368,7 +368,7 @@ def activity():
 @login_required
 @check_confirmed
 def referrals():
-	from app import db
+	from sbb import db
 	from models import Account
 	from models import ReferralBonuses
 
@@ -389,7 +389,7 @@ def referrals():
 @login_required
 @check_confirmed
 def wallets():
-	from app import db
+	from sbb import db
 	from models import Wallet
 	from models import AccountWallets
 	from forms import WalletsForm
@@ -447,7 +447,7 @@ def wallets():
 @login_required
 @check_confirmed
 def withdraw():
-	from app import db
+	from sbb import db
 	from models import Wallet
 	accWallets = current_user.account.wallets.all()
 
@@ -461,7 +461,7 @@ def withdraw():
 @login_required
 @check_confirmed
 def confirm_withdraw():
-	from app import db, application
+	from sbb import db, application
 
 	accWallets = current_user.account.wallets.all()
 
@@ -512,7 +512,7 @@ def confirm_withdraw():
 @check_confirmed
 def make_withdraw():
 
-	from app import db, application
+	from sbb import db, application
 	accWallets = current_user.account.wallets.all()
 
 	accWallets = None if len(accWallets) == 0 else accWallets

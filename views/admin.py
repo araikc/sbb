@@ -95,8 +95,8 @@ class WithdrawModelView(sqla.ModelView):
         from models import AccountWallets
         from models import Transaction
         from models import TransactionType
-        from app import db
-        from app import application
+        from sbb import db
+        from sbb import application
         from lib.email2 import send_email
         
         try:

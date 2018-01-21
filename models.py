@@ -1,4 +1,4 @@
-from app import db
+from sbb import db
 from datetime import datetime
 from flask_bcrypt import generate_password_hash, check_password_hash
 

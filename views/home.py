@@ -97,7 +97,7 @@ def register():
 @home.route('/login',methods=['GET','POST'])
 @logout_required
 def login():
-	from app import db
+	from sbb import db
 	from models import User
 	from models import Transaction
 	from models import TransactionType
@@ -144,7 +144,7 @@ def view_reset_pass():
 
 @home.route('/confirm/<token>')
 def confirm_email(token):
-	from app import application, db
+	from sbb import application, db
 	from models import User
 	email = None
 	try:
@@ -165,7 +165,7 @@ def confirm_email(token):
 
 @home.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
-	from app import application
+	from sbb import application
 	email = None
 	try:
 	    email = confirm_token(token=token, config=application.config)
@@ -178,7 +178,7 @@ def reset_password(token):
 def send_reset_pass():
 	from lib.email2 import send_email
 	from models import User
-	from app import application
+	from sbb import application
 	form = RequestResetPassordForm(request.form)
 	if request.method == 'POST' and form.validate():
 		user = User.query.filter_by(email=form.email.data).first()
@@ -200,7 +200,7 @@ def save_reset_pass():
 	from models import User
 	from models import Transaction
 	from models import TransactionType
-	from app import application, db
+	from sbb import application, db
 	form = ResetPassordForm(request.form)
 	if form.validate():
 		user = User.query.filter_by(email=request.form['email']).first()
@@ -223,7 +223,7 @@ def save_reset_pass():
 @home.route('/resend')
 @login_required
 def resend_confirmation():
-	from app import application
+	from sbb import application
 	from lib.email2 import send_email
 	token = generate_confirmation_token(current_user.email, application.config)
 	confirm_url = url_for('home.confirm_email', token=token, _external=True)
@@ -236,7 +236,7 @@ def resend_confirmation():
 @home.route('/logout')
 @login_required
 def logout():
-	from app import db
+	from sbb import db
 	from models import Transaction
 	from models import TransactionType
 	trType = TransactionType.query.filter_by(id=2).first()
