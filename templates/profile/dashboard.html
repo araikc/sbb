@@ -1,88 +1,99 @@
 {% extends "profile/layout.html" %}
 {% block body %}
 
-<div class="row">
-	<h2 style="color:#959595">Account</h2>
-	<hr style="width:100%">
-</div>
-<div style="min-width:200px">
-<div class="row">
-	<div class="col-xs-6">
-		<div  class="account_section">
-			<p>
-				Current balances
-			</p>
-			<a href="makedeposit" class="btn btn-info"  style="margin-bottom:10px">Make deposit</a>
+<div calss="row">
+	<div class="col-xs-6 account-left"  style="border-right:1px solid #eee;">
+		<div class="row">
+			<h2 style="color:#959595;  padding-left:10px">Account</h2>
+			<hr style="width:95%">
+		</div>
+		<div style="min-width:200px">
+			<div class="row">
+				<div class="col-xs-6">
+					<div  class="account_section">
+						<p>
+							Current balances
+						</p>
+						<a href="makedeposit" class="btn btn-info"  style="margin-bottom:10px">Make deposit</a>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="account_numbers">
+						<p>{{g.user.account.balance}}<span>$</span></p>
+						<p>{{g.user.account.balance}}<span>€</span></p>
+						<p>{{g.user.account.balance}}<span class="bit">Ƀ</span></p>
+					</div>
+				</div>
+				<div>
+					<hr style="width:95%; margin-top: 90px;">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6">
+					<div  class="account_section">
+						<p style="margin-bottom:10px">
+							Active investments
+						</p>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="account_numbers">
+						<p>{{g.user.account.balance}}<span>$</span></p>
+						<p>{{g.user.account.balance}}<span>€</span></p>
+						<p>{{g.user.account.balance}}<span class="bit">Ƀ</span></p>
+					</div>
+				</div>
+				<div>
+					<hr style="width:95%; margin-top: 90px;">
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-xs-6">
+					<div  class="account_section">
+						<p style="margin-bottom:10px">
+							Rreferral bonuses
+						</p>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="account_numbers">
+						<p>{{g.user.account.balance}}<span>$</span></p>
+						<p>{{g.user.account.balance}}<span>€</span></p>
+						<p>{{g.user.account.balance}}<span class="bit">Ƀ</span></p>
+					</div>
+				</div>
+				<div>
+					<hr style="width:95%; margin-top: 90px;">
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-xs-6">
+					<div  class="account_section">
+						<p style="margin-bottom:10px">
+							Summary
+						</p>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="account_numbers">
+						<p>{{g.user.account.balance}}<span>$</span></p>
+						<p>{{g.user.account.balance}}<span>€</span></p>
+						<p>{{g.user.account.balance}}<span class="bit">Ƀ</span></p>
+					</div>
+				</div>
+				<div>
+					<hr style="width:95%; margin-top: 90px;">
+				</div>	
+			</div>
 		</div>
 	</div>
-	<div class="col-xs-6">
-		<div class="account_numbers">
-			<p>{{g.user.account.balance}}<span>$</span></p>
-			<p>{{g.user.account.balance}}<span>€</span></p>
-			<p>{{g.user.account.balance}}<span class="bit">Ƀ</span></p>
+
+	<div class="col-xs-6 account-right" >
+		<div class="row">
+			<h2 style="color:#959595;  padding-left:10px">Actions</h2>
+			<hr style="width:95%">
 		</div>
 	</div>
-	<div>
-		<hr style="width:100%; margin-top: 90px;">
-	</div>
-</div>
-<div class="row">
-	<div class="col-xs-6">
-		<div  class="account_section">
-			<p style="margin-bottom:10px">
-				Active investments
-			</p>
-		</div>
-	</div>
-	<div class="col-xs-6">
-		<div class="account_numbers">
-			<p>{{g.user.account.balance}}<span>$</span></p>
-			<p>{{g.user.account.balance}}<span>€</span></p>
-			<p>{{g.user.account.balance}}<span class="bit">Ƀ</span></p>
-		</div>
-	</div>
-	<div>
-		<hr style="width:100%; margin-top: 90px;">
-	</div>	
-</div>
-<div class="row">
-	<div class="col-xs-6">
-		<div  class="account_section">
-			<p style="margin-bottom:10px">
-				Rreferral bonuses
-			</p>
-		</div>
-	</div>
-	<div class="col-xs-6">
-		<div class="account_numbers">
-			<p>{{g.user.account.balance}}<span>$</span></p>
-			<p>{{g.user.account.balance}}<span>€</span></p>
-			<p>{{g.user.account.balance}}<span class="bit">Ƀ</span></p>
-		</div>
-	</div>
-	<div>
-		<hr style="width:100%; margin-top: 90px;">
-	</div>	
-</div>
-<div class="row">
-	<div class="col-xs-6">
-		<div  class="account_section">
-			<p style="margin-bottom:10px">
-				Summary
-			</p>
-		</div>
-	</div>
-	<div class="col-xs-6">
-		<div class="account_numbers">
-			<p>{{g.user.account.balance}}<span>$</span></p>
-			<p>{{g.user.account.balance}}<span>€</span></p>
-			<p>{{g.user.account.balance}}<span class="bit">Ƀ</span></p>
-		</div>
-	</div>
-	<div>
-		<hr style="width:100%; margin-top: 90px;">
-	</div>	
-</div>
 </div>
 <!-- <div class="row">
 	<h4>Active investments</h4>

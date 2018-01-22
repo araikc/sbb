@@ -354,3 +354,13 @@ Footer Section CSS
   color: #959595;
   font-size: 24px;
 }
+
+@media (max-width: 630px) {
+  .account-right {
+    display: none;
+  }
+  
+  .account-left {
+    border-right: none !important;
+  }
+}
