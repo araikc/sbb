@@ -1372,7 +1372,7 @@ Deposits And Payouts CSS
     padding: 104px 0;
 }
 table {
-    border: 10px solid #ddd;
+    border: 1px solid #ddd;
     border-collapse: collapse;
     margin: 0;
     padding: 0;
@@ -1385,7 +1385,7 @@ table caption {
   margin: .5em 0 .75em;
 }
 table tr {
-  background: #f8f8f8;
+  /*background: #f8f8f8;*/
  
 }
 table th,
@@ -1399,7 +1399,7 @@ table td{
     font-weight: 600;
 }
 table th {
-font-size: 14px;
+    font-size: 14px;
     letter-spacing: .1em;
     text-transform: uppercase;
     background: #ddd;
@@ -1407,11 +1407,11 @@ font-size: 14px;
     line-height: 26px;
     padding: 20px 0;
 }
-table tr:hover{
+/*table tr:hover{
     box-shadow: 
         inset 0px 11px 8px -10px #CCC,
         inset 0px -11px 8px -10px #CCC
-}
+}*/
 
 /*tab css*/
 ul.nav.nav-tabs {

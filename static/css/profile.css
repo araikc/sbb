@@ -28,6 +28,10 @@ body,html{
       margin-left: 210px;
     }
 
+    .navbar-brand {
+      color: #63cc88 !important;
+    }
+
     nav.sidebar.navbar.sidebar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
       margin-left: 0px;
     }
@@ -146,12 +150,12 @@ body,html{
   }
 
   .top-navbar {
-    background-color: #63cc88;
-    color:white;
+    background-color: #444;
+    color:#63cc88;
 }
  
   .top-navbar .navbar-right > li > a{
-    color:white;
+    color:#63cc88;
 }
 
 .main-area {
