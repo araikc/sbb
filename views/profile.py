@@ -50,11 +50,11 @@ def confirm_deposit():
 		unit = form.get('unit', None)
 
 		if psid and amount and ipid and unit:
-			from .. import db
-			from ..models import InvestmentPlan
-			from ..models import PaymentSystems
-			from ..models import Transaction
-			from ..models import TransactionType
+			from sbb import db
+			from models import InvestmentPlan
+			from models import PaymentSystems
+			from models import Transaction
+			from models import TransactionType
 
 			trType = TransactionType.query.filter_by(id=3).first()
 			ps = PaymentSystems.query.filter_by(id=psid).first()
@@ -114,11 +114,11 @@ def validate_deposit():
 			verhash = hashlib.md5(ver).hexdigest().upper()
 
 			if v2 == verhash:
-				from .. import db
-				from ..models import Transaction
-				from ..models import AccountInvestments
-				from ..models import Referral
-				from ..models import ReferralBonuses
+				from sbb import db
+				from models import Transaction
+				from models import AccountInvestments
+				from models import Referral
+				from models import ReferralBonuses
 
 				trans = Transaction.query.filter_by(id=pid).first()
 				if trans.status == 0:
