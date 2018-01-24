@@ -149,6 +149,12 @@ class InvestmentPlan(db.Model):
     # 1 - hour, 2 - day, 3 - week, 4 - month
     periodUnit = db.Column(db.Integer, nullable=False)
     percentage = db.Column(db.Integer, nullable=False)
+    # 0 - new investment will be added into current one with the same percentage
+    # 1 - new investment will be added separatelly with the new percentage
+    usage = db.Column(db.Integer, default=0)
+    # 0 - not active investmentPlan
+    # 1 - active investmentPlan
+    active = db.Column(db.Boolean, default=False)
     description = db.Column(db.String(50), nullable=True)
 
     acountInvestments = db.relationship('AccountInvestments', backref='investmentPlan', lazy='dynamic')
