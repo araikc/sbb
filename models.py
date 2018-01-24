@@ -56,8 +56,7 @@ class Account(db.Model):
     __tablename__ = 'accounts'
 
     id = db.Column(db.Integer, primary_key=True)
-    balance_usd = db.Column(db.Float, nullable=False, default=0)
-    balance_euro = db.Column(db.Float, nullable=False, default=0)
+    balance = db.Column(db.Float, nullable=False, default=0)
     bitcoin = db.Column(db.Float, nullable=True)
     
     referralProgramId = db.Column(db.Integer, db.ForeignKey('referral_programs.id'), nullable=False)
@@ -70,9 +69,8 @@ class Account(db.Model):
     referralBonuses = db.relationship('ReferralBonuses', backref='earnedAccount', lazy='dynamic')
     withdraws = db.relationship('Withdraws', backref='account', lazy='dynamic')
 
-    def __init__(self, balance_usd, balance_euro, bc):
-        self.balance_usd = balance_usd
-        self.balance_euro = balance_euro
+    def __init__(self, balance, bc):
+        self.balance = balance
         self.bitcoin = bc
 
     def __unicode__(self):

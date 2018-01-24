@@ -29,12 +29,11 @@ def dashboard():
 @check_confirmed
 def makedeposit():
 	from sbb import db
-	from models import InvestmentPlan
+	# from models import InvestmentPlan
 	from models import PaymentSystems
 	ps = PaymentSystems.query.all()
-	investmentPlans = InvestmentPlan.query.all()
+	# investmentPlans = InvestmentPlan.query.all()
 	return render_template('profile/makedeposit.html', 
-							invPlans=investmentPlans,
 							paymentSystems=ps)
 
 
@@ -46,19 +45,26 @@ def confirm_deposit():
 		form = request.form
 		psid = form.get('paymentSystemId', None)
 		amount = form.get('amount', None)
-		ipid = form.get('invPlanId', None)
-		unit = form.get('unit', None)
-
-		if psid and amount and ipid and unit:
+		# ipid = form.get('invPlanId', None)
+		# unit = form.get('unit', None)
+		if psid and amount:
 			from sbb import db
 			from models import InvestmentPlan
 			from models import PaymentSystems
 			from models import Transaction
 			from models import TransactionType
+			from models import AccountInvestments
 
 			trType = TransactionType.query.filter_by(id=3).first()
 			ps = PaymentSystems.query.filter_by(id=psid).first()
-			ip = InvestmentPlan.query.filter_by(id=ipid).first()
+			# default investmment plan
+			ip_def = InvestmentPlan.query.filter_by(id=1).first()
+			# more than one investmment plan
+			ip_next = InvestmentPlan.query.filter_by(id=2).first()
+			acc_invs = AccountInvestments.query.filter_by(accountId=current_user.account.id).all()
+			ip = ip_def
+			if len(acc_invs) != 0:
+				ip = ip_next
 
 			dep_act = Transaction(
 									date=datetime.datetime.now(),
@@ -68,7 +74,7 @@ def confirm_deposit():
 			dep_act.transactionType = trType
 			dep_act.paymentSystem = ps
 			dep_act.investmentPlan = ip
-			dep_act.unit = unit
+			dep_act.unit = "USD"
 			db.session.add(dep_act)
 			db.session.commit()
 
@@ -78,9 +84,9 @@ def confirm_deposit():
 									paymentSystem=ps,
 									amount=amount,
 									depId=dep_act.id,
-									unit=unit)
+									unit=dep_act.unit)
 		else:
-			flash('Invalid data supplied in deposit form')
+			flash('Invalid data supplied in deposit form {} - {}'.format(psid, amount))
 			return redirect(url_for('userprofile.makedeposit'))
 
 	else:

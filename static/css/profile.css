@@ -267,6 +267,7 @@ Footer Section CSS
     bottom:1px;
     z-index: 1001;
     text-align: right;
+    line-height: 0.5;
 }
 .footer-section {
     background: #fff;

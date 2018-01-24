@@ -5,7 +5,7 @@
 
 <p>
 	<center><h3>Please confirm you deposit</h3></center>
-	<center>You are investing {{amount}} in "{{invPlan.description}}" investment plan.<center>
+	<center>You are investing {{amount}}$ in "{{invPlan.description}}" investment plan.<center>
 	<center>You have selected "{{paymentSystem.name}}" payment system. <center>
 </p>
 
@@ -14,7 +14,7 @@
 
 	<!-- Perfect money data -->
 	<input type="hidden" name="PAYEE_ACCOUNT" value="U16116460">
-    <input type="hidden" name="PAYEE_NAME" value="XXX Media">
+    <input type="hidden" name="PAYEE_NAME" value="SolarBit">
     <input type="hidden" name="PAYMENT_AMOUNT" value="{{amount}}">
     <input type="hidden" name="PAYMENT_UNITS" value="{{unit}}">
     <input type="hidden" name="STATUS_URL" value="{{request.host_url}}validate_deposit">
