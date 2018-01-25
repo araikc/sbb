@@ -381,9 +381,13 @@ Footer Section CSS
     width: 100%;
   }
 
+  .current-plan {
+    display: none;
+  }
+
 }
 
-.account_detail_section > p{
+.account_detail_section > p {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 400;
   color: #959595;
@@ -395,3 +399,49 @@ Footer Section CSS
   margin-top:10px;
 }
 
+.deposit-section > label {
+  padding-left:30px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  color: #959595;
+  font-size: 20px;
+  margin:0px;
+}
+
+.deposit-section > label > input {
+  margin-top:10px !important;
+}
+
+.deposit-section > h4 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  color: #959595;
+  font-size: 18px;
+  margin:0px;
+}
+
+.input-amount > input {
+  border-radius:6px;
+  line-height:0.5;
+  padding-top: 7px;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.profit-estimate > span {
+    text-align: right;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1;
+    color: #63cc88;
+    margin-left:10px;
+}
+
+.profit-estimate {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1;
+    color: #959595;
+}

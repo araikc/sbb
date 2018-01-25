@@ -9,8 +9,11 @@
             });
         }, 10000);
 
-        $(document).on('click','.close_menu ',function(){
-        	// var sb = $('.sidebar');
+        $("#inv-amount").on("change paste keyup", function() {
+           $('#prof-value').text(($(this).val()*0.03*30).toString().substring(0, 8));
+        });
+
+        $(document).on('click','#inv-amount ',function(){
         	// if (sb.hasClass('active')) {
         	// 	sb.removeClass('active');
         	// 	sb.addClass('passive');

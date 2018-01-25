@@ -34,11 +34,12 @@ def dashboard():
 @check_confirmed
 def makedeposit():
 	from sbb import db
-	# from models import InvestmentPlan
+	from models import InvestmentPlan
 	from models import PaymentSystems
 	ps = PaymentSystems.query.all()
-	# investmentPlans = InvestmentPlan.query.all()
+	ip = InvestmentPlan.query.filter_by(active=1).first()
 	return render_template('profile/makedeposit.html', 
+							ip=ip,
 							paymentSystems=ps)
 
 
