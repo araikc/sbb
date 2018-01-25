@@ -2254,6 +2254,9 @@ Swhitcher Css
         padding: 5px 8px !important;
     }
 
+  .username-btn {
+        border:none !important;
+    }
 /*    .btn-border:hover {
         border-radius: 6px !important;
     }*/

@@ -7,7 +7,7 @@
             $(".alert").fadeTo(500, 0).slideUp(500, function(){
                 $(this).remove(); 
             });
-        }, 4000);
+        }, 10000);
 
         $(document).on('click','.close_menu ',function(){
         	// var sb = $('.sidebar');

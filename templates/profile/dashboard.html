@@ -89,19 +89,19 @@
 						<p  class="bit">{{g_ernbtc}}<span>Ƀ</span></p>
 					</div>
 				</div>
-				<div>
+<!-- 				<div>
 					<hr style="width:95%; margin-top: 90px;">
-				</div>	
+				</div>	 -->
 			</div>
 		</div>
 	</div>
 
 	<div class="col-xs-6 account-right" >
 		<div class="row">
-			<h2 style="color:#959595;  padding-left:10px">Investment</h2>
+			<h2 style="color:#959595;  padding-left:10px">Investments</h2>
 			<hr style="width:95%">
 		</div>
-<!-- 		<div class="row">
+		<!-- <div class="row">
 			<div class="col-xs-6">
 				<div  class="account_section">
 					<a href="referrals" class="btn btn-info"  style="margin-bottom:10px">Referrals history</a>
@@ -114,47 +114,59 @@
 				<hr style="width:95%; margin-top: 90px;">
 			</div>
 		</div> -->
-		<div class="row">
-			<div class="col-xs-8" style="border-right:1px solid #eee;">
-				<div class="account_detail_section">
-					<p>Invested amount</p>
+		{% if accInvestments %}
+			{% for inv in accInvestments %}
+			<div class="row">
+				<div class="col-xs-8" style="border-right:1px solid #eee;">
+					<div class="account_detail_section">
+						<p>Invested amount</p>
+					</div>
+					<div class="account_detail_section">
+						<p>Current balance</p>
+					</div>
+					<div class="account_detail_section">
+						<p>Daily interest</p>
+					</div>
+					<div class="account_detail_section">
+						<p>Active days</p>
+					</div>
+					<div class="account_detail_section">
+						<p>Start date</p>
+					</div>
 				</div>
-				<br>
-				<div class="account_detail_section">
-					<p>Current balance</p>
-				</div>
-				<br>
-				<div class="account_detail_section">
-					<p>Daily interest</p>
-				</div>
-				<div class="account_detail_section">
-					<p>Investment active days</p>
-				</div>
-				<div class="account_detail_section">
-					<p>Investment date</p>
-				</div>
-			</div>
-			<div class="col-xs-4">
-				<div class="account_detail_section">
-						<p>{{g.user.account.balance}}<span>$</span></p>
-						<p class="bit">{{g.user.account.bitcoin}}<span>Ƀ</span></p>
-				</div>
+				<div class="col-xs-4">
+					<div class="account_detail_section">
+							{% if inv.paymentSystemId == 2 %}
+								<p class="bit">{{inv.initialInvestment}}<span>Ƀ</span></p>
+							{% else %}
+								<p>{{inv.initialInvestment}}<span>$</span></p>
+							{% endif %}
+					</div>
 
-				<div class="account_detail_section">
-						<p>{{g.user.account.balance}}<span>$</span></p>
-						<p class="bit">{{g.user.account.bitcoin}}<span>Ƀ</span></p>
-				</div>
-				<div class="account_detail_section">
-						<p>3%</p>
-				</div>
-				<div class="account_detail_section">
-						<p>6 days</p>
-				</div>
-				<div class="account_detail_section">
-						<p>2018-01-21</p>
+					<div class="account_detail_section">
+							{% if inv.paymentSystemId == 2 %}
+								<p class="bit">{{inv.currentBalance}}<span>Ƀ</span></p>
+							{% else %}
+								<p>{{inv.currentBalance}}<span>$</span></p>
+							{% endif %}
+					</div>
+					<div class="account_detail_section">
+							<p>{{ inv.investmentPlan.percentage | clean_float }}%</p>
+					</div>
+					<div class="account_detail_section">
+							<p>{{ inv.startDatetime | day_distance }} days</p>
+					</div>
+					<div class="account_detail_section">
+							<p>{{ inv.startDatetime | only_date }}</p>
+					</div>
 				</div>
 			</div>
-		</div>
+			{% endfor %}
+		{% else %}
+			<div class="account_detail_section">
+				<p>No any investments</p>
+			</div>
+		{% endif %}
 	</div>
 </div>
 <!-- <div class="row">

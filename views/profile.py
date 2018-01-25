@@ -23,7 +23,7 @@ def dashboard():
 	wam = float(0)
 	for w in wths:
 		w += float(w.amount)
-	investments = current_user.account.investments
+	investments = current_user.account.investments.filter_by(isActive=1).all()
 	return render_template('profile/dashboard.html', 
 							accId=current_user.account.id,
 							accInvestments=investments,

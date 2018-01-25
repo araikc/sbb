@@ -76,20 +76,20 @@
                         {{ nav_link('home.faq', "FAQ") }}
                         {{ nav_link('home.contact', "Contact") }}
                         {% if g.user.is_authenticated %}
-                        <li><a href="{{url_for('userprofile.dashboard')}}" class="btn-border">{{g.user.username}}</a>
+                        <li><a href="{{url_for('userprofile.dashboard')}}" class="btn-border username-btn">{{g.user.username}}</a></li>
                         {% else %}
                         <li><a href="{{url_for('userprofile.dashboard')}}" class="btn-border">Account</a>
-                        {% endif %}  
-                            <ul class="sub-menu">
-                            	{% if g.user.is_authenticated %}
-                            		{{ nav_link('home.logout', "Logout") }}
-                            	{% endif %}
-                            	{% if not g.user.is_authenticated %}
-	                                {{ nav_link('home.login', "Login") }}
-	                                {{ nav_link('home.register', "Register") }}
-	                            {% endif %}
-                            </ul>
+                          <ul class="sub-menu">
+                          	{% if not g.user.is_authenticated %}
+                                {{ nav_link('home.login', "Login") }}
+                                {{ nav_link('home.register', "Register") }}
+                            {% endif %}
+                          </ul>
                         </li>
+                        {% endif %}
+                        {% if g.user.is_authenticated %}
+                          {{ nav_link('home.logout', "Logout") }}
+                        {% endif %}
                     </ul>
                     </nav>
                 </div>

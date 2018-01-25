@@ -85,13 +85,13 @@ def craete_utils():
     wallet.unit = 'USD'
     db.session.add(wallet)
 
-    wallet = Wallet("Perfect Money", "url")
-    wallet.paymentSystem = pm
-    wallet.unit = 'EURO'
+    wallet = Wallet("Bitcoin", "url")
+    wallet.paymentSystem = bc
+    wallet.unit = 'BTC'
     db.session.add(wallet)
 
-    ip = InvestmentPlan(8, 1, 8, "8% per day")
-    ip1 = InvestmentPlan(14, 0, 115, "115% after 14 days")
+    ip = InvestmentPlan(0, 1, 3, "3% per day")
+    ip1 = InvestmentPlan(0, 1, 3.5, "3.5% per day")
     db.session.add(ip)
     db.session.add(ip1)
     #db.session.commit()
