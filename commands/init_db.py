@@ -90,7 +90,7 @@ def craete_utils():
     wallet.unit = 'BTC'
     db.session.add(wallet)
 
-    ip = InvestmentPlan(0, 1, 3, "3% per day")
+    ip = InvestmentPlan(0, 1, 3, "3% per day", 1)
     ip1 = InvestmentPlan(0, 1, 3.5, "3.5% per day")
     db.session.add(ip)
     db.session.add(ip1)

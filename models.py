@@ -160,11 +160,12 @@ class InvestmentPlan(db.Model):
     acountInvestments = db.relationship('AccountInvestments', backref='investmentPlan', lazy='dynamic')
     transactions = db.relationship('Transaction', backref='investmentPlan', lazy='dynamic')
 
-    def __init__(self, per, peru, perc, desc):
+    def __init__(self, per, peru, perc, desc, act=None):
         self.period = per
         self.periodUnit = peru
         self.percentage = perc
         self.description = desc
+        self.active = act
         
 class PaymentSystems(db.Model):
     __tablename__ = "payment_systems"
