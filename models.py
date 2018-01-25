@@ -148,7 +148,7 @@ class InvestmentPlan(db.Model):
     period = db.Column(db.Integer, nullable=False)
     # 1 - hour, 2 - day, 3 - week, 4 - month
     periodUnit = db.Column(db.Integer, nullable=False)
-    percentage = db.Column(db.Integer, nullable=False)
+    percentage = db.Column(db.Float, nullable=False)
     # 0 - new investment will be added into current one with the same percentage
     # 1 - new investment will be added separatelly with the new percentage
     usage = db.Column(db.Integer, default=0)

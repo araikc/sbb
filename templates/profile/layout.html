@@ -14,6 +14,7 @@
     <!--Style Css-->
     <link href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/profile.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/animate.css')}}" rel="stylesheet">
     <!--font-awesome Css-->
     <link href="{{ url_for('static', filename='css/font-awesome.min.css')}}" rel="stylesheet">        
 </head>
@@ -56,18 +57,21 @@
 		</div> 
 	</div>
 
-
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-  <div class="alert">
-	    <ul class="flashes">
+	<!-- <div class="alerts"> -->
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+	    <!-- <ul class="flash"> -->
 	    {% for message in messages %}
-	      <li>{{ message }}</li>
+	    <div class="alert alert-info fade in alert-dismissable" id="flash-alert">
+	    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+		  <strong>Info!</strong> {{message}}
+		</div>
+	      <!-- <li>{{ message }}</li> -->
 	    {% endfor %}
-	    </ul>
-	</div>
-{% endif %}
-{% endwith %}
+	    <!-- </ul> -->
+	  {% endif %}
+	{% endwith %}
+	<!-- </div> -->
 
 	<div class="main-area">
 		<nav class="navbar navbar-default sidebar" role="navigation">
@@ -79,7 +83,7 @@
 
 		        <li {{active_link('dashboard')}}><a href="{{url_for('userprofile.dashboard')}}">My ACCOUNT <span style="font-size:16px;" class="pull-right  showopacity glyphicon glyphicon-user"></span></a></li>
 		        <li {{active_link('makedeposit')}}><a href="{{url_for('userprofile.makedeposit')}}">MAKE DEPOSIT <span style="font-size:16px;" class="pull-right  showopacity glyphicon glyphicon-plus"></span></a></li>
-		        <li {{active_link('deposits')}}><a href="{{url_for('userprofile.deposits')}}">DEPOSITS <span style="font-size:16px;" class="pull-right  showopacity glyphicon glyphicon-th-list"></span></a></li>
+		        <li {{active_link('deposits')}}><a href="{{url_for('userprofile.deposits')}}">DEPOSITS HISTORY <span style="font-size:16px;" class="pull-right  showopacity glyphicon glyphicon-th-list"></span></a></li>
 		        <li {{active_link('wallets')}}><a href="{{url_for('userprofile.wallets')}}">WALLETS <span style="font-size:16px;" class="pull-right  showopacity glyphicon glyphicon-credit-card"></span></a></li>
 		        <li {{active_link('activity')}}><a href="{{url_for('userprofile.activity')}}">ACTIVITY HISTORY <span style="font-size:16px;" class="pull-right  showopacity glyphicon glyphicon-road"></span></a></li>
 		        <li {{active_link('referrals')}}><a href="{{url_for('userprofile.referrals')}}">REFFERALS <span style="font-size:16px;" class="pull-right  showopacity glyphicon glyphicon-bullhorn"></span></a></li>

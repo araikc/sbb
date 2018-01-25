@@ -134,10 +134,11 @@ body,html{
     padding-left: 15px;
   }
   
-  .left-side-nav >li>a {
+  .left-side-nav > li > a {
     color: #777;
-    font-weight: 800;
-    font-size: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 15px;
   }
 
   .left-side-nav >li.active>a {
@@ -357,15 +358,37 @@ Footer Section CSS
   margin: 0 0 15px;
   font-weight: 400;
   color: #959595;
-  font-size: 24px;
+  font-size: 22px;
 }
 
-@media (max-width: 630px) {
+.bit {
+  color: #FF9900 !important;
+}
+
+.bit > span {
+  color: #FF9900 !important;
+}
+
+@media (max-width: 700px) {
   .account-right {
     display: none;
   }
   
   .account-left {
     border-right: none !important;
+    width: 100%;
   }
 }
+
+.account_detail_section > p{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  color: #959595;
+  font-size: 16px;
+  margin:0px;
+}
+
+.account_detail_section {
+  margin-top:10px;
+}
+

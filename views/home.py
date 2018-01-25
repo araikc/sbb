@@ -41,9 +41,9 @@ def contact():
 def register():
 	#if 'referral' in session:
 	#	print session['referral']
-	from .. import application, db
-	from ..lib.email2 import send_email
-	from ..models import User, ReferralProgram, Account
+	from sbb import application, db
+	from lib.email2 import send_email
+	from models import User, ReferralProgram, Account, Referral
 	if request.method == 'GET':
 		referral = None
 		if 'referral' in session:
@@ -255,6 +255,6 @@ def logout():
 @login_required
 def unconfirmed():
 	if current_user.confirmed:
-	    return redirect('index')
+	    return redirect(url_for('home.index'))
 	return render_template('home/unconfirmed.html')
 

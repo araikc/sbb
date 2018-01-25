@@ -60,13 +60,19 @@ def before_request():
 def inject_finance():
 	from models import AccountInvestments
 	if current_user.is_authenticated:
-		investments = AccountInvestments.query.filter_by(accountId=current_user.account.id).all()
-		inv = 0
-		ern = 0
+		investments = AccountInvestments.query.filter_by(accountId=current_user.account.id, isActive=1).all()
+		invusd = float(0)
+		ernusd = float(0)
+		invbtc = float(0)
+		ernbtc = float(0)
 		for i in investments:
-			inv += i.initialInvestment
-			ern += i.currentBalance - i.initialInvestment
-		return dict(g_investment=inv, g_earning=ern)
+			if i.paymentSystemId == 1:
+				invusd += i.initialInvestment
+				ernusd += i.currentBalance - i.initialInvestment
+			elif i.paymentSystemId == 2:
+				invbtc += i.initialInvestment
+				ernbtc += i.currentBalance - i.initialInvestment
+		return dict(g_invusd=invusd, g_ernusd=ernusd, g_invbtc=invbtc, g_ernbtc=ernbtc)
 	return dict()
 
 from lib import filters

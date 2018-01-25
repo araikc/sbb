@@ -2377,3 +2377,18 @@ Swhitcher Css
     position: fixed;
     left: 0px;
     top: 10%;
+}
+
+.alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    width: 290px;
+    line-height: 1;
+    position: fixed;
+    right: 20px;
+    z-index: 1030;
+    top: 60px;
+}
+
+

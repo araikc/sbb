@@ -19,10 +19,15 @@ def dashboard():
 	from sbb import db
 	from models import PaymentSystems
 	#investments = AccountInvestments.query.filter_by(accountId=current_user.account.id).limit(5)
+	wths = current_user.account.withdraws.all()
+	wam = float(0)
+	for w in wths:
+		w += float(w.amount)
 	investments = current_user.account.investments
 	return render_template('profile/dashboard.html', 
 							accId=current_user.account.id,
-							accInvestments=investments)
+							accInvestments=investments,
+							w_amount = wam)
 
 @userprofile.route('/makedeposit')
 @login_required
@@ -57,14 +62,8 @@ def confirm_deposit():
 
 			trType = TransactionType.query.filter_by(id=3).first()
 			ps = PaymentSystems.query.filter_by(id=psid).first()
-			# default investmment plan
-			ip_def = InvestmentPlan.query.filter_by(id=1).first()
-			# more than one investmment plan
-			ip_next = InvestmentPlan.query.filter_by(id=2).first()
-			acc_invs = AccountInvestments.query.filter_by(accountId=current_user.account.id).all()
-			ip = ip_def
-			if len(acc_invs) != 0:
-				ip = ip_next
+			# active investmment plan
+			ip = InvestmentPlan.query.filter_by(active=1).first()
 
 			dep_act = Transaction(
 									date=datetime.datetime.now(),
@@ -227,19 +226,43 @@ def success_deposit():
 					ps = trans.paymentSystem
 					ip = trans.investmentPlan
 
-					# add investment
-					accInv = AccountInvestments(
-												currentBalance=pam,
-												initialInvestment=pam,
+					# adding investment to current one if exist
+					# if ip.usage == 0:
+					curInv = AccountInvestments.query.filter_by(accountId=current_user.account.id, isActive=1, investmentPlanId=ip.id, paymentSystemId=ps.id, payment_unit=pu).first()
+					
+					if curInv:
+						curInv.isActive = 0
+						curInv.endDatetime = datetime.datetime.now()
+						db.session.add(curInv)
+
+
+						accInv = AccountInvestments(
+												currentBalance=float(curInv.currentBalance) + float(pam),
+												initialInvestment=float(curInv.initialInvestment) + float(pam),
 												isActive=1)
-					accInv.account = current_user.account
-					accInv.paymentSystem = ps
-					accInv.investmentPlan = ip
-					accInv.startDatetime = datetime.datetime.now()
-					accInv.endDatetime = accInv.startDatetime + datetime.timedelta(trans.investmentPlan.period) 
-					accInv.pm_batch_num = pbn
-					accInv.payment_unit = pu
-					db.session.add(accInv)
+						accInv.account = current_user.account
+						accInv.paymentSystem = ps
+						accInv.investmentPlan = ip
+						accInv.startDatetime = datetime.datetime.now()
+						accInv.pm_batch_num = pbn
+						accInv.payment_unit = pu
+						db.session.add(accInv)
+
+					else:
+
+						# add investment
+						accInv = AccountInvestments(
+													currentBalance=float(pam),
+													initialInvestment=float(pam),
+													isActive=1)
+						accInv.account = current_user.account
+						accInv.paymentSystem = ps
+						accInv.investmentPlan = ip
+						accInv.startDatetime = datetime.datetime.now()
+						# accInv.endDatetime = accInv.startDatetime + datetime.timedelta(trans.investmentPlan.period) 
+						accInv.pm_batch_num = pbn
+						accInv.payment_unit = pu
+						db.session.add(accInv)
 
 					# parent account
 					myRef = Referral.query.filter_by(accountId=current_user.account.id).first()
@@ -247,7 +270,7 @@ def success_deposit():
 						parentAcc = myRef.referralAccount
 						refProg = parentAcc.referralProgram
 						perc = int(refProg.level1)
-						refBon = ReferralBonuses(current_user.account.id, pam, float(float(pam) * perc  / 100), 1)
+						refBon = ReferralBonuses(current_user.account.id, float(pam), float(float(pam) * perc  / 100), 1)
 						refBon.earnedAccount = parentAcc
 						refBon.payed = True
 						db.session.add(refBon)
@@ -312,13 +335,13 @@ def success_deposit():
 									pbn=pbn,
 									pracc=pracc)
 			else:
-				flash('Something goes worng. Please try again.')
+				flash('Something goes worng. Please try again: hash problem')
 				return redirect(url_for('userprofile.dashboard'))
 		else:
-			flash('Something goes worng. Please try again.')
+			flash('Something goes worng. Please try again. Data from PM')
 			return redirect(url_for('userprofile.dashboard'))
 	else:
-		flash('Something goes worng. Please try again.')
+		flash('Something goes worng. Please try again. Not a post request')
 		return redirect(url_for('userprofile.dashboard'))
 
 @userprofile.route('/fail_deposit', methods=['POST'])
@@ -353,7 +376,7 @@ def fail_deposit():
 def deposits():
 	from sbb import db
 	from models import AccountInvestments
-	investments = current_user.account.investments.filter_by(isActive=True).order_by(AccountInvestments.endDatetime.desc()).limit(5)
+	investments = current_user.account.investments.order_by(AccountInvestments.endDatetime.desc()).limit(5)
 	return render_template('profile/deposits.html', 
 							accId=current_user.account.id,
 							accInvestments=investments)

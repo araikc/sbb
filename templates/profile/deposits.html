@@ -12,17 +12,15 @@
 				<th>Investment Plan</th>
 				<th>Start</th>
 				<th>End</th>
-				<th>Amount invested</th>
-				<th>Current ammount</th>
+				<th>Deposit</th>
 			</tr>
 		</thead>
 	{% for inv in accInvestments %}
 		<tr>
 			<td>{{ inv.investmentPlan.description }}</td>
 			<td>{{ inv.startDatetime }}</td>
-			<td>{{ inv.endDatetime }}</td>
+			<td> {% if inv.endDatetime == None%} -- {% else %} {{inv.endDatetime}} {% endif %}</td>
 			<td>{{ inv.initialInvestment }} {{inv.payment_unit}}</td>
-			<td>{{ inv.currentBalance }} {{inv.payment_unit}}</td>
 		</tr>
 	{% endfor %}
 	</table>
