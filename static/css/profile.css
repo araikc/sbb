@@ -369,11 +369,11 @@ Footer Section CSS
   color: #FF9900 !important;
 }
 
-}
 
 @media (max-width: 700px) {
+
   .account-right {
-    display: none;
+    display: none !important;
   }
   
   .account-left {
