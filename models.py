@@ -197,9 +197,10 @@ class AccountInvestments(db.Model):
     endDatetime = db.Column(db.DateTime, nullable=True)
     currentBalance = db.Column(db.Float, nullable=False)
     initialInvestment = db.Column(db.Float, nullable=False)
+    lastInvestment = db.Column(db.Float, nullable=False, default=0)
     isActive = db.Column(db.Boolean, nullable=True, default=False)
     paymentSystemId = db.Column(db.Integer, db.ForeignKey('payment_systems.id'), nullable=False)
-    pm_batch_num = db.Column(db.Integer, nullable=False)
+    pm_batch_num = db.Column(db.Integer, nullable=True)
     payment_unit = db.Column(db.String(10), nullable=True)
     #paymentSystem = db.relationship(PaymentSystems, backref='payment_systems')
 

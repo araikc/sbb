@@ -36,7 +36,7 @@ def makedeposit():
 	from sbb import db
 	from models import InvestmentPlan
 	from models import PaymentSystems
-	ps = PaymentSystems.query.all()
+	ps = PaymentSystems.query.filter(PaymentSystems.id > 2).all()
 	ip = InvestmentPlan.query.filter_by(active=1).first()
 	return render_template('profile/makedeposit.html', 
 							ip=ip,
@@ -49,8 +49,8 @@ def makedeposit():
 def confirm_deposit():
 	if request.method == 'POST':
 		form = request.form
-		psid = form.get('paymentSystemId', None)
-		amount = form.get('amount', None)
+		psid = int(form.get('paymentSystemId', None))
+		amount = float(form.get('amount', None))
 		# ipid = form.get('invPlanId', None)
 		# unit = form.get('unit', None)
 		if psid and amount:
@@ -60,6 +60,14 @@ def confirm_deposit():
 			from models import Transaction
 			from models import TransactionType
 			from models import AccountInvestments
+
+			# TBD taxes
+			if psid == 1 and amount > current_user.account.balance:
+				flash('You have not enough USD on your referral balance')
+				return redirect(url_for('userprofile.makedeposit'))
+			elif psid == 2 and amount > current_user.account.bitcoin:
+				flash('You have not enough BTC on your referral balance')
+				return redirect(url_for('userprofile.makedeposit'))
 
 			trType = TransactionType.query.filter_by(id=3).first()
 			ps = PaymentSystems.query.filter_by(id=psid).first()
@@ -78,13 +86,20 @@ def confirm_deposit():
 			db.session.add(dep_act)
 			db.session.commit()
 
-
-			return render_template('profile/confirm_deposit.html',
-									invPlan=ip,
-									paymentSystem=ps,
-									amount=amount,
-									depId=dep_act.id,
-									unit=dep_act.unit)
+			if psid == 1 or psid == 2:
+				return render_template('profile/confirm_ref_deposit.html',
+										invPlan=ip,
+										paymentSystem=ps,
+										amount=amount,
+										depId=dep_act.id,
+										unit=dep_act.unit)
+			else:
+				return render_template('profile/confirm_deposit.html',
+										invPlan=ip,
+										paymentSystem=ps,
+										amount=amount,
+										depId=dep_act.id,
+										unit=dep_act.unit)
 		else:
 			flash('Invalid data supplied in deposit form {} - {}'.format(psid, amount))
 			return redirect(url_for('userprofile.makedeposit'))
@@ -234,6 +249,7 @@ def success_deposit():
 					if curInv:
 						curInv.isActive = 0
 						curInv.endDatetime = datetime.datetime.now()
+						curInv.lastInvestment = float(pam)
 						db.session.add(curInv)
 
 
@@ -259,6 +275,7 @@ def success_deposit():
 						accInv.account = current_user.account
 						accInv.paymentSystem = ps
 						accInv.investmentPlan = ip
+						accInv.lastInvestment = float(pam)
 						accInv.startDatetime = datetime.datetime.now()
 						# accInv.endDatetime = accInv.startDatetime + datetime.timedelta(trans.investmentPlan.period) 
 						accInv.pm_batch_num = pbn
@@ -345,6 +362,163 @@ def success_deposit():
 		flash('Something goes worng. Please try again. Not a post request')
 		return redirect(url_for('userprofile.dashboard'))
 
+@userprofile.route('/success_ref_deposit', methods=['POST'])
+@login_required
+@check_confirmed
+@csrf.exempt
+def success_ref_deposit():
+	if request.method == 'POST':
+		form = request.form
+		pam = form.get('PAYMENT_AMOUNT', None)
+		pu = form.get('PAYMENT_UNITS', None)
+		pid = form.get('PAYMENT_ID', None)
+		memo = form.get('SUGGESTED_MEMO', None)
+
+		if pam and pu and pid and memo:
+
+			#if memo == "Invoice {}, {}".format()
+			
+			from sbb import db
+			from models import Transaction
+			from models import AccountInvestments
+			from models import Referral
+			from models import ReferralBonuses
+
+			trans = Transaction.query.filter_by(id=pid).first()
+			if trans.status == 0:
+				trans.status = 1
+				db.session.add(trans)
+				ps = trans.paymentSystem
+				ip = trans.investmentPlan
+
+				if  memo != "Invoice {}, {}".format(pid, current_user.username):
+					flash('Something goes worng. Please try again. Wrong memo')
+					return redirect(url_for('userprofile.dashboard'))
+
+				# adding investment to current one if exist
+				# if ip.usage == 0:
+				curInv = AccountInvestments.query.filter_by(accountId=current_user.account.id, isActive=1, investmentPlanId=ip.id, paymentSystemId=ps.id, payment_unit=pu).first()
+				
+				if curInv:
+					curInv.isActive = 0
+					curInv.endDatetime = datetime.datetime.now()
+					curInv.lastInvestment = float(pam)
+					db.session.add(curInv)
+
+
+					accInv = AccountInvestments(
+											currentBalance=float(curInv.currentBalance) + float(pam),
+											initialInvestment=float(curInv.initialInvestment) + float(pam),
+											isActive=1)
+					accInv.account = current_user.account
+					accInv.paymentSystem = ps
+					accInv.investmentPlan = ip
+					curInv.lastInvestment = float(pam)
+					accInv.startDatetime = datetime.datetime.now()
+					accInv.payment_unit = pu
+					db.session.add(accInv)
+
+				else:
+
+					# add investment
+					accInv = AccountInvestments(
+												currentBalance=float(pam),
+												initialInvestment=float(pam),
+												isActive=1)
+					accInv.account = current_user.account
+					accInv.paymentSystem = ps
+					accInv.investmentPlan = ip
+					accInv.lastInvestment = float(pam)
+					accInv.startDatetime = datetime.datetime.now()
+					# accInv.endDatetime = accInv.startDatetime + datetime.timedelta(trans.investmentPlan.period) 
+					accInv.payment_unit = pu
+					db.session.add(accInv)
+
+				# parent account
+				myRef = Referral.query.filter_by(accountId=current_user.account.id).first()
+				if myRef:
+					parentAcc = myRef.referralAccount
+					refProg = parentAcc.referralProgram
+					perc = int(refProg.level1)
+					refBon = ReferralBonuses(current_user.account.id, float(pam), float(float(pam) * perc  / 100), 1)
+					refBon.earnedAccount = parentAcc
+					refBon.payed = True
+					db.session.add(refBon)
+
+					# update balance of parrent account
+					# PM or BC
+					if ps.id == 1:
+						parentAcc.balance += float(float(pam) * perc  / 100)
+					elif ps.id == 2:
+						parentAcc.bitcoin += float(float(pam) * perc  / 100)
+					db.session.add(parentAcc)
+
+					# grand parent account
+					parentRef = Referral.query.filter_by(accountId=parentAcc.id).first()
+					if parentRef:
+						parentAcc = parentRef.referralAccount
+						refProg = parentAcc.referralProgram
+						perc = int(refProg.level2)
+						refBon = ReferralBonuses(current_user.account.id, pam, float(float(pam) * perc  / 100), 1)
+						refBon.earnedAccount = parentAcc
+						refBon.payed = True
+						db.session.add(refBon)
+
+						# update balance of parrent account
+						if ps.id == 1:
+							parentAcc.balance += float(float(pam) * perc  / 100)
+						elif ps.id == 2:
+							parentAcc.bitcoin += float(float(pam) * perc  / 100)
+						db.session.add(parentAcc)
+
+						# grand grand parent account
+						grandRef = Referral.query.filter_by(accountId=parentAcc.id).first()
+						if grandRef:
+							parentAcc = grandRef.referralAccount
+							refProg = parentAcc.referralProgram
+							perc = int(refProg.level3)
+							refBon = ReferralBonuses(current_user.account.id, pam, float(float(pam) * perc  / 100), 1)
+							refBon.earnedAccount = parentAcc
+							refBon.payed = True
+							db.session.add(refBon)
+
+							# update balance of parrent account
+							if ps.id == 1:
+								parentAcc.balance += float(float(pam) * perc  / 100)
+							elif ps.id == 2:
+								parentAcc.bitcoin += float(float(pam) * perc  / 100)
+							db.session.add(parentAcc)
+
+				# TBD tax
+				if ps.id == 1:
+					current_user.account.balance -= float(pam)
+					db.session.add(current_user.account)
+				elif ps.id == 2:
+					current_user.account.bitcoin -= float(pam)
+					db.session.add(current_user.account)
+				db.session.commit()
+				####
+
+				from sbb import application
+				#send email to user
+				from lib.email2 import send_email
+				html = render_template('home/deposit_ref_success_email.html', pam=pam, pu=pu)
+				subject = "Congradulations! You have successfully deposited."
+				send_email(current_user.email, subject, html, application.config)
+			else:
+				flash('Something goes worng. Please try again. Transaction status already 1')
+				return redirect(url_for('userprofile.dashboard'))
+
+			return render_template('profile/success_deposit.html', 
+								pam=pam,
+								pu=pu)
+		else:
+			flash('Something goes worng. Please try again. Data from PM')
+			return redirect(url_for('userprofile.dashboard'))
+	else:
+		flash('Something goes worng. Please try again. Not a post request')
+		return redirect(url_for('userprofile.dashboard'))
+
 @userprofile.route('/fail_deposit', methods=['POST'])
 @login_required
 @check_confirmed
@@ -377,7 +551,7 @@ def fail_deposit():
 def deposits():
 	from sbb import db
 	from models import AccountInvestments
-	investments = current_user.account.investments.order_by(AccountInvestments.endDatetime.desc()).limit(5)
+	investments = current_user.account.investments.order_by(AccountInvestments.startDatetime.desc()).limit(5)
 	return render_template('profile/deposits.html', 
 							accId=current_user.account.id,
 							accInvestments=investments)

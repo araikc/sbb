@@ -75,6 +75,11 @@ def craete_utils():
     #db.session.commit()
 
 
+    rbu = PaymentSystems("Ref bonus", "logo", "url")
+    db.session.add(rbu)
+    rbb = PaymentSystems("Ref bonus", "logo", "url")
+    db.session.add(rbb)
+
     pm = PaymentSystems("Perfect money", "logo", "url")
     db.session.add(pm)
     bc = PaymentSystems("BitCoint", "logo", "url")

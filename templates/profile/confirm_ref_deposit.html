@@ -1,0 +1,32 @@
+{% extends "profile/layout.html" %}
+{% block body %}
+
+<div class="row">
+
+<p>
+	<center><h3>Please confirm you deposit</h3></center>
+	<center>You are investing {{amount}}$ in "{{invPlan.description}}" investment plan.<center>
+	<center>You are investing from referral bonuses. <center>
+</p>
+
+<form action="{{url_for('userprofile.success_ref_deposit')}}" method="POST">
+<div class="block" style="border:1px">
+
+	<!-- Perfect money data -->
+    <input type="hidden" name="PAYMENT_AMOUNT" value="{{amount}}">
+    <input type="hidden" name="PAYMENT_UNITS" value="{{unit}}">
+    <input type="hidden" name="PAYMENT_URL" value="{{request.host_url}}success_deposit">
+    <input type="hidden" name="PAYMENT_URL_METHOD" value="POST">
+    <input type="hidden" name="SUGGESTED_MEMO" value="Invoice {{depId}}, {{g.user.username}}">
+    <input type="hidden" name="PAYMENT_ID" value="{{depId}}">
+    <br>
+    <input type="submit" class="btn btn-success" name="PAYMENT_METHOD" value="Confirm">
+	<a type="btn" class="btn" href="{{url_for('userprofile.makedeposit')}}">Cancel</a>
+
+
+</div>
+</form>
+
+</div>
+
+{% endblock %}
