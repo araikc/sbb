@@ -610,15 +610,12 @@ def wallets():
 	if request.method == 'POST':
 		form = WalletsForm(request.form)
 		if form.validate():
-			pmusd = form.pmwalletUSD.data.strip()
-			pmeuro = form.pmwalletEURO.data.strip()
+			pm = form.pmwallet.data.strip()
 			bc = form.bcwallet.data.strip()
 			for w in wlist:
-				if w['psid'] == 1 and w['unit'] == 'USD':
-					www = pmusd
-				elif w['psid'] == 1 and w['unit'] == 'EURO':
-					www = pmeuro
-				elif w['psid'] == 2:
+				if w['psid'] == 3:
+					www = pm
+				elif w['psid'] == 4:
 					www = bc
 
 				wallet = Wallet.query.filter_by(id=w['id']).first()
