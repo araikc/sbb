@@ -14,6 +14,8 @@ class RegistrationForm(LoginForm):
     username = StringField('Username', validators=[DataRequired()])
     refemail = StringField('Referral e-mail', validators=[Optional(), Email()])
     pin_number = StringField('Pin number', validators=[DataRequired(), Regexp(regex="\d{4}", message="PIN number should be number with 4 digits")])
+    fb = StringField('Facebook', validators=[Optional()])
+    skype = StringField('Skype name', validators=[Optional()])
 
 class RequestResetPassordForm(Form):
     email = StringField('E-mail', validators=[Email(), DataRequired()])

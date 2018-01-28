@@ -15,6 +15,8 @@ class User(db.Model):
     confirmed_on = db.Column(db.DateTime, nullable=True)
     role = db.Column(db.String(20), nullable=False, default='user')
     pin = db.Column(db.String(4), nullable=False)
+    fb = db.Column(db.String(120), nullable=True)
+    skype = db.Column(db.String(120), nullable=True)
 
     ####
     account = db.relationship('Account', backref='user', uselist=False)

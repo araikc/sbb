@@ -69,16 +69,23 @@ def register():
 
 			user = User(username=form.username.data, password=form.password.data, email=form.email.data)
 			user.account = account
+			if form.fb.data != '':
+				user.fb = form.fb.data
+			if form.skype.data != '':
+				user.skype = form.skype.data
+			user.pin = form.pin_number.data
 			db.session.add(user)
 			#db.session.commit()
 
 			# referral account
-			if form.refemail.data:
+			if form.refemail.data and form.refemail.data != form.email.data:
 				refUser = User.query.filter_by(email=form.refemail.data).first()
 				if refUser:
 					referral = Referral(accountId=account.id)
 					referral.referralAccount = refUser.account
 					db.session.add(referral)
+				else:
+					flash("Wrong referral email. Referral email skiped.")
 
 			db.session.commit()
 
