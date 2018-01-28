@@ -112,11 +112,11 @@ class WithdrawModelView(sqla.ModelView):
                 acc = Account.query.filter_by(id=w.accountId).first()
                 accW = AccountWallets.query.filter_by(accountId=acc.id, walletId=w.walletId).first()
 
-                if accW.wallet.unit == 'BTC':
-                    acc.bitcoin -= w.amount
-                else:
-                    acc.balance -= w.amount
-                db.session.add(acc)                    
+                # if accW.wallet.unit == 'BTC':
+                #     acc.bitcoin -= w.amount
+                # else:
+                #     acc.balance -= w.amount
+                # db.session.add(acc)                    
                 db.session.commit()
 
                 html = render_template('home/withdraw_landed.html', account=acc, amount=w.amount, accW=accW, bnum=w.batch_num)

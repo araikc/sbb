@@ -5,7 +5,7 @@
 
 <p>
 	<center><h3>Please confirm you withdraw</h3></center>
-	<center>You are withdrawing {{amount}}{{unit}} into you {{accWallet.wallet.name}}[{{accWallet.wallet.unit}}] wallet.<center>
+	<center>You are withdrawing {{amount}}{{unit}} from {% if source == 'rbusd' or source == 'rbbtc' %} referal bonuses {% elif source.startswith('ai') %} investment profit {% endif %} into you {{accWallet.wallet.name}}[{{accWallet.wallet.unit}}] wallet.<center>
 	<center style="font-size: 12px;">Note: You will be chanrged with the selected payment system service fee.<center>
 </p>
 
@@ -17,6 +17,7 @@
 	<input type="hidden" name="accWalletId" value="{{accWallet.wallet.id}}">
     <input type="hidden" name="amount" value="{{amount}}">
     <input type="hidden" name="withdrawId" value="{{withId}}">
+    <input type="hidden" name="source" value="{{source}}">
     <br>
     <input type="submit" class="btn btn-success" name="WITHDRAW_METHOD" value="Confirm">
 	<a type="btn" class="btn" href="{{url_for('userprofile.withdraw')}}">Cancel</a>

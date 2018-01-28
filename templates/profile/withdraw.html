@@ -13,6 +13,37 @@
 	<form action="{{ url_for('userprofile.confirm_withdraw') }}" method=post class="form-horizontal">
 	<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 	<div class="block" style="border:1px">
+
+		<div class="row">
+			<div class="col-xs-6">
+				<h4>Profit from investments</h4>
+				{% if accInvs %}
+				{% for ai in  accInvs %}
+				<label class="radio">
+					<input type="radio" name="source" id="source" value="ai{{ai.id}}" required {% if ai.currentBalance - ai.initialInvestment == 0%} disabled {% endif %}>
+					{{ai.currentBalance - ai.initialInvestment}}{% if ai.paymentSystemId==3 %}${% else %}Ƀ{% endif %}
+				</label>
+				{% endfor %}
+				{% else %}
+				<p>No investments</p>
+				{% endif %}
+			</div>
+			<div class="col-xs-6">
+				<h4>Referral bonuses</h4>
+				<label class="radio">
+					<input type="radio" name="source" id="source" value="rbusd" required {% if g.user.account.balance == 0 %} disabled {% endif %}>
+					<div class="account_numbers">
+						<p>{{g.user.account.balance}}<span>$</span></p>
+					</div>
+				</label>
+				<label class="radio">
+					<input type="radio" name="source" id="source" value="rbbtc" required {% if g.user.account.bitcoin == 0 %} disabled {% endif %}>
+					<div class="account_numbers">
+						<p>{{g.user.account.bitcoin}}<span>Ƀ</span></p>
+					</div>
+				</label>
+			</div>
+		</div>
 		<div class="row">
 			<div class="span4">
 				<h4>Select Wallet</h4>

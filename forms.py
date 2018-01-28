@@ -35,6 +35,7 @@ class WalletsForm(Form):
 
 
 class WithdrawForm(Form):
+    source = StringField('Source', validators=[DataRequired()])
     accWalletId = StringField('accWalletId', validators=[DataRequired()])
     amount = StringField('amount', validators=[DataRequired(), Regexp(regex="\d+\.\d+|\d+", message="Amount should be positive number")])
     pin_number = StringField('Pin number', validators=[DataRequired(), Regexp(regex="\d{4}", message="PIN number should be number with 4 digits")])
@@ -43,3 +44,4 @@ class ConfirmWithdrawForm(Form):
     withdrawId = StringField('withdrawId', validators=[DataRequired()])
     accWalletId = StringField('accWalletId', validators=[DataRequired()])
     amount = StringField('amount', validators=[DataRequired(), Regexp(regex="\d+\.\d+|\d+", message="Amount should be positive number")])
+    source = StringField('Source', validators=[DataRequired()])

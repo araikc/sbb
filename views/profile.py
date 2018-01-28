@@ -19,8 +19,9 @@ def profile():
 def dashboard():
 	from sbb import db
 	from models import PaymentSystems
+	from models import Withdraws
 	#investments = AccountInvestments.query.filter_by(accountId=current_user.account.id).limit(5)
-	wths = current_user.account.withdraws.all()
+	wths = Withdraws.query.filter(Withdraws.status==1, Withdraws.accountId==current_user.account.id).all()
 	wamusd = float(0)
 	wambtc = float(0)
 	for w in wths:
@@ -656,21 +657,28 @@ def wallets():
 def withdraw():
 	from sbb import db
 	from models import Wallet
+	from models import AccountInvestments
+
+	accInvs = AccountInvestments.query.filter(AccountInvestments.accountId==current_user.account.id, AccountInvestments.isActive==1).all()
 	accWallets = current_user.account.wallets.all()
 
 	accWallets = None if len(accWallets) == 0 else accWallets
 
 	if request.method == 'GET':
 		return render_template('profile/withdraw.html', 
-								accWallets=accWallets)
+								accWallets=accWallets,
+								accInvs=accInvs)
 
 @userprofile.route('/confirm_withdraw', methods=['POST'])
 @login_required
 @check_confirmed
 def confirm_withdraw():
 	from sbb import db, application
+	from models import AccountInvestments
 
 	accWallets = current_user.account.wallets.all()
+
+	accInvs = AccountInvestments.query.filter(AccountInvestments.accountId==current_user.account.id, AccountInvestments.isActive==1).all()
 
 	accWallets = None if len(accWallets) == 0 else accWallets
 
@@ -678,28 +686,55 @@ def confirm_withdraw():
 	from forms import WithdrawForm
 	from models import TransactionType
 	from models import Transaction
+	from models import AccountInvestments
 
 	form = WithdrawForm(request.form)
 	if form.validate_on_submit():
 		accWalletId = form.accWalletId.data.strip()
 		amount = form.amount.data.strip()
+		source = form.source.data.strip()
 
 		accW = AccountWallets.query.filter(AccountWallets.walletId==accWalletId, AccountWallets.accountId==current_user.account.id).first()
 
-		balance = current_user.account.balance if accW.wallet.unit == 'USD' or  accW.wallet.unit == 'EURO' else current_user.account.bitcoin
+		balance = None
+		if source == 'rbusd':
+			balance = float(current_user.account.balance)
+			if accW.wallet.paymentSystemId == 4:
+				flash('Please make sure that withdraw amout unit and wallet unit are matching')
+				return render_template('profile/withdraw.html', 
+								accWallets=accWallets,
+								accInvs=accInvs)
+		elif source == 'rbbtc':
+			balance = float(current_user.account.bitcoin)
+			if accW.wallet.paymentSystemId == 3:
+				flash('Please make sure that withdraw amout unit and wallet unit are matching')
+				return render_template('profile/withdraw.html', 
+								accWallets=accWallets,
+								accInvs=accInvs)
+		elif source.startswith('ai'):
+			accInv = AccountInvestments.query.filter_by(id=float(source[2:])).first()
+			balance = float(accInv.currentBalance - accInv.initialInvestment)
+			if accInv.paymentSystemId != accW.wallet.paymentSystemId:
+				flash('Please make sure that withdraw amout unit and wallet unit are matching')
+				return render_template('profile/withdraw.html', 
+								accWallets=accWallets,
+								accInvs=accInvs)
 
 		if float(amount) <= 0:
 			flash('Please specify positive amount')
 			return render_template('profile/withdraw.html', 
-								accWallets=accWallets)
-		elif float(current_user.account.balance) < float(amount):
-			flash('Insufficient balance')
+								accWallets=accWallets,
+								accInvs=accInvs)
+		elif balance < float(amount):
+			flash('Sepcified withdraw money greater then your balance')
 			return render_template('profile/withdraw.html', 
-								accWallets=accWallets)
+								accWallets=accWallets,
+								accInvs=accInvs)
 		elif form.pin_number.data != current_user.pin:
 			flash('Wrong PIN nubmer')
 			return render_template('profile/withdraw.html', 
-								accWallets=accWallets)
+								accWallets=accWallets,
+								accInvs=accInvs)
 		else:
 			trType = TransactionType.query.filter_by(id=5).first()
 			dep_act = Transaction(
@@ -717,10 +752,12 @@ def confirm_withdraw():
 								amount=amount,
 								accWallet=accW,
 								withId=dep_act.id,
-								unit=accW.wallet.unit)
+								unit=accW.wallet.unit,
+								source=source)
 	flash_errors(form)
 	return render_template('profile/withdraw.html', 
-								accWallets=accWallets)
+								accWallets=accWallets,
+								accInvs=accInvs)
 
 
 @userprofile.route('/make_withdraw', methods=['POST'])
@@ -737,33 +774,47 @@ def make_withdraw():
 	from models import Withdraws
 	from models import Transaction
 	from models import TransactionType
+	from models import AccountInvestments
 	from forms import ConfirmWithdrawForm
 
 	form = ConfirmWithdrawForm(request.form)
-	if form.validate():
+	if form.validate_on_submit():
 		accWalletId = form.accWalletId.data.strip()
-		amount = form.amount.data.strip()
+		amount = float(form.amount.data.strip())
 		withdrawId = form.withdrawId.data.strip()
+		source = form.source.data.strip()
+
+		accInvs = AccountInvestments.query.filter(AccountInvestments.accountId==current_user.account.id, AccountInvestments.isActive==1).all()
+
+		balance = None
+		if source == 'rbusd':
+			balance = float(current_user.account.balance)
+		elif source == 'rbbtc':
+			balance = float(current_user.account.bitcoin)
+		elif source.startswith('ai'):
+			accInv = AccountInvestments.query.filter_by(id=float(source[2:])).first()
+			balance = float(accInv.currentBalance - accInv.initialInvestment)
 
 		accW = AccountWallets.query.filter(AccountWallets.walletId==accWalletId, AccountWallets.accountId==current_user.account.id).first()
 
-		balance = current_user.account.balance if accW.wallet.unit == 'USD' or  accW.wallet.unit == 'EURO' else current_user.account.bitcoin
-
 		wd = Transaction.query.filter_by(id=withdrawId).first()
 
-		if float(amount) <= 0:
+		if amount <= 0:
 			flash('Please specify positive amount')
 			return render_template('profile/withdraw.html', 
-								accWallets=accWallets)
-		elif float(current_user.account.balance) < float(amount):
+								accWallets=accWallets,
+								accInvs=accInvs)
+		elif balance < amount:
 			flash('Insufficient balance')
 			return render_template('profile/withdraw.html', 
-								accWallets=accWallets)
-		elif wd.accountId != current_user.account.id or float(wd.amount) != float(amount) \
+								accWallets=accWallets,
+								accInvs=accInvs)
+		elif wd.accountId != current_user.account.id or float(wd.amount) != amount \
 			   or wd.unit != accW.wallet.unit or wd.status != False:
 			   	flash('Something goes wrong. please try agian.')
 				return render_template('profile/withdraw.html', 
-								accWallets=accWallets)
+								accWallets=accWallets,
+								accInvs=accInvs)
 		else:
 			from lib.email2 import send_email
 			html = render_template('home/withdraw_request_email.html', account=current_user.account, amount=amount, accW=accW)
@@ -774,8 +825,18 @@ def make_withdraw():
 			wd.account = current_user.account
 			wd.status = False
 			db.session.add(wd)
+			if source == 'rbusd':
+				current_user.account.balance -= amount
+				db.session.add(current_user.account)
+			elif source == 'rbbtc':
+				current_user.account.bitcoin -= amount
+				db.session.add(current_user.account)
+			elif source.startswith('ai'):
+				accInv = AccountInvestments.query.filter_by(id=float(source[2:])).first()
+				accInv.currentBalance -= amount
+				db.session.add(accInv)
 
-			db.session.commit()
+			db.session.commit()	
 
 			#withs = current_user.account.withdraws.all()
 			#return render_template('profile/withdraws_history.html',
@@ -786,7 +847,8 @@ def make_withdraw():
 	else:
 		flash('Please recheck your input data')
 		return render_template('profile/withdraw.html', 
-				accWallets=accWallets)
+				accWallets=accWallets,
+				accInvs=accInvs)
 
 
 
