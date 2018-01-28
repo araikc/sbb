@@ -14,6 +14,7 @@ class User(db.Model):
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
     role = db.Column(db.String(20), nullable=False, default='user')
+    pin = db.Column(db.String(4), nullable=False)
 
     ####
     account = db.relationship('Account', backref='user', uselist=False)
@@ -272,6 +273,7 @@ class Withdraws(db.Model):
     accountId = db.Column(db.Integer, db.ForeignKey('accounts.id'), nullable=False, index=True)
     amount = db.Column(db.Float, nullable=False)
     walletId = db.Column(db.Integer, db.ForeignKey('wallet.id'), nullable=False, index=True)
+    batch_num = db.Column(db.Integer, nullable=True)
     status = db.Column(db.Boolean, nullable=False, default=False)
 
     def __init__(self, dateTime, amount, walletId):

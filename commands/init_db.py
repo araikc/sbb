@@ -61,6 +61,7 @@ def create_user(account):
                                email=u'araikc@gmail.com', role='admin',
                                confirmed=1)
     user.account = account
+    user.pin = "1234"
     db.session.add(user)
     #db.session.commit()
     return user

@@ -69,10 +69,20 @@
 
 
             <div class="form-group">
+              <label for="confirm" class="cols-sm-2 control-label">PIN number</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user-secret fa-lg" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" name="pin_number" id="pin_number"  placeholder="Pin number" value="{{request.form.pin_number}}" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
               <label for="confirm" class="cols-sm-2 control-label">Referral email</label>
               <div class="cols-sm-10">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                  <span class="input-group-addon"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></span>
                   <input type="email" class="form-control" name="refemail" id="refemail"  placeholder="Referral email" value="{% if referral %} {{referral}} {% endif  %}"/>
                 </div>
               </div>

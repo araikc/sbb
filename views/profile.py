@@ -1,6 +1,7 @@
 from flask import Blueprint, flash, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 from lib.decorators import check_confirmed
+from lib.utils import flash_errors
 from forms import DepositForm, csrf
 import datetime
 
@@ -20,14 +21,19 @@ def dashboard():
 	from models import PaymentSystems
 	#investments = AccountInvestments.query.filter_by(accountId=current_user.account.id).limit(5)
 	wths = current_user.account.withdraws.all()
-	wam = float(0)
+	wamusd = float(0)
+	wambtc = float(0)
 	for w in wths:
-		w += float(w.amount)
+		if w.wallet.paymentSystemId == 3:
+			wamusd += float(w.amount)
+		elif w.wallet.paymentSystemId == 4:
+			wambtc += float(w.amount)
 	investments = current_user.account.investments.filter_by(isActive=1).all()
 	return render_template('profile/dashboard.html', 
 							accId=current_user.account.id,
 							accInvestments=investments,
-							w_amount = wam)
+							w_amount_usd = wamusd,
+							w_amount_btc = wambtc)
 
 @userprofile.route('/makedeposit')
 @login_required
@@ -674,7 +680,7 @@ def confirm_withdraw():
 	from models import Transaction
 
 	form = WithdrawForm(request.form)
-	if form.validate():
+	if form.validate_on_submit():
 		accWalletId = form.accWalletId.data.strip()
 		amount = form.amount.data.strip()
 
@@ -688,6 +694,10 @@ def confirm_withdraw():
 								accWallets=accWallets)
 		elif float(current_user.account.balance) < float(amount):
 			flash('Insufficient balance')
+			return render_template('profile/withdraw.html', 
+								accWallets=accWallets)
+		elif form.pin_number.data != current_user.pin:
+			flash('Wrong PIN nubmer')
 			return render_template('profile/withdraw.html', 
 								accWallets=accWallets)
 		else:
@@ -706,7 +716,12 @@ def confirm_withdraw():
 		return render_template('profile/confirm_withdraw.html', 
 								amount=amount,
 								accWallet=accW,
-								withId=dep_act.id)
+								withId=dep_act.id,
+								unit=accW.wallet.unit)
+	flash_errors(form)
+	return render_template('profile/withdraw.html', 
+								accWallets=accWallets)
+
 
 @userprofile.route('/make_withdraw', methods=['POST'])
 @login_required

@@ -4,6 +4,7 @@ from forms import LoginForm, RegistrationForm, RequestResetPassordForm, ResetPas
 from datetime import datetime
 from lib.token2 import generate_confirmation_token, confirm_token
 from lib.decorators import check_confirmed, logout_required
+from lib.utils import flash_errors
 from datetime import datetime
 
 home = Blueprint('home', __name__)
@@ -41,6 +42,7 @@ def contact():
 def register():
 	#if 'referral' in session:
 	#	print session['referral']
+
 	from sbb import application, db
 	from lib.email2 import send_email
 	from models import User, ReferralProgram, Account, Referral
@@ -50,7 +52,7 @@ def register():
 			referral = session['referral']
 		return render_template('home/register.html', referral=referral)
 	form = RegistrationForm(request.form)
-	if form.validate():
+	if form.validate_on_submit():
 		cur = User.query.filter_by(email=form.email.data).first()
 		refUser = None
 
@@ -91,6 +93,8 @@ def register():
 			return redirect(url_for('home.unconfirmed'))
 		else:
 			flash('User with specified email already exists in a system', 'warning')
+	else:
+		flash_errors(form)
 	return render_template('home/register.html')
  
 
@@ -104,7 +108,7 @@ def login():
 	if request.method == 'GET':
 	    return render_template('home/login.html')
 	form = LoginForm(request.form)
-	if form.validate():
+	if form.validate_on_submit():
 		email = form.email.data
 		password = form.password.data
 		remember_me = False
@@ -135,7 +139,7 @@ def login():
 		db.session.add(login_act)
 		db.session.commit()
 		return redirect(request.args.get('next') or url_for('userprofile.dashboard'))
-	flash('Please check your inputs' , 'error')
+	flash_errors(form)
 	return redirect(url_for('home.login'))
 
 @home.route('/view_reset_pass')
@@ -180,7 +184,7 @@ def send_reset_pass():
 	from models import User
 	from sbb import application
 	form = RequestResetPassordForm(request.form)
-	if request.method == 'POST' and form.validate():
+	if form.validate_on_submit():
 		user = User.query.filter_by(email=form.email.data).first()
 		if user:
 			token = generate_confirmation_token(form.email.data, application.config)
@@ -192,6 +196,8 @@ def send_reset_pass():
 		else:
 			flash('No user found with specified email.', 'warning')
 			return redirect('view_reset_pass')
+	else:
+		flash_errors(form)
 	return redirect('login')
 
 @home.route('/save_reset_pass', methods=['POST'])
@@ -202,7 +208,7 @@ def save_reset_pass():
 	from models import TransactionType
 	from sbb import application, db
 	form = ResetPassordForm(request.form)
-	if form.validate():
+	if form.validate_on_submit():
 		user = User.query.filter_by(email=request.form['email']).first()
 		if user:
 			user.password = User.hash_password(form.password.data)
@@ -217,6 +223,8 @@ def save_reset_pass():
 			flash('Thank you! You have successfully reset your password.')
 		else:
 			flash('No user found with specified email.', 'warning')
+	else:
+		flash_errors(form)
 	return redirect('login')
 
 

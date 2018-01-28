@@ -100,10 +100,9 @@ class WithdrawModelView(sqla.ModelView):
         from lib.email2 import send_email
         
         try:
-            wths = Withdraws.query.filter(Withdraws.id.in_(ids), Withdraws.status==0).all()
-
+            wths = Withdraws.query.filter(Withdraws.id.in_(ids), Withdraws.status==0, Withdraws.batch_num!=None).all()
             if len(wths) == 0:
-                flash("Info: no pending withdraws found")
+                flash("Info: no pending withdraws found | fill batch number")
                 return
 
             for w in wths:
@@ -120,7 +119,7 @@ class WithdrawModelView(sqla.ModelView):
                 db.session.add(acc)                    
                 db.session.commit()
 
-                html = render_template('home/withdraw_landed.html', account=acc, amount=w.amount, accW=accW)
+                html = render_template('home/withdraw_landed.html', account=acc, amount=w.amount, accW=accW, bnum=w.batch_num)
                 subject = "Withdraw received"
                 send_email(acc.user.email, subject, html, application.config)
 

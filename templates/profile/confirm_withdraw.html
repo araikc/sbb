@@ -5,7 +5,8 @@
 
 <p>
 	<center><h3>Please confirm you withdraw</h3></center>
-	<center>You are withdrawing {{amount}} into you {{accWallet.wallet.name}}[{{accWallet.wallet.unit}}] wallet.<center>
+	<center>You are withdrawing {{amount}}{{unit}} into you {{accWallet.wallet.name}}[{{accWallet.wallet.unit}}] wallet.<center>
+	<center style="font-size: 12px;">Note: You will be chanrged with the selected payment system service fee.<center>
 </p>
 
 <form action="{{url_for('userprofile.make_withdraw')}}" method="POST">
