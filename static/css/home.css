@@ -5,3 +5,197 @@
 .social_register_hidden {
 	display: none;
 }
+
+
+
+.select-language {
+            /*margin-right: -10px;*/
+            /*margin-left: 96px;
+            margin-top:25px;*/
+            float: left;
+            position: absolute;
+            left:200px;
+            top:58px;
+            z-index:1000;
+        }
+
+@media (max-width: 992px) {
+	.select-language {
+		left:53px;
+		top:68px;
+	}
+}
+            .select-language .language-href {
+                font-size: 14px;
+                line-height: 15px;
+                position: relative;
+            }
+                .language-href:before{
+                    content: "\f0d7";
+                    display: block;
+                    position: absolute;
+                    font-family: 'FontAwesome', sans-serif;
+                    top: 1px;
+                    right: -10px;
+                    font-size: 10px;
+                    color: #4faee8;
+                }
+                .select-language .language-href a {
+                    font-weight: 400;
+                    color: #4faee8;
+                    font-size: 14px;
+                    text-decoration: none;
+                    position: relative;
+                }
+                    .select-language .language-href a:hover,
+                    .select-language .language-href a:active,
+                    .select-language .language-href a:focus {
+                        color: #459dd1;
+                        text-decoration: none;
+                    }
+            .language-tab {
+                /* display: none;*/
+                width: 100px;
+                position: absolute;
+                top: 30px;
+                left: -20px;
+                z-index: 1000;
+                font-size: 15px;
+                line-height: 26px;
+                background: transparent;
+                /*border: 1px solid #dddddd;*/
+                opacity: 0;
+                /*box-shadow: 0px 24px 20px 0px rgba(0, 1, 1, 0.04);*/
+                /*transform: rotate3d(1,1,0,-20deg);
+                transform-origin: 100% 0;
+                will-change: transform,opacity;
+                transition-property: transform,opacity;
+                transition-duration: .25s;*/
+                pointer-events: none;
+                padding: 10px 15px;
+                border-radius: 4px;
+            }
+                .tab-header{
+                    font-size: 14px;
+                    color: #363636;
+                    text-transform: uppercase;
+                    line-height: 20px;
+                    margin: 10px 0 15px;
+                    font-weight: 700;
+                }
+                .language-list {
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                }
+                    .language-list li {
+                        width: 100%;
+                        float: left;
+                    }
+                        .language-list li a {
+                            text-align: center;
+                            font-weight: 400;
+                            margin: 4px 0;
+                            font-size: 14px;
+                            color: #4faee8;
+                            line-height: 16px;
+                            display: block;
+                            width: 100%;
+                            text-decoration: none;
+                        }
+                            .language-list li a:hover,
+                            .language-list li a:focus,
+                            .language-list li a:active,
+                            .language-list li a.active{
+                                text-decoration: none;
+                                color: #459dd1;
+                            }
+                                .language-list li a.disabled{
+                                    opacity: 0.3;
+                                    pointer-events: none;
+                                    cursor: default;
+                                }
+                                .language-href .flag,
+                                .language-list .flag {
+                                    width: 16px;
+                                    height: 16px;
+                                    border-radius: 16px;
+                                    background: url('../img/sprite_flag.png');
+                                    background-position-x: center;
+                                    display: block;
+                                    float: left;
+                                    margin-right: 9px;
+                                }
+                                    .language-href .flag.flag_ru,
+                                    .language-list .flag.flag_ru {
+                                        background-position: 0 -18px;
+                                        background-position-x: center;
+                                    }
+                                    .language-href .flag.flag_de,
+                                    .language-list .flag.flag_de {
+                                        background-position: 0 -35px;
+                                        background-position-x: center;
+                                    }
+                                    .language-href .flag.flag_fr,
+                                    .language-list .flag.flag_ge {
+                                        background-position: 0 -53px;
+                                        background-position-x: center;
+                                    }
+                                    .language-href .flag.flag_fr,
+                                    .language-list .flag.flag_fr {
+                                        background-position: 0 -71px;
+                                        background-position-x: center;
+                                    }
+                                    .language-href .flag.flag_pl,
+                                    .language-list .flag.flag_pl {
+                                        background-position: 0 -89px;
+                                        background-position-x: center;
+                                    }
+                                    .language-href .flag.flag_vi,
+                                    .language-list .flag.flag_vi {
+                                        background-position: 0 -106px;
+                                        background-position-x: center;
+                                    }
+                                    .language-href .flag.flag_pt,
+                                    .language-list .flag.flag_pt {
+                                        background-position: 0 -124px;
+                                        background-position-x: center;
+                                    }
+                                    .language-href .flag.flag_cn,
+                                    .language-list .flag.flag_cn {
+                                        background-position: 0 -160px;
+                                        background-position-x: center;
+                                    }
+                                    .language-href .flag.flag_it,
+                                    .language-list .flag.flag_it {
+                                        background-position: 0 -178px;
+                                        background-position-x: center;
+                                    }
+                                    .language-href .flag.flag_hi,
+                                    .language-list .flag.flag_hi {
+                                        background-position: 0 -196px;
+                                        background-position-x: center;
+                                    }
+/*                                    .language-href .flag.flag_bn,
+                                    .language-list .flag.flag_bn {
+                                        background-position: 0 -214px;
+                                        background-position-x: center;
+                                    }*/
+/*                                    .language-href .flag.flag_ar,
+                                    .language-list .flag.flag_ar {
+                                        background-position: 0 -231px;
+                                        background-position-x: center;
+                                    }*/
+/*                                    .language-href .flag.flag_id,
+                                    .language-list .flag.flag_id {
+                                        background-position: 0 -208px;
+                                        background-position-x: center;
+                                    }*/
+        .select-language.active .language-tab {
+            /*transform: rotate3d(1,1,0,0deg);*/
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .select-language.active .language-href a {
+            /*background: url('../img/select-arrow-top_hover.png') no-repeat right center;*/
+        }

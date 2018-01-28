@@ -147,6 +147,7 @@
         margin-bottom: 150px;
     }
     .slicknav_menu{
+        z-index: 1001;
         display: block;
     }
     .slicknav_btn{
@@ -161,12 +162,15 @@
     background: #2C4065;
     color: #fff;
     }
+    .slicknav_nav {
+        z-index: 1001;
+    }
     .slicknav_menu.nav-fixed {
     position: fixed;
     left: 0;
     top: 0;
     width: 100%;
-    z-index: 999;
+    z-index: 1001;
     box-shadow: 0 0px 5px  #333;
     }
     .single-team-member {
@@ -357,7 +361,7 @@
     left: 0;
     top: 0;
     width: 100%;
-    z-index: 9;
+    z-index: 1001;
     box-shadow: 0 0px 5px  #333;
     }
     .spinner {

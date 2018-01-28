@@ -6,6 +6,14 @@
         $(document).on('click','#social_button ',function() {
         	$('#social_register').toggleClass('social_register_hidden social_register_active');
         });
+
+        $(document).on('click', '.language-href', function(){
+            if ($('#lang-select').hasClass('active')) {
+                $('#lang-select').removeClass('active');
+            } else {
+                $('#lang-select').addClass('active');
+            }
+        });
     });
 
     // $('input[type=radio][name=paymentSystemId]').change(function() {
