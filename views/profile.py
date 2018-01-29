@@ -120,7 +120,7 @@ def validate_deposit():
 
 		req_ip = request.remote_addr
 
-		if str(req_ip) not in ['77.109.141.170', '91.205.41.208', '94.242.216.60'. '78.41.203.75']:
+		if str(req_ip) not in ['77.109.141.170', '91.205.41.208', '94.242.216.60', '78.41.203.75']:
 			return make_response('error', 400)
 
 		form = request.form
