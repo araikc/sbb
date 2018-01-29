@@ -20,7 +20,7 @@ admin = Admin(application, index_view=MyAdminIndexView(), base_template='admin/m
 
 
 # config
-application.config.from_object('config.DevelopConfig')
+application.config.from_object('config.ProductionConfig')
 application.config['PMSECRET'] = os.environ['PMSECRET'] if application.config['PMSECRET'] == '' else application.config['PMSECRET']
 application.config['MAIL_USERNAME'] = os.environ['MAIL_USERNAME'] if application.config['MAIL_USERNAME'] == '' else application.config['MAIL_USERNAME']
 application.config['MAIL_PASSWORD'] = os.environ['MAIL_PASSWORD'] if application.config['MAIL_PASSWORD'] == '' else application.config['MAIL_PASSWORD']
