@@ -28,10 +28,10 @@ class ProductionConfig(Config):
     MAIL_USERNAME = ''
     MAIL_PASSWORD = ''
     PAYMENT_PROD = True
-    PMSECRET = ''
+    PMSECRET = '\x01\xc8$\x97\xd9\x1a\x13\xd9\x9eE\xabS\xc8\x17\xa4\xc3\x14\xe8Re\x94\x8cKR'
     SQLALCHEMY_DATABASE_URI = ''
     SECRET_KEY = ''
-    WTF_CSRF_SECRET_KEY = ''
+    WTF_CSRF_SECRET_KEY = '12j1j1lk31k2312313'
     ASSETS_DEBUG = False
 
 class DevelopConfig(Config):
@@ -49,5 +49,5 @@ class DevelopConfig(Config):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     DEBUG_TB_INTERCEPT_REDIRECTS = False
     PAYMENT_PROD = False
-    PMSECRET = ''
+    PMSECRET = ""
 
