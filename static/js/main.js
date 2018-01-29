@@ -3,15 +3,28 @@
 
     jQuery(document).ready(function($){
 /*--theme swither activation--*/
-        // $(document).on('click','.Switcher',function(){
-        //     var cname = $(this).attr('class');
-        //     var length = cname.length;
-        //     if(length == 8){
-        //         $(this).addClass('active');
-        //     }else{
-        //         $(this).removeClass('active');
-        //     }  
-        // });
+        $(document).on('click','#Switch-button',function(){
+            var cname = $('.Switcher').attr('class');
+            var length = cname.length;
+            if(length == 8){
+                $('.Switcher').addClass('active');
+            }else{
+                $('.Switcher').removeClass('active');
+            }  
+        });
+
+        $("#calc-amount").on("change paste keyup", function() {
+           $('#calc-out').text( ($('#calc-amount').val()/100) * $('#calc-percent').val() * $('#calc-days').val() );
+        });
+
+        $("#calc-percent").on("change paste keyup", function() {
+           $('#calc-out').text(($('#calc-amount').val()/100)*$('#calc-percent').val()*$('#calc-days').val());
+        });
+
+        $("#calc-days").on("change paste keyup", function() {
+           $('#calc-out').text(($('#calc-amount').val()/100)*$('#calc-percent').val()*$('#calc-days').val());
+        });
+
         $(document).on('click','.left-menu-btn',function(){
             var cname = $(this).attr('class');
 

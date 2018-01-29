@@ -21,6 +21,7 @@
         <link href="{{ url_for('static', filename='css/animate.css')}}" rel="stylesheet">
         <!--Style Css-->
         <link href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet">
+
         <link href="{{ url_for('static', filename='css/home.css')}}" rel="stylesheet">
         <!--Responsive Css-->
         <link href="{{ url_for('static', filename='css/responsive.css')}}" rel="stylesheet">
@@ -29,6 +30,30 @@
 
     <body>
 
+    <div class="Switcher">
+        <i class="fa fa-calculator" id="Switch-button"></i>
+        <h5 style="margin-bottom: 5px">Profit calculator</h5>
+        <!-- <ul id="colors" data-dir="assets/css/themes/">
+            <li class="theme-3"><span>y</span></li>
+            <li class="theme-4"><span>y</span></li>
+            <li class="theme-6"><span>p</span></li>
+            <li class="theme-9"><span>p</span></li>
+            <li class="theme-13"><span>p</span></li>
+            <li class="theme-14"><span>p</span></li>
+        </ul> -->
+        <div class="calc-body">
+          <div style="float:left" class="calc-input">
+            <input type="text" id="calc-amount" placeholder="Deposit"/>
+            <input type="text" id="calc-percent" placeholder="Percent"/>
+            <input type="text" id="calc-days" placeholder="Days"/>
+          </div>
+          <div style="float:left" class="calc-output">
+            <span style="color:#049426; font-size:18px; font-weight:600">Profit</span>
+            <br>
+            <span id="calc-out" style="color:#63cc88; font-size:28px; font-weight:600">0</span>
+          </div>
+        </div>
+    </div>
 
     <div class="SocialQA">
         <ul id="socials">
