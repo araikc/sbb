@@ -126,7 +126,13 @@ def validate_deposit():
 		pmsecrethash = hashlib.md5(application.config['PMSECRET']).hexdigest().upper()
 		form = request.form
 
+		print form
+		print 'DDDDDDDDD'
+
 		req_ip = request.remote_addr
+
+		print req_ip
+		print "IPPPPPPP"
 
 		pid = form.get('PAYMENT_ID', None)
 		pyacc = form.get('PAYEE_ACCOUNT', None)
@@ -216,6 +222,15 @@ def validate_deposit():
 def success_deposit():
 	if request.method == 'POST':
 		form = request.form
+
+		print form
+		print 'SSSSSSSS'
+
+		req_ip = request.remote_addr
+
+		print req_ip
+		print "IPPPPPPP"
+
 		pyacc = form.get('PAYEE_ACCOUNT', None)
 		pam = form.get('PAYMENT_AMOUNT', None)
 		pu = form.get('PAYMENT_UNITS', None)
