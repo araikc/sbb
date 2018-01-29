@@ -28,9 +28,9 @@ class ProductionConfig(Config):
     MAIL_USERNAME = ''
     MAIL_PASSWORD = ''
     PAYMENT_PROD = True
-    PMSECRET = '\x01\xc8$\x97\xd9\x1a\x13\xd9\x9eE\xabS\xc8\x17\xa4\xc3\x14\xe8Re\x94\x8cKR'
+    PMSECRET = ''
     SQLALCHEMY_DATABASE_URI = ''
-    SECRET_KEY = ''
+    SECRET_KEY = '\x01\xc8$\x97\xd9\x1a\x13\xd9\x9eE\xabS\xc8\x17\xa4\xc3\x14\xe8Re\x94\x8cKR'
     WTF_CSRF_SECRET_KEY = '12j1j1lk31k2312313'
     ASSETS_DEBUG = False
 
