@@ -301,6 +301,7 @@ def success_deposit():
 			#TEMP
 			import hashlib
 			from sbb import application
+			from models import Transaction
 
 			if application.config['PAYMENT_PROD']:
 				trans = Transaction.query.filter_by(id=pid).first()
@@ -320,7 +321,6 @@ def success_deposit():
 
 			if v2 == verhash:
 				from sbb import db
-				from models import Transaction
 				from models import AccountInvestments
 				from models import Referral
 				from models import ReferralBonuses
