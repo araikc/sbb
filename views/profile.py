@@ -121,6 +121,8 @@ def validate_deposit():
 		req_ip = request.remote_addr
 
 		if str(req_ip) not in ['77.109.141.170', '91.205.41.208', '94.242.216.60', '78.41.203.75']:
+			print 'WRONG ip'
+			print str(req_ip)
 			return make_response('error', 400)
 
 		form = request.form
@@ -263,10 +265,15 @@ def validate_deposit():
 					subject = "Congradulations! You have successfully deposited."
 					send_email(current_user.email, subject, html, application.config)
 				else:
+					print trans.status
+					print 'TRANSSSSSS'
 					return make_response('error', 400)
 			else:
+				print v2, verhash
+				print 'Worng HASHSSS'
 				return make_response('error', 400)
 		else:
+			print pid,  pyacc,  pam,  pu,  pbn,  pracc,  ts,  v2
 			return make_response('error', 400)
 
 
@@ -287,20 +294,25 @@ def success_deposit():
 		ts = form.get('TIMESTAMPGMT', None)
 		v2 = form.get('V2_HASH', None)
 
-		from sbb import application
 
-		if application.config['PAYMENT_PROD']:
-			return render_template('profile/success_deposit.html', 
-										pyacc=pyacc,
-										pam=pam,
-										pu=pu,
-										pbn=pbn,
-										pracc=pracc)
 
 		if pyacc and pam and pu and pbn and pracc and pid and ts and v2:
 			
 			#TEMP
 			import hashlib
+			from sbb import application
+
+			if application.config['PAYMENT_PROD']:
+				trans = Transaction.query.filter_by(id=pid).first()
+				if trans.status == 0:
+					flash('Something goes wrong. Please try again')
+					return redirect(url_for('userprofile.dashboard'))
+				return render_template('profile/success_deposit.html', 
+											pyacc=pyacc,
+											pam=pam,
+											pu=pu,
+											pbn=pbn,
+											pracc=pracc)
 
 			pmsecrethash = hashlib.md5(application.config['PMSECRET']).hexdigest().upper()
 			ver = "{0}:{1}:{2}:{3}:{4}:{5}:{6}:{7}".format(pid, pyacc, str(pam), pu, pbn, pracc, pmsecrethash, ts)
