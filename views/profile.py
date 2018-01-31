@@ -271,14 +271,14 @@ def validate_deposit():
 				else:
 					print trans.status
 					print 'TRANSSSSSS'
-					return make_response('error', 400)
+					return make_response('error', 401)
 			else:
 				print v2, verhash
 				print 'Worng HASHSSS'
-				return make_response('error', 400)
+				return make_response('error', 402)
 		else:
 			print pid,  pyacc,  pam,  pu,  pbn,  pracc,  ts,  v2
-			return make_response('error', 400)
+			return make_response('error', 403)
 
 
 @userprofile.route('/success_deposit', methods=['POST'])
