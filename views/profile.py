@@ -156,112 +156,7 @@ def validate_deposit():
 				if trans.status == 0:
 					trans.status = 1
 					db.session.add(trans)
-					ps = trans.paymentSystem
-					ip = trans.investmentPlan
-
-					# adding investment to current one if exist
-					# if ip.usage == 0:
-					curInv = AccountInvestments.query.filter_by(accountId=current_user.account.id, isActive=1, investmentPlanId=ip.id, paymentSystemId=ps.id, payment_unit=pu).first()
-					
-					if curInv:
-						curInv.isActive = 0
-						curInv.endDatetime = datetime.datetime.now()
-						curInv.lastInvestment = pam
-						db.session.add(curInv)
-
-
-						accInv = AccountInvestments(
-												currentBalance=float(curInv.currentBalance) + pam,
-												initialInvestment=float(curInv.initialInvestment) + pam,
-												isActive=1)
-						accInv.account = current_user.account
-						accInv.paymentSystem = ps
-						accInv.investmentPlan = ip
-						accInv.startDatetime = datetime.datetime.now()
-						accInv.pm_batch_num = pbn
-						accInv.payment_unit = pu
-						db.session.add(accInv)
-
-					else:
-
-						# add investment
-						accInv = AccountInvestments(
-													currentBalance=pam,
-													initialInvestment=pam,
-													isActive=1)
-						accInv.account = current_user.account
-						accInv.paymentSystem = ps
-						accInv.investmentPlan = ip
-						accInv.lastInvestment = pam
-						accInv.startDatetime = datetime.datetime.now()
-						# accInv.endDatetime = accInv.startDatetime + datetime.timedelta(trans.investmentPlan.period) 
-						accInv.pm_batch_num = pbn
-						accInv.payment_unit = pu
-						db.session.add(accInv)
-
-					# parent account
-					myRef = Referral.query.filter_by(accountId=current_user.account.id).first()
-					if myRef:
-						parentAcc = myRef.referralAccount
-						refProg = parentAcc.referralProgram
-						perc = int(refProg.level1)
-						refBon = ReferralBonuses(current_user.account.id, pam, float(pam * perc  / 100), 1)
-						refBon.earnedAccount = parentAcc
-						refBon.payed = True
-						db.session.add(refBon)
-
-						# update balance of parrent account
-						# PM or BC
-						if ps.id == 3:
-							parentAcc.balance += float(pam * perc  / 100)
-						elif ps.id == 4:
-							parentAcc.bitcoin += float(pam * perc  / 100)
-						db.session.add(parentAcc)
-
-						# grand parent account
-						parentRef = Referral.query.filter_by(accountId=parentAcc.id).first()
-						if parentRef:
-							parentAcc = parentRef.referralAccount
-							refProg = parentAcc.referralProgram
-							perc = int(refProg.level2)
-							refBon = ReferralBonuses(current_user.account.id, pam, float(pam * perc  / 100), 1)
-							refBon.earnedAccount = parentAcc
-							refBon.payed = True
-							db.session.add(refBon)
-
-							# update balance of parrent account
-							if ps.id == 3:
-								parentAcc.balance += float(pam * perc  / 100)
-							elif ps.id == 4:
-								parentAcc.bitcoin += float(pam * perc  / 100)
-							db.session.add(parentAcc)
-
-							# grand grand parent account
-							grandRef = Referral.query.filter_by(accountId=parentAcc.id).first()
-							if grandRef:
-								parentAcc = grandRef.referralAccount
-								refProg = parentAcc.referralProgram
-								perc = int(refProg.level3)
-								refBon = ReferralBonuses(current_user.account.id, pam, float(pam * perc  / 100), 1)
-								refBon.earnedAccount = parentAcc
-								refBon.payed = True
-								db.session.add(refBon)
-
-								# update balance of parrent account
-								if ps.id == 3:
-									parentAcc.balance += float(pam * perc  / 100)
-								elif ps.id == 4:
-									parentAcc.bitcoin += float(pam * perc  / 100)
-								db.session.add(parentAcc)
-
 					db.session.commit()
-					####
-
-					#send email to user
-					from lib.email2 import send_email
-					html = render_template('home/deposit_success_email.html', pam=pam, pu=pu, pyacc=pyacc, pbn=pbn, pracc=pracc)
-					subject = "Congradulations! You have successfully deposited."
-					send_email(current_user.email, subject, html, application.config)
 				else:
 					return make_response('error', 401)
 			else:
@@ -301,12 +196,6 @@ def success_deposit():
 				if trans.status == 0:
 					flash('Something goes wrong. Please try again')
 					return redirect(url_for('userprofile.dashboard'))
-				return render_template('profile/success_deposit.html', 
-											pyacc=pyacc,
-											pam=pam,
-											pu=pu,
-											pbn=pbn,
-											pracc=pracc)
 
 			pmsecrethash = hashlib.md5(application.config['PMSECRET']).hexdigest().upper()
 			ver = "{0}:{1}:{2}:{3}:{4}:{5}:{6}:{7}".format(pid, pyacc, str(pam), pu, pbn, pracc, pmsecrethash, ts)
@@ -319,77 +208,101 @@ def success_deposit():
 				from models import ReferralBonuses
 
 				trans = Transaction.query.filter_by(id=pid).first()
-				if trans.status == 0:
+				#if application.config['PAYMENT_PROD']
+
+				if not application.config['PAYMENT_PROD'] and trans.status == 0:
 					trans.status = 1
 					db.session.add(trans)
-					ps = trans.paymentSystem
-					ip = trans.investmentPlan
+				elif not application.config['PAYMENT_PROD'] and trans.status == 1:
+					flash('Something goes wrong. Already finished payment')
+					return redirect(url_for('userprofile.dashboard'))
 
-					# adding investment to current one if exist
-					# if ip.usage == 0:
-					curInv = AccountInvestments.query.filter_by(accountId=current_user.account.id, isActive=1, investmentPlanId=ip.id, paymentSystemId=ps.id, payment_unit=pu).first()
-					
-					if curInv:
-						curInv.isActive = 0
-						curInv.endDatetime = datetime.datetime.now()
-						curInv.lastInvestment = pam
-						db.session.add(curInv)
+				ps = trans.paymentSystem
+				ip = trans.investmentPlan
+
+				# adding investment to current one if exist
+				# if ip.usage == 0:
+				curInv = AccountInvestments.query.filter_by(accountId=current_user.account.id, isActive=1, investmentPlanId=ip.id, paymentSystemId=ps.id, payment_unit=pu).first()
+				
+				if curInv:
+					curInv.isActive = 0
+					curInv.endDatetime = datetime.datetime.now()
+					curInv.lastInvestment = pam
+					db.session.add(curInv)
 
 
-						accInv = AccountInvestments(
-												currentBalance=float(curInv.currentBalance) + pam,
-												initialInvestment=float(curInv.initialInvestment) + pam,
+					accInv = AccountInvestments(
+											currentBalance=float(curInv.currentBalance) + pam,
+											initialInvestment=float(curInv.initialInvestment) + pam,
+											isActive=1)
+					accInv.account = current_user.account
+					accInv.paymentSystem = ps
+					accInv.investmentPlan = ip
+					accInv.startDatetime = datetime.datetime.now()
+					accInv.pm_batch_num = pbn
+					accInv.payment_unit = pu
+					db.session.add(accInv)
+
+				else:
+
+					# add investment
+					accInv = AccountInvestments(
+												currentBalance=pam,
+												initialInvestment=pam,
 												isActive=1)
-						accInv.account = current_user.account
-						accInv.paymentSystem = ps
-						accInv.investmentPlan = ip
-						accInv.startDatetime = datetime.datetime.now()
-						accInv.pm_batch_num = pbn
-						accInv.payment_unit = pu
-						db.session.add(accInv)
+					accInv.account = current_user.account
+					accInv.paymentSystem = ps
+					accInv.investmentPlan = ip
+					accInv.lastInvestment = pam
+					accInv.startDatetime = datetime.datetime.now()
+					# accInv.endDatetime = accInv.startDatetime + datetime.timedelta(trans.investmentPlan.period) 
+					accInv.pm_batch_num = pbn
+					accInv.payment_unit = pu
+					db.session.add(accInv)
 
-					else:
+				# parent account
+				myRef = Referral.query.filter_by(accountId=current_user.account.id).first()
+				if myRef:
+					parentAcc = myRef.referralAccount
+					refProg = parentAcc.referralProgram
+					perc = int(refProg.level1)
+					refBon = ReferralBonuses(current_user.account.id, pam, float(pam * perc  / 100), 1)
+					refBon.earnedAccount = parentAcc
+					refBon.payed = True
+					db.session.add(refBon)
 
-						# add investment
-						accInv = AccountInvestments(
-													currentBalance=pam,
-													initialInvestment=pam,
-													isActive=1)
-						accInv.account = current_user.account
-						accInv.paymentSystem = ps
-						accInv.investmentPlan = ip
-						accInv.lastInvestment = pam
-						accInv.startDatetime = datetime.datetime.now()
-						# accInv.endDatetime = accInv.startDatetime + datetime.timedelta(trans.investmentPlan.period) 
-						accInv.pm_batch_num = pbn
-						accInv.payment_unit = pu
-						db.session.add(accInv)
+					# update balance of parrent account
+					# PM or BC
+					if ps.id == 3:
+						parentAcc.balance += float(pam * perc  / 100)
+					elif ps.id == 4:
+						parentAcc.bitcoin += float(pam * perc  / 100)
+					db.session.add(parentAcc)
 
-					# parent account
-					myRef = Referral.query.filter_by(accountId=current_user.account.id).first()
-					if myRef:
-						parentAcc = myRef.referralAccount
+					# grand parent account
+					parentRef = Referral.query.filter_by(accountId=parentAcc.id).first()
+					if parentRef:
+						parentAcc = parentRef.referralAccount
 						refProg = parentAcc.referralProgram
-						perc = int(refProg.level1)
+						perc = int(refProg.level2)
 						refBon = ReferralBonuses(current_user.account.id, pam, float(pam * perc  / 100), 1)
 						refBon.earnedAccount = parentAcc
 						refBon.payed = True
 						db.session.add(refBon)
 
 						# update balance of parrent account
-						# PM or BC
 						if ps.id == 3:
 							parentAcc.balance += float(pam * perc  / 100)
 						elif ps.id == 4:
 							parentAcc.bitcoin += float(pam * perc  / 100)
 						db.session.add(parentAcc)
 
-						# grand parent account
-						parentRef = Referral.query.filter_by(accountId=parentAcc.id).first()
-						if parentRef:
-							parentAcc = parentRef.referralAccount
+						# grand grand parent account
+						grandRef = Referral.query.filter_by(accountId=parentAcc.id).first()
+						if grandRef:
+							parentAcc = grandRef.referralAccount
 							refProg = parentAcc.referralProgram
-							perc = int(refProg.level2)
+							perc = int(refProg.level3)
 							refBon = ReferralBonuses(current_user.account.id, pam, float(pam * perc  / 100), 1)
 							refBon.earnedAccount = parentAcc
 							refBon.payed = True
@@ -402,32 +315,14 @@ def success_deposit():
 								parentAcc.bitcoin += float(pam * perc  / 100)
 							db.session.add(parentAcc)
 
-							# grand grand parent account
-							grandRef = Referral.query.filter_by(accountId=parentAcc.id).first()
-							if grandRef:
-								parentAcc = grandRef.referralAccount
-								refProg = parentAcc.referralProgram
-								perc = int(refProg.level3)
-								refBon = ReferralBonuses(current_user.account.id, pam, float(pam * perc  / 100), 1)
-								refBon.earnedAccount = parentAcc
-								refBon.payed = True
-								db.session.add(refBon)
+				db.session.commit()
+				####
 
-								# update balance of parrent account
-								if ps.id == 3:
-									parentAcc.balance += float(pam * perc  / 100)
-								elif ps.id == 4:
-									parentAcc.bitcoin += float(pam * perc  / 100)
-								db.session.add(parentAcc)
-
-					db.session.commit()
-					####
-
-					#send email to user
-					from lib.email2 import send_email
-					html = render_template('home/deposit_success_email.html', pam=pam, pu=pu, pyacc=pyacc, pbn=pbn, pracc=pracc)
-					subject = "Congradulations! You have successfully deposited."
-					send_email(current_user.email, subject, html, application.config)
+				#send email to user
+				from lib.email2 import send_email
+				html = render_template('home/deposit_success_email.html', pam=pam, pu=pu, pyacc=pyacc, pbn=pbn, pracc=pracc)
+				subject = "Congradulations! You have successfully deposited."
+				send_email(current_user.email, subject, html, application.config)
 
 				return render_template('profile/success_deposit.html', 
 									pyacc=pyacc,
