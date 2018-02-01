@@ -116,16 +116,13 @@ def confirm_deposit():
 
 @userprofile.route('/validate_deposit', methods=['POST'])
 def validate_deposit():
-	print "GGGGGGGGGGGGGGGGGGGGG"
 	if request.method == 'POST':
 
 		req_ip = request.remote_addr
 
 		print str(req_ip)
 		if str(req_ip) not in ['77.109.141.170', '91.205.41.208', '94.242.216.60', '78.41.203.75']:
-			print 'WRONG ip'
-			print str(req_ip)
-			return make_response('error', 400)
+			return make_response('error', 408)
 
 		form = request.form
 
@@ -140,7 +137,6 @@ def validate_deposit():
 
 
 		if pid and pyacc and pam and pu and pbn and pracc and ts and v2:
-			print "FFFFFF111111111111"
 			from sbb import application
 			import hashlib
 
@@ -150,7 +146,6 @@ def validate_deposit():
 			verhash = hashlib.md5(ver).hexdigest().upper()
 
 			if v2 == verhash:
-				print "FFFFFF222222222"
 				from sbb import db
 				from models import Transaction
 				from models import AccountInvestments
@@ -159,7 +154,6 @@ def validate_deposit():
 
 				trans = Transaction.query.filter_by(id=pid).first()
 				if trans.status == 0:
-					print "FFFFFF3333333333"
 					trans.status = 1
 					db.session.add(trans)
 					ps = trans.paymentSystem
@@ -269,15 +263,10 @@ def validate_deposit():
 					subject = "Congradulations! You have successfully deposited."
 					send_email(current_user.email, subject, html, application.config)
 				else:
-					print trans.status
-					print 'TRANSSSSSS'
 					return make_response('error', 401)
 			else:
-				print v2, verhash
-				print 'Worng HASHSSS'
 				return make_response('error', 402)
 		else:
-			print pid,  pyacc,  pam,  pu,  pbn,  pracc,  ts,  v2
 			return make_response('error', 403)
 
 
