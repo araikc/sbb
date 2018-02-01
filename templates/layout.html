@@ -208,18 +208,16 @@
     </div>
 
 
-
-	{% with messages = get_flashed_messages() %}
-	{% if messages %}
-	  <div class="alert">
-		    <ul class="flashes">
-		    {% for message in messages %}
-		      <li>{{ message }}</li>
-		    {% endfor %}
-		    </ul>
-		</div>
-	{% endif %}
-	{% endwith %}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-info fade in alert-dismissable" id="flash-alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+          <strong>Info!</strong> {{message}}
+        </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
 
     {% block main %}{% endblock %}
 

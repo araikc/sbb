@@ -2114,7 +2114,7 @@ Swhitcher Css
    position: absolute;
     width: 60px;
     height: 56px;
-    background: #fff;
+    background: #d8d8d8;
     left: -50px;
     top: 0;
     content: "";
@@ -2144,7 +2144,7 @@ Swhitcher Css
     top: 60%;
     width: 280px;
     height: 180px;
-    background: #fff;
+    background: #d8d8d8;
     z-index: 1009;
     -moz-border-radius: 5px; 
     -ms-border-radius: 5px; 
