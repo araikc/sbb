@@ -157,6 +157,7 @@ def validate_deposit():
 					trans.status = 1
 					db.session.add(trans)
 					db.session.commit()
+					return make_response('success', 200)
 				else:
 					return make_response('error', 401)
 			else:
