@@ -115,14 +115,14 @@ def confirm_deposit():
 		return redirect(url_for('userprofile.makedeposit'))
 
 @userprofile.route('/validate_deposit', methods=['POST'])
+@csrf.exempt
 def validate_deposit():
 	if request.method == 'POST':
 
 		req_ip = request.remote_addr
 
-		print str(req_ip)
 		if str(req_ip) not in ['77.109.141.170', '91.205.41.208', '94.242.216.60', '78.41.203.75']:
-			return make_response('error', 408)
+			return make_response('error', 400)
 
 		form = request.form
 
