@@ -16,63 +16,77 @@
 
 		<div class="row">
 			<div class="col-xs-6">
-				<h4>Profit from investments</h4>
-				{% if accInvs %}
-				{% for ai in  accInvs %}
-				<label class="radio">
-					<input type="radio" name="source" id="source" value="ai{{ai.id}}" required {% if ai.currentBalance - ai.initialInvestment == 0%} disabled {% endif %}>
-					{{ai.currentBalance - ai.initialInvestment}}{% if ai.paymentSystemId==3 %}${% else %}Ƀ{% endif %}
-				</label>
-				{% endfor %}
-				{% else %}
-				<p>No investments</p>
-				{% endif %}
+				<h3 style="color:#959595;">Profit from investments</h3>
+				<div style="margin-left:20px">
+					{% if accInvs %}
+					{% for ai in  accInvs %}
+					<label class="radio">
+						<input type="radio" name="source" id="source" value="ai{{ai.id}}" required {% if ai.currentBalance - ai.initialInvestment == 0%} disabled {% endif %}>
+						<p class="radiotext">{{ai.currentBalance - ai.initialInvestment}}{% if ai.paymentSystemId==3 %}${% else %}Ƀ{% endif %}</p>
+					</label>
+					{% endfor %}
+					{% else %}
+					<p>No investments</p>
+					{% endif %}
+				</div>
 			</div>
 			<div class="col-xs-6">
-				<h4>Referral bonuses</h4>
-				<label class="radio">
-					<input type="radio" name="source" id="source" value="rbusd" required {% if g.user.account.balance == 0 %} disabled {% endif %}>
-					<div class="account_numbers">
-						<p>{{g.user.account.balance}}<span>$</span></p>
-					</div>
-				</label>
-				<label class="radio">
-					<input type="radio" name="source" id="source" value="rbbtc" required {% if g.user.account.bitcoin == 0 %} disabled {% endif %}>
-					<div class="account_numbers">
-						<p>{{g.user.account.bitcoin}}<span>Ƀ</span></p>
-					</div>
-				</label>
+				<h3 style="color:#959595;">Referral bonuses</h3>
+				<div style="margin-left:20px">
+					<label class="radio">
+						<input type="radio" name="source" id="source" value="rbusd" required {% if g.user.account.balance == 0 %} disabled {% endif %}>
+						<div >
+							<p class="radiotext">{{g.user.account.balance}}<span>$</span></p>
+						</div>
+					</label>
+					<label class="radio">
+						<input type="radio" name="source" id="source" value="rbbtc" required {% if g.user.account.bitcoin == 0 %} disabled {% endif %}>
+						<div>
+							<p class="radiotext">{{g.user.account.bitcoin}}<span>Ƀ</span></p>
+						</div>
+					</label>
+				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="span4">
-				<h4>Select Wallet</h4>
-				{% for aw in  accWallets %}
-				<label class="radio">
-					<input type="radio" name="accWalletId" id="{{aw.walletId}}" value="{{aw.walletId}}" required>
-					{{aw.wallet.name}} [{{aw.wallet.unit}}]
-				</label>
-				{% endfor %}
+			<hr style="width:95%; margin-top:5px">
+			<div class="col-xs-12">
+				<h3 style="color:#959595;">Select Wallet</h3>
+				<div style="margin-left:20px">
+					{% for aw in  accWallets %}
+					<label class="radio">
+						<input style="margin-top:10px" type="radio" name="accWalletId" id="{{aw.walletId}}" value="{{aw.walletId}}" required>
+						{% if  aw.wallet.paymentSystemId == 3 %}
+							<img class="pm-img">
+						{% else %}
+							<img class="bc-img">
+						{% endif %}
+						<!-- {{aw.wallet.name}} [{{aw.wallet.unit}}] -->
+					</label>
+					{% endfor %}
+				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="span4">
-				<h4>Amount</h4>
-				<input name="amount" id="amount" value="" type="text" required>
+			<hr style="width:95%; margin-top:5px">
+			<div class="col-xs-12">
+				<h3 style="color:#959595;">Amount</h3>
+				<input class="amount-input" name="amount" id="amount" type="text" required>
 			</div>
 		</div>
 		<div class="row">
-			<div class="span4">
-				<h4>PIN</h4>
-				<input name="pin_number" id="pin_number" value="" type="text" required>
+			<div class="col-xs-12">
+				<h3 style="color:#959595;">PIN</h3>
+				<input class="amount-input" name="pin_number" id="pin_number" value="" type="text" required>
 			</div>
 		</div>
 		<div class="row">
-			<div class="span3 offset4">
-				<button type="submit" class="btn btn-success btn-large">Withdraw</button>
+			<hr style="width:95%; margin-top:5px">
+			<div class="col-xs-12">
+				<button type="submit" class="center-block btn btn-info" style="padding-left: 50px; padding-right: 50px; margin-bottom:40px; margin-top:0px">Withdraw</button>
 			</div>
 		</div>
-
+		<br>
 	</div>
 	</form>
 {% endif %}

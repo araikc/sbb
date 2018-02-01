@@ -3,6 +3,19 @@
 
     jQuery(document).ready(function($){
 /*--theme swither activation--*/
+        
+        // $(window).click(function() {
+        //   $('.Switcher').removeClass('active');
+        // });
+
+        // $('.Switcher').click(function(event){
+        //     event.stopPropagation();
+        // });
+
+        // $('#Switch-button').click(function(event){
+        //     event.stopPropagation();
+        // });   
+
         $(document).on('click','#Switch-button',function(){
             var cname = $('.Switcher').attr('class');
             var length = cname.length;
