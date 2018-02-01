@@ -124,7 +124,7 @@
             dots:true,
             nav:false,
             autoplay:true,
-            autoplayTimeout:3000,
+            autoplayTimeout:5000,
             autoplayHoverPause:true,
             responsive : {
               0 : {
@@ -152,7 +152,7 @@
             nav:true,
             navText:['<i class="fa fa-caret-left"></i>','<i class="fa fa-caret-right"></i>'],
             autoplay:true,
-            autoplayTimeout:3000,
+            autoplayTimeout:5000,
             autoplayHoverPause:true,
             responsive : {
               0 : {
