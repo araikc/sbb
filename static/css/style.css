@@ -2196,6 +2196,12 @@ Swhitcher Css
     border-radius: 6px;
 }
 
+@media only screen and (max-width: 767px) {
+    .calc-body > div > input {
+        margin-top: 0px !important;
+    }
+}
+
 
 .theme-1 {
     background: #008EE7;
