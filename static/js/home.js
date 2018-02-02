@@ -7,34 +7,14 @@
         	$('#social_register').toggleClass('social_register_hidden social_register_active');
         });
 
-        $(document).on('click', '.language-href', function(){
-            if ($('#lang-select').hasClass('active')) {
-                $('#lang-select').removeClass('active');
+        $(document).on('click', '#lang-select', function(){
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
             } else {
-                $('#lang-select').addClass('active');
+                $(this).addClass('active');
             }
         });
     });
 
-    // $('input[type=radio][name=paymentSystemId]').change(function() {
-    //     if (this.value == '1') {
-    //         var sel = $("#unit");
-    //         $('#unit option').remove();
-    //         sel.append($("<option></option>")
-    //                 .attr("value", "USD").text("$"));
-    //         sel.append($("<option></option>")
-    //                 .attr("value", "EUR").text("€"));
-    //         sel.removeAttr("disabled");
-    //     }
-    //     else if (this.value == '2') {
-    //         $('#unit option').remove();
-    //         var sel = $("#unit");
-    //         sel.append($("<option></option>")
-    //                 .attr("value", "BTC").text("BTC"));
-    //         if (sel) {
-    //             sel.attr("disabled", "disabled");
-    //         }
-    //     }
-    // });
 
 }(jQuery));	
