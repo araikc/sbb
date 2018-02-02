@@ -1534,6 +1534,11 @@ Footer Section CSS
     height: 80px;
 }
 
+.not-active {
+  pointer-events: none;
+  cursor: default;
+}
+
 /*==================
 Map Section CSS
 ===================*/
