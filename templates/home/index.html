@@ -13,7 +13,7 @@
                                 </div>
                                 <br>
                                 <div>
-                                    <a class="btn btn-success" style="width:150px">INVEST</a>
+                                    <a href="{{url_for('userprofile.dashboard')}}" class="btn btn-success" style="width:150px">INVEST</a>
                                 </div>
                             </div>
                         </div>
@@ -27,7 +27,7 @@
                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris . </p>
                                  <br>
                                 <div>
-                                    <a class="btn btn-success" style="width:150px">INVEST</a>
+                                    <a href="{{url_for('userprofile.dashboard')}}" class="btn btn-success" style="width:150px">INVEST</a>
                                 </div>
                             </div>
                         </div>
@@ -35,6 +35,56 @@
             </div>         
         </div>
 	</section><!--Header section end-->
+
+    <!--pament method section start-->
+    <section class="section-padding about-us-section">
+           <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="section-title text-center">
+                         <h2>ABOUT US</h2>
+                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                     </div>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="row" style="padding-left:20px;padding-right:30px;">
+                        <h2 style="color:#959595;  padding-left:10px; font-size:22px; float:left">Amount</h2>
+                        <h2 style="color:#63cc88;  padding-left:10px; font-size:22px; text-align:right" class="current-plan">Current investment plan</h2>
+                    </div>
+                    
+                    <div class="col-xs-6">
+                        <div class="input-amount">
+                            <input name="amount" id="inv-amount" value="" type="text" required style="width: 150px;">
+                        </div>
+                        <div class="profit-estimate">
+                            Profit after 30 days 
+                            <span id="prof-value">0</span>
+                        </div>
+                    </div>
+                   <div class="col-xs-2">
+                        <div class="numberCircle">3%</div>
+                    </div>                    
+                    <div class="col-xs-4 current-plan" >
+                        <h5 style="color:#959595;  padding-left:10px; font-size:14px; float:left">Percent</h5>
+                        <h5 style="color:#63cc88;  padding-left:10px; font-size:14px; text-align:right">3%</h5>
+                        <hr style="width:95%;  margin-top:-30px">  
+                        <h5 style="color:#959595;  padding-left:10px; font-size:14px; float:left">Withdraw</h5>
+                        <h5 style="color:#63cc88;  padding-left:10px; font-size:14px; text-align:right">Manual</h5>
+                        <hr style="width:95%;  margin-top:-30px">   
+                        <h5 style="color:#959595;  padding-left:10px; font-size:14px; float:left">Withdraw period</h5>
+                        <h5 style="color:#63cc88;  padding-left:10px; font-size:14px; text-align:right">24h</h5>
+                        <hr style="width:95%;  margin-top:-30px">   
+                        <h5 style="color:#959595;  padding-left:10px; font-size:14px; float:left">Deposit duration</h5>
+                        <h5 style="color:#63cc88;  padding-left:10px; font-size:14px; text-align:right">Unlimit</h5>
+                        <hr style="width:95%;  margin-top:-30px">
+                        <h5 style="color:#959595;  padding-left:10px; font-size:14px; float:left">Return deposit body</h5>
+                        <h5 style="color:#63cc88;  padding-left:10px; font-size:14px; text-align:right">No</h5>
+                    </div>
+                    <hr style="width:95%; margin-top:90px">
+            </div>
+         </div>
+    </section><!--pament method section end-->
 
     <!--about us page content start-->
     <section class="section-padding why-should-us">
