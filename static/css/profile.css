@@ -468,3 +468,16 @@ Footer Section CSS
     font-weight: 500;
     color: #63cc88;
 }
+
+.referr-prog-active {
+  color:green;
+  font-size: 64px !important;
+  text-align: center;
+}
+
+.referr-prog {
+  color:gray;
+  font-size: 64px !important;
+  text-align: center;
+}
+

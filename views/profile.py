@@ -554,6 +554,10 @@ def referrals():
 	from sbb import db
 	from models import Account
 	from models import ReferralBonuses
+	from models import ReferralProgram
+
+	rp1 = ReferralProgram.query.filter_by(id=1).first()
+	rp2 = ReferralProgram.query.filter_by(id=2).first()
 
 	data = []
 	for rb in current_user.account.referralBonuses.order_by(ReferralBonuses.dateTime.desc()).limit(5):
@@ -566,7 +570,9 @@ def referrals():
 					 'date' : rb.dateTime})
 
 	return render_template('profile/referrals.html', 
-							referrals=data)
+							referrals=data,
+							refprog=rp1, 
+							viprefprog=rp2)
 
 @userprofile.route('/wallets', methods=['GET', 'POST'])
 @login_required
