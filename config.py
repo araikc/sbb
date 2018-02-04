@@ -33,6 +33,12 @@ class ProductionConfig(Config):
     SECRET_KEY = '\x01\xc8$\x97\xd9\x1a\x13\xd9\x9eE\xabS\xc8\x17\xa4\xc3\x14\xe8Re\x94\x8cKR'
     WTF_CSRF_SECRET_KEY = '12j1j1lk31k2312313'
     ASSETS_DEBUG = False
+    MINUSDDEPOSIT = 0.01
+    MINBTCDEPOSIT = 0.000001
+    MAXUSDDEPOSIT = 10000
+    MAXBTCDEPOSIT = 2.5
+    # MINUSDDEPOSIT = 10
+    # MINBTCDEPOSIT = 0.0025
 
 class DevelopConfig(Config):
     DEBUG = False
@@ -42,7 +48,7 @@ class DevelopConfig(Config):
     MAIL_USE_SSL = True
     MAIL_USE_TLS = False
     MAIL_USERNAME = 'info@solarbit.biz'
-    MAIL_PASSWORD = ''
+    MAIL_PASSWORD = 'SBBinfo@1985'
     WTF_CSRF_SECRET_KEY = '12j1j1lk31k2312313'
     SECRET_KEY = '\x01\xc8$\x97\xd9\x1a\x13\xd9\x9eE\xabS\xc8\x17\xa4\xc3\x14\xe8Re\x94\x8cKR'
     SQLALCHEMY_DATABASE_URI = 'mysql://root:root@127.0.0.1/hpdb'
@@ -50,4 +56,8 @@ class DevelopConfig(Config):
     DEBUG_TB_INTERCEPT_REDIRECTS = False
     PAYMENT_PROD = False
     PMSECRET = ""
+    MINUSDDEPOSIT = 0.01
+    MINBTCDEPOSIT = 0.000001
+    MAXUSDDEPOSIT = 10
+    MAXBTCDEPOSIT = 2.5
 
