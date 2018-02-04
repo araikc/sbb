@@ -43,11 +43,19 @@ def makedeposit():
 	from sbb import db
 	from models import InvestmentPlan
 	from models import PaymentSystems
+	from sbb import application
+
 	ps = PaymentSystems.query.filter(PaymentSystems.id > 2).all()
 	ip = InvestmentPlan.query.filter_by(active=1).first()
+
 	return render_template('profile/makedeposit.html', 
 							ip=ip,
-							paymentSystems=ps)
+							paymentSystems=ps,
+							minusd=application.config['MINUSDDEPOSIT'],
+							maxusd=application.config['MAXUSDDEPOSIT'],
+							minbtc=application.config['MINBTCDEPOSIT'],
+							maxbtc=application.config['MAXBTCDEPOSIT']
+							)
 
 
 @userprofile.route('/confirm_deposit', methods=['POST'])
@@ -61,6 +69,20 @@ def confirm_deposit():
 		# ipid = form.get('invPlanId', None)
 		# unit = form.get('unit', None)
 		if psid and amount:
+			from sbb import application
+			if (psid == 1 or psid == 3) and amount < application.config['MINUSDDEPOSIT']:
+				flash('Deposit value range violation')
+				return redirect(url_for('userprofile.makedeposit'))
+			elif (psid == 1 or psid == 3) and amount > application.config['MAXUSDDEPOSIT']:
+				flash('Deposit value range violation')
+				return redirect(url_for('userprofile.makedeposit'))
+			if (psid == 2 or psid == 4) and amount < application.config['MINBTCDEPOSIT']:
+				flash('Deposit value range violation')
+				return redirect(url_for('userprofile.makedeposit'))
+			elif (psid == 2 or psid == 4) and amount > application.config['MAXBTCDEPOSIT']:
+				flash('Deposit value range violation')
+				return redirect(url_for('userprofile.makedeposit'))
+				
 			from sbb import db
 			from models import InvestmentPlan
 			from models import PaymentSystems

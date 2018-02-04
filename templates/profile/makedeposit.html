@@ -1,7 +1,37 @@
 {% extends "profile/layout.html" %}
 {% block body %}
 
-<form action="{{ url_for('userprofile.confirm_deposit') }}" method=post class="form-horizontal"> 
+<script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function($) {
+
+		var maxusd = {{ maxusd }};
+		var minusd = {{ minusd }};
+		var maxbtc = {{ maxbtc }};
+		var minbtc = {{ minbtc }};
+
+		$("input[name=paymentSystemId]").change(function() {
+			var ps = document.getElementsByName('paymentSystemId');
+			for (var i = 0, length = ps.length; i < length; i++)
+			{
+				if (ps[i].checked && (ps[i].value == 4 || ps[i].value == 2)) 
+				{
+					$('#validrange').text('[ ' + minbtc + "Ƀ - " + maxbtc + 'Ƀ ]');
+				}
+				else if (ps[i].checked && (ps[i].value == 1 || ps[i].value == 3))
+				{
+					$('#validrange').text('[ ' + minusd + "$ - " + maxusd + '$ ]');
+				}
+			}
+		});
+
+    });
+
+</script>
+
+<form action="{{ url_for('userprofile.confirm_deposit') }}" method=post class="form-horizontal" id="deposit"> 
 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 <div class="block" style="border:1px">
 		<div class="row">
@@ -49,8 +79,9 @@
 			
 			<div class="col-xs-6">
 				<div class="input-amount">
-					<input name="amount" id="inv-amount" value="" type="text" required style="width: 150px;">
+					<input name="amount" id="inv-amount" type="text" required style="width: 150px;" >
 				</div>
+				<span class="profit-estimate" id="validrange"></span>
 				<div class="profit-estimate">
 					Profit after 30 days 
 					<span id="prof-value">0</span>

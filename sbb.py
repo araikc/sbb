@@ -1,5 +1,5 @@
 
-from flask import Flask, g, session
+from flask import Flask, g, session, flash
 from flask_admin import Admin
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_login import LoginManager, current_user
@@ -12,7 +12,13 @@ from views.home import home
 from views.profile import userprofile
 from views.admin import MyAdminIndexView, UserModelView, AccountModelView, WithdrawModelView
 
+from pytz import utc
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
+from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
+
 import datetime
+import time
 import os
 
 application = Flask(__name__)
@@ -43,6 +49,41 @@ login_manager.login_view = 'home.login'
 
 # debuging
 dtb = DebugToolbarExtension(application)
+
+
+########## Scheduler ##########
+
+jobstores = {
+    # 'mongo': MongoDBJobStore(),
+    'default': SQLAlchemyJobStore(url=application.config['SQLALCHEMY_DATABASE_URI'])
+}
+executors = {
+    'default': ThreadPoolExecutor(20),
+    'processpool': ProcessPoolExecutor(5)
+}
+job_defaults = {
+    'coalesce': False,
+    'max_instances': 3
+}
+scheduler = BackgroundScheduler(jobstores=jobstores, executors=executors, job_defaults=job_defaults, timezone=utc)
+
+@scheduler.scheduled_job('cron', id="job_id", day="*", hour="0", minute="0", second="1")
+def reward_investments():
+    #print('Tick! The time is: %s' % datetime.now())
+    from models import AccountInvestments
+    from sbb import db
+
+    accInvs = AccountInvestments.query.filter_by(isActive=1).all()
+    for ai in accInvs:
+    	perc = ai.investmentPlan.percentage
+    	ai.currentBalance += float(float(ai.initialInvestment/100)*perc)
+    	db.session.add(ai)
+	db.session.commit()    
+
+scheduler.start()
+
+
+###############################
 
 @login_manager.user_loader
 def load_user(user_id):
