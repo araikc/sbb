@@ -462,7 +462,7 @@ input::-webkit-inner-spin-button {
 }
 
 .radiotext {
-    /*text-align: right;
+    text-align: right;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 28px;
     font-weight: 500;
