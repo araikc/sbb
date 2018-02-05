@@ -33,11 +33,40 @@ def faq():
 		return render_template('home/faq.html')
 
 
-@home.route('/contact')
+@home.route('/contact', methods=['GET','POST'])
 def contact():
-		return render_template('home/contact.html')
+	from random import randint
 
-@home.route('/register' , methods=['GET','POST'])
+	if request.method == 'GET':
+		session['a'] = randint(1, 10)
+		session['b'] = randint(1, 10)
+		return render_template('home/contact.html', a=session['a'], b=session['b'])
+	else:
+		form = request.form
+		captcha = form.get('captcha', '')
+		if captcha != '' and int(captcha) == session['a'] + session['b']:
+
+			name = form.get('name', None)
+			email = form.get('email', None)
+			message = form.get('message', None)
+
+			if name and email and message:
+				from sbb import application
+				#send email to user
+				from lib.email2 import send_email
+				html = render_template('home/contact_email.html', name=name, email=email, message=message)
+				subject = "Contact email: {}".format(name)
+				send_email("info@solarbit.biz", subject, html, application.config)
+			else:
+				flash("Please fill all fields.")
+		else:
+			flash("Wrong captcha")
+
+		session['a'] = randint(1, 10)
+		session['b'] = randint(1, 10)
+		return render_template('home/contact.html', a=session['a'], b=session['b'])
+
+@home.route('/register', methods=['GET','POST'])
 @logout_required
 def register():
 	#if 'referral' in session:
@@ -272,4 +301,6 @@ def unconfirmed():
 	if current_user.confirmed:
 	    return redirect(url_for('home.index'))
 	return render_template('home/unconfirmed.html')
+
+
 
