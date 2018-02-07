@@ -67,7 +67,7 @@ job_defaults = {
 }
 scheduler = BackgroundScheduler(jobstores=jobstores, executors=executors, job_defaults=job_defaults, timezone=utc)
 
-@scheduler.scheduled_job('cron', id="job_id", day="*", hour="0", minute="0", second="1")
+@scheduler.scheduled_job('cron', id="job_id", day='*', hour=0, minute=0, second=0)
 def reward_investments():
     #print('Tick! The time is: %s' % datetime.now())
     from models import AccountInvestments
