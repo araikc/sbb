@@ -1485,7 +1485,7 @@ Footer Section CSS
 .footer-section {
     background: #fff;
     color: #333;
-    padding-top: 50px;
+    padding-top: 0px;
 }
 .footer-logo {
     padding-bottom: 22px;
@@ -1501,7 +1501,7 @@ Footer Section CSS
 }
 
 .footer-social-link {
-    padding-bottom: 94px;
+    padding-bottom: 30px;
 }
 
 .copyright-text {

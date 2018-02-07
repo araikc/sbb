@@ -26,6 +26,8 @@
         <!--Responsive Css-->
         <link href="{{ url_for('static', filename='css/responsive.css')}}" rel="stylesheet">
 
+        <link href="{{ url_for('static', filename='css/common.css')}}" rel="stylesheet">
+
     </head>
 
     <body>
@@ -222,16 +224,7 @@
     {% block main %}{% endblock %}
 
     <footer class="footer-section section-padding padding-bottom-0 text-center">
-           <div class="container">
-               <div class="row ">
-                   <div class="col-md-6 col-md-offset-3">
-                       <div class="footer-logo">
-                           <a href="index.html"><img src="static/img/footer-logo.png" alt="Footer Logo"></a>
-                       </div>
-                       <p class="footer-text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                   </div>
-               </div>
-               <div class="row">
+           <div class="row footer-top">
                <div class="col-md-4 col-md-offset-4">
                   <div class="footer-social-link">
                       <h3>Follow Us on</h3>
@@ -244,7 +237,45 @@
                       </div>
                   </div>
                </div>
-               </div>
+           </div>
+           <div class="row footer-bottom-expanded" style="background-color:#2c2b2a; padding-bottom: 10px;">
+             <div class="col-xs-1 footer-delimeter ">
+             </div>
+             <div class="col-xs-3 footer-delimeter">
+                <div style=" border-right:1px solid #7e7b79;">
+                  <div class="footer-logo">
+                      <a href="index.html"><img src="static/img/footer-logo.png" alt="Footer Logo"></a>
+                  </div>
+                  <div style="text-align:center">
+                      <p style="font-size:16px; font-weight:500; color:white; font-family:'Poppins', sans-serif; margin-bottom: 0px;">© 2018 SolarBit</p>
+                      <span style="color:#585653; font-size:14px">All rights reserved</span>
+                  </div>
+                </div>
+             </div>
+             <div class="col-xs-2 footer-delimeter ">
+                <h3>COMPANY</h3>
+                <a href="{{url_for('home.about')}}">About us</a>
+                <a href="{{url_for('home.service')}}">Referral</a>
+                <a href="{{url_for('home.index')}}">Partners</a>
+                <a href="{{url_for('home.index')}}">Reviews</a>
+             </div>
+             <div class="col-xs-2 footer-delimeter ">
+              <h3>INFORMATION</h3>
+                <a>News</a>
+                <a href="{{url_for('home.faq')}}">FAQ</a>
+                <a href="{{url_for('home.terms')}}">Security</a>
+                <a href="{{url_for('home.terms')}}">Terms &amp; Conditions</a>
+             </div>
+             <div class="col-xs-2 footer-delimeter ">
+              <h3>CONTACTS</h3>
+                <a href="{{url_for('home.contact')}}">Contact</a>
+                <a> support@solarbit.biz</a>
+                <div class="social-links-bottom" style="margin-top:10px">
+                  <a href=""><i class="fa fa-facebook"></i></a>
+                  <a href=""><i class="fa fa-twitter"></i></a>
+                  <a href=""><i class="fa fa-youtube"></i></a>
+                </div>
+             </div>
            </div>
            <div class="footer-bottom">
                <p class="copyright-text">COPY RIGHTS &copy; 2018. ALL RIGHTS RESERVED </p>

@@ -41,21 +41,23 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>Username</th>
-				<th>Investment</th>
-				<th>Earned</th>
+				<th>User</th>
 				<th>Level</th>
-				<th>Payed</th>
+				<!-- <th>$</th> -->
+				<th>Bonus</th>
+				
+				<!-- <th>Payed</th> -->
 				<th>Date</th>
 			</tr>
 		</thead>
 	{% for ref in referrals %}
 		<tr>
 			<td>{{ ref.username }}</td>
-			<td>{{ ref.investment }}</td>
-			<td>{{ ref.earned }}</td>
 			<td>{{ ref.level }}</td>
-			<td>{{ ref.status }}</td>
+			<!-- <td>{{ ref.investment }}</td> -->
+			<td>{{ ref.earned }}</td>
+			
+			<!-- <td>{{ ref.status }}</td> -->
 			<td>{{ ref.date }}</td>
 		</tr>
 	{% endfor %}

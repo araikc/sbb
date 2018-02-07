@@ -12,3 +12,108 @@ div#loading {
     background: url(loadingimage.gif) no-repeat;
     cursor: wait;
     }
+
+.footer-delimeter {
+    padding-top:30px;
+    padding-bottom:30px;
+    text-align: left;
+    color:white;
+    margin-left: 15px;
+}
+
+
+.footer-delimeter > a {
+    font-size: 16px;
+    display: block;
+    padding: 6px 0;
+    color: #7e7b79;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.footer-delimeter > a:hover {
+    color:#00b256;
+}
+
+.footer-delimeter > h3{
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+@media (min-width: 786px) {
+    .footer-bottom {
+        display: none;
+    }
+    .footer-top {
+        display: none;
+    }
+}
+
+@media (max-width: 786px) {
+    .footer-bottom-expanded {
+        display: none;
+    }
+}
+
+.social-links-bottom > a > i{
+    color: #fff;
+    display: inline-block;
+    padding: 5px;
+    background: #595A5B;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    padding-top: 13px;
+    /*border-radius: 50%;*/
+    transition: .5s;
+}
+
+.social-links-bottom > a > i:hover{
+    background-color:#00b256;
+}
+
+.reg-accept input:checked+label i{
+    opacity: 1 !important;
+}
+
+.reg-accept > label > i {
+    font-size: 20px;
+    position: relative;
+    top: 2px;
+    left: -25px;
+    color: #00b256;
+    opacity: 0;
+    -webkit-transition: all .25s ease-in-out;
+    -o-transition: all .25s ease-in-out;
+    transition: all .25s ease-in-out;
+}
+
+.reg-accept > label {
+    cursor: pointer;
+    margin-right:15px;
+    margin-left:0px;
+}
+
+.reg-accept > label::before {
+    content: '';
+    display: block;
+    position: relative;
+    top: -3px;
+    left: 0px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #c1c1c1;
+    -webkit-box-shadow: 0 0 2px #c1c1c1;
+    box-shadow: 0 0 2px #c1c1c1;
+    float:left;
+}
+
+.reg-accept  {
+    text-align: right;
+}
+
+.reg-accept > input {
+    display:none;
+}
+

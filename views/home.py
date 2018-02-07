@@ -23,6 +23,10 @@ def index():
 def service():
 		return render_template('home/service.html')
 
+@home.route('/terms')
+def terms():
+		return render_template('home/terms.html')
+
 @home.route('/about')
 def about():
 		return render_template('home/about.html')
@@ -61,7 +65,7 @@ def contact():
 				flash("Please fill all fields.")
 		else:
 			flash("Wrong captcha")
-
+		flash("You have successfully sent email.")
 		session['a'] = randint(1, 10)
 		session['b'] = randint(1, 10)
 		return render_template('home/contact.html', a=session['a'], b=session['b'])
