@@ -13,93 +13,96 @@
             /*margin-left: 96px;
             margin-top:25px;*/
             float: left;
-            position: absolute;
-            left:200px;
-            top:23px;
-            z-index:1008;
+            position: relative;
+            left:150px;
+            top:-35px;
+            z-index:1111;
         }
 
-@media (max-width: 992px) {
-	.select-language {
-		left:53px;
-		top:100px;
-        position: fixed;
-	}
-}
 
 @media (min-width: 992px) {
-    .main-area-lang {
+    .small-lang {
         display: none;
     }
 }
             
-            .select-language .language-href {
-                font-size: 14px;
-                line-height: 15px;
-                position: relative;
-            }
-                .language-href:before{
-                    content: "\f0d7";
-                    display: block;
-                    position: absolute;
-                    font-family: 'FontAwesome', sans-serif;
-                    top: 1px;
-                    right: -10px;
-                    font-size: 10px;
-                    color: #00b256;
-                }
-                .select-language .language-href a {
-                    font-weight: 400;
-                    color: #00b256;
-                    font-size: 14px;
-                    text-decoration: none;
-                    position: relative;
-                }
-                    .select-language .language-href a:hover,
-                    .select-language .language-href a:active,
-                    .select-language .language-href a:focus {
-                        color: #00b256;
-                        text-decoration: none;
-                    }
-            .language-tab {
-                /* display: none;*/
-                width: 100px;
-                position: absolute;
-                top: 30px;
-                left: -20px;
-                z-index: 1000;
-                font-size: 15px;
-                line-height: 26px;
-                background: transparent;
-                /*border: 1px solid #dddddd;*/
-                opacity: 0;
-                /*box-shadow: 0px 24px 20px 0px rgba(0, 1, 1, 0.04);*/
-                /*transform: rotate3d(1,1,0,-20deg);
-                transform-origin: 100% 0;
-                will-change: transform,opacity;
-                transition-property: transform,opacity;
-                transition-duration: .25s;*/
-                pointer-events: none;
-                padding: 10px 15px;
-                border-radius: 4px;
-            }
-                .tab-header{
-                    font-size: 14px;
-                    color: #00b256;
-                    text-transform: uppercase;
-                    line-height: 20px;
-                    margin: 10px 0 15px;
-                    font-weight: 700;
-                }
-                .language-list {
-                    margin: 0;
-                    padding: 0;
-                    list-style: none;
-                }
-                    .language-list li {
-                        width: 100%;
-                        float: left;
-                    }
+.select-language .language-href {
+    font-size: 14px;
+    line-height: 15px;
+    position: relative;
+    z-index:1111;
+}
+.language-href:before{
+    content: "\f0d7";
+    display: block;
+    position: absolute;
+    font-family: 'FontAwesome', sans-serif;
+    top: 1px;
+    right: -10px;
+    font-size: 10px;
+    color: #00b256;
+    z-index:1111;
+}
+.select-language .language-href a {
+    font-weight: 400;
+    color: #00b256;
+    font-size: 14px;
+    text-decoration: none;
+    position: relative;
+    z-index:1111;
+}
+.select-language .language-href a:hover,
+.select-language .language-href a:active,
+.select-language .language-href a:focus {
+    color: #00b256;
+    text-decoration: none;
+    z-index:1111;
+}
+
+.language-tab {
+    /* display: none;*/
+    width: 100px;
+    position: absolute;
+    top: 30px;
+    left: -20px;
+    z-index: 1111;
+    font-size: 15px;
+    line-height: 26px;
+    background: transparent;
+    /*border: 1px solid #dddddd;*/
+    opacity: 0;
+    /*box-shadow: 0px 24px 20px 0px rgba(0, 1, 1, 0.04);*/
+    /*transform: rotate3d(1,1,0,-20deg);
+    transform-origin: 100% 0;
+    will-change: transform,opacity;
+    transition-property: transform,opacity;
+    transition-duration: .25s;*/
+    pointer-events: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    z-index:1111;
+}
+
+.tab-header{
+    font-size: 14px;
+    color: #00b256;
+    text-transform: uppercase;
+    line-height: 20px;
+    margin: 10px 0 15px;
+    font-weight: 700;
+    z-index:1111;
+}
+.language-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    z-index:1111;
+}
+.language-list li {
+    width: 100%;
+    float: left;
+    z-index:1111;
+}
                         .language-list li a {
                             text-align: center;
                             font-weight: 400;
@@ -110,6 +113,7 @@
                             display: block;
                             width: 100%;
                             text-decoration: none;
+                            z-index:1111;
                         }
                             .language-list li a:hover,
                             .language-list li a:focus,
@@ -133,6 +137,7 @@
                                     display: block;
                                     float: left;
                                     margin-right: 9px;
+                                    z-index:1111;
                                 }
                                     .language-href .flag.flag_ru,
                                     .language-list .flag.flag_ru {
@@ -207,3 +212,46 @@
         .select-language.active .language-href a {
             /*background: url('../img/select-arrow-top_hover.png') no-repeat right center;*/
         }
+
+
+@media (max-width: 992px) {
+    .big-lang {
+        display: none;
+    }
+
+    .select-language {
+        left:200px;
+        top:20px;
+        position: fixed;
+        z-index: 1111;
+    }
+
+    .language-href:before { 
+        color: white;
+    }
+
+    .select-language .language-href a {
+        color: white;
+    }
+
+    .select-language .language-href a:hover,
+    .select-language .language-href a:active,
+    .select-language .language-href a:focus {
+        color: white;
+    }
+
+    .tab-header {
+        color: white;
+    }
+
+    .language-list li a {
+        color: white;
+    }
+
+    .language-list li a:hover,
+    .language-list li a:focus,
+    .language-list li a:active,
+    .language-list li a.active {
+        color: white;
+    }
+}

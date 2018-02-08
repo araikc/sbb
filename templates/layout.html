@@ -32,6 +32,26 @@
 
     <body>
 
+    <div class="select-language small-lang" id="lang-select">
+        <div class="language-href"><a href="javascript:void(0);"><i class="flag flag_en"></i>ENG</a></div>
+        <div class="language-tab">
+            <ul class="language-list">
+                <li>
+                    <a href="?language=en"><i class="flag flag_en"></i>ENG</a>
+                </li>
+                <li>
+                    <a  class="disabled" href="?language=ru"><i class="flag flag_ru"></i>RUS</a>
+                </li>
+                <li>
+                    <a class="disabled" href="?language=de"><i class="flag flag_de"></i>DEU</a>
+                </li>
+                <li>
+                    <a class="disabled" href="?language=es"><i class="flag flag_ge"></i>ESP</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
     <div class="Switcher">
         <i class="fa fa-calculator" id="Switch-button"></i>
         <h5 style="margin-bottom: 5px">Profit calculator</h5>
@@ -94,7 +114,8 @@
                         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="Logo Image Will Be Here"></a> -->
                         <a href="{{url_for('home.index')}}">SolarBit</a>
                     </div>
-    <div class="select-language" id="lang-select">
+                    
+    <div class="select-language big-lang" id="lang-select">
         <div class="language-href"><a href="javascript:void(0);"><i class="flag flag_en"></i>ENG</a></div>
         <div class="language-tab">
             <ul class="language-list">
@@ -104,39 +125,18 @@
                 <li>
                     <a  class="disabled" href="?language=ru"><i class="flag flag_ru"></i>RUS</a>
                 </li>
-                <!--<li>
-                    <a class="disabled" href="?language=fr"><i class="flag flag_fr"></i>FRA</a>
-                </li> -->
                 <li>
                     <a class="disabled" href="?language=de"><i class="flag flag_de"></i>DEU</a>
                 </li>
                 <li>
                     <a class="disabled" href="?language=es"><i class="flag flag_ge"></i>ESP</a>
                 </li>
-                <!-- <li>
-                    <a class="disabled" href="?language=pl"><i class="flag flag_pl"></i>POL</a>
-                </li> -->
-                <!-- <li>
-                    <a class="disabled" href="?language=vi"><i class="flag flag_vi"></i>VIE</a>
-                </li> -->
-                <!-- <li>
-                    <a class="disabled" href="?language=pt"><i class="flag flag_pt"></i>POR</a>
-                </li> -->
-                <!-- <li>
-                    <a class="disabled" href="?language=cn"><i class="flag flag_cn"></i>CHN</a>
-                </li> -->
-                <!-- <li>
-                    <a class="disabled" href="?language=it"><i class="flag flag_it"></i>ITA</a>
-                </li>
-                <li>
-                    <a class="disabled" href="?language=hi"><i class="flag flag_hi"></i>HIN</a>
-                </li> -->
             </ul>
         </div>
     </div>
-
                 </div>
                 <div class="col-md-8 text-right">
+                    
                     <nav>
                         <ul id="menu-bar">
                         {{ nav_link('home.index', "Home") }}
@@ -168,7 +168,7 @@
     </nav><!--main menu end-->
 
 
-    <div class="select-language main-area-lang" id="lang-select">
+<!--     <div class="select-language main-area-lang" id="lang-select">
         <div class="language-href"><a href="javascript:void(0);"><i class="flag flag_en"></i>ENG</a></div>
         <div class="language-tab">
             <ul class="language-list">
@@ -178,36 +178,15 @@
                 <li>
                     <a  class="disabled" href="?language=ru"><i class="flag flag_ru"></i>RUS</a>
                 </li>
-                <!--<li>
-                    <a class="disabled" href="?language=fr"><i class="flag flag_fr"></i>FRA</a>
-                </li> -->
                 <li>
                     <a class="disabled" href="?language=de"><i class="flag flag_de"></i>DEU</a>
                 </li>
                 <li>
                     <a class="disabled" href="?language=es"><i class="flag flag_ge"></i>ESP</a>
                 </li>
-                <!-- <li>
-                    <a class="disabled" href="?language=pl"><i class="flag flag_pl"></i>POL</a>
-                </li> -->
-                <!-- <li>
-                    <a class="disabled" href="?language=vi"><i class="flag flag_vi"></i>VIE</a>
-                </li> -->
-                <!-- <li>
-                    <a class="disabled" href="?language=pt"><i class="flag flag_pt"></i>POR</a>
-                </li> -->
-                <!-- <li>
-                    <a class="disabled" href="?language=cn"><i class="flag flag_cn"></i>CHN</a>
-                </li> -->
-                <!-- <li>
-                    <a class="disabled" href="?language=it"><i class="flag flag_it"></i>ITA</a>
-                </li>
-                <li>
-                    <a class="disabled" href="?language=hi"><i class="flag flag_hi"></i>HIN</a>
-                </li> -->
             </ul>
         </div>
-    </div>
+    </div> -->
 
 
     {% with messages = get_flashed_messages() %}
