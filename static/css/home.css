@@ -105,7 +105,7 @@
 }
                         .language-list li a {
                             text-align: center;
-                            font-weight: 400;
+                            font-weight: 600;
                             margin: 4px 0;
                             font-size: 14px;
                             color: #00b256;
@@ -244,14 +244,14 @@
         color: white;
     }
 
-    .language-list li a {
+/*    .language-list li a {
         color: white;
-    }
+    }*/
 
-    .language-list li a:hover,
+/*    .language-list li a:hover,
     .language-list li a:focus,
     .language-list li a:active,
     .language-list li a.active {
         color: white;
-    }
+    }*/
 }
