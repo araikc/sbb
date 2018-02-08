@@ -445,21 +445,34 @@ input::-webkit-inner-spin-button {
 .profit-estimate > span {
     text-align: right;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 28px;
-    font-weight: 500;
     line-height: 1;
     color: #63cc88;
     margin-left:10px;
 }
 
+.profit-estimate > span.profit1 {
+    font-size: 16px;
+    font-weight: 400;
+}
+.profit-estimate > span.profit2 {
+    font-size: 22px;
+    font-weight: 500;
+}
+.profit-estimate > span.profit3 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
 .profit-estimate {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 300;
-    line-height: 1;
+    line-height: 1.5;
     color: #959595;
     padding-left: 10px;
+    margin-top: 20px;
 }
+
 
 .radiotext {
     /*text-align: right;*/
@@ -494,3 +507,9 @@ input::-webkit-inner-spin-button {
   text-align: center;
 }
 
+.account-btn-middle {
+  height:40px;
+  width:150px;
+  line-height: 25px;
+  font-size: 16px;
+}
