@@ -79,10 +79,6 @@ Base CSS
 ==============*/
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,600,800|Raleway:400,600,800');
-.row {
-    margin-right: 10px;
-    margin-left: 10px;
-}
 
 .alignleft {
     float: left;
@@ -2483,10 +2479,16 @@ Swhitcher Css
     }
 
     .current-plan {
-        margin-top:20px;
+        margin-top:50px;
         width:100%;
         text-align:center;
     }
+
+    .deposit-amount {
+        width:100%;
+        text-align:center;
+    }
+
     .index-about-us {
         text-align:center;
         width:100%;
@@ -2496,6 +2498,9 @@ Swhitcher Css
         margin-top:20px;
         width:100%;
     }
+/*    .profits {
+        display: none;
+    }*/
 }
 
 

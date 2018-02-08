@@ -72,45 +72,42 @@
 		<hr style="width:95%; margin-top:110px">
 	</div>
 	<div class="row">
-			<div class="row" style="padding-left:20px;padding-right:30px;">
-				<h2 style="color:#959595;  padding-left:10px; font-size:22px; float:left">Amount</h2>
-				<h2 style="color:#959595;  padding-left:10px; font-size:22px; text-align:right" class="current-plan">Current investment plan</h2>
-			</div>
-			
-			<div class="col-xs-6">
+			<div class="col-xs-12 col-md-6 deposit-amount" >
+				<h2 style="color:#959595;  padding-left:10px; font-size:22px;">Amount</h2>
+
 				<div class="input-amount">
 					<input name="amount" id="inv-amount" type="text" required style="width: 150px; font-weight:600" value="10">
 				</div>
 				<div class="row">
-					<span class="profit-estimate" id="validrange" style="font-size: 14	px;"></span>
+					<span class="profit-estimate" id="validrange" style="font-size: 14px;"></span>
 				</div>
-				<div class="col-xs-6">
-					<div class="profit-estimate">
-						Profit after 1 day
+				<div class="profits">
+					<div class="col-xs-6">
+						<div class="profit-estimate">
+							 1 day profit
+						</div>
+						<div class="profit-estimate">
+							 30 days profit 
+						</div>
+						<div class="profit-estimate">
+							 1 year profit 
+						</div>
 					</div>
-					<div class="profit-estimate">
-						Profit after 30 days 
-					</div>
-					<div class="profit-estimate">
-						Profit after 1 year 
+					<div class="col-xs-6">
+						<div class="profit-estimate">
+							<span id="prof-value1" class="profit1">0.3</span>
+						</div>
+						<div class="profit-estimate">
+							<span id="prof-value2" class="profit2">9</span>
+						</div>
+						<div class="profit-estimate">
+							<span id="prof-value3" class="profit3">109.5</span>
+						</div>
 					</div>
 				</div>
-				<div class="col-xs-2" style="">
-					<div class="profit-estimate">
-						<span id="prof-value1" class="profit1">0.3</span>
-					</div>
-					<div class="profit-estimate">
-						<span id="prof-value2" class="profit2">9</span>
-					</div>
-					<div class="profit-estimate">
-						<span id="prof-value3" class="profit3">109.5</span>
-					</div>
-				</div>
-				
-
-				
 			</div>
-			<div class="col-xs-6 current-plan" >
+			<div class="col-xs-12 col-md-6 current-plan" >
+				<h2 style="color:#959595;  padding-left:10px; font-size:22px;">Current investment plan</h2>
 				<h5 style="color:#959595;  padding-left:10px; font-size:14px; float:left">Percent</h5>
 				<h5 style="color:#63cc88;  padding-left:10px; font-size:14px; text-align:right">{{ip.percentage|clean_float}}%</h5>
 				<hr style="width:95%;  margin-top:-30px">  
@@ -126,7 +123,7 @@
 				<h5 style="color:#959595;  padding-left:10px; font-size:14px; float:left">Return deposit body</h5>
 				<h5 style="color:#63cc88;  padding-left:10px; font-size:14px; text-align:right">No</h5>
 			</div>
-			<hr style="width:95%; margin-top:90px">
+			<hr style="width:95%; margin-top:90px" class="profits">
 	</div>
 <!-- 	<div class="row">
 		<div class="span4">
