@@ -489,6 +489,13 @@ Main Menu CSS
       display: none;
     }
 
+@media only screen and (max-width: 480px) {
+    .mobile-logo.fixed {
+        position: fixed;
+        z-index: 999999999 !important;
+    }
+}
+
 /*==================
 Support Area CSS
 ===================*/
@@ -2355,13 +2362,17 @@ Social quick access
 }
 
 
-@media (max-width: 991px) {
+@media (max-width: 992px) {
     .left-menu {
         position:absolute;
         left: -175px;
         top: 20%;
     }
     .hidden-area {
+        display: none;
+    }
+
+    .SocialQA {
         display: none;
     }
 
@@ -2502,5 +2513,18 @@ Swhitcher Css
         display: none;
     }*/
 }
+
+@media (max-width: 425px) { 
+    .numberCircle {
+        margin-left:33%;
+    }
+}
+
+@media (max-width: 320px) { 
+    .numberCircle {
+        margin-left:28%;
+    }
+}
+
 
 

@@ -26,6 +26,16 @@
             }  
         });
 
+        $(document).mouseup(function(e) 
+        {
+            var container = $('.Switcher')[0];
+            
+            if (!$.contains(container, e.target)) 
+            {
+                $('.Switcher').removeClass('active');
+            }
+        });
+
         $("#calc-amount").on("change paste keyup", function() {
            $('#calc-out').text( ($('#calc-amount').val()/100) * $('#calc-percent').val() * $('#calc-days').val() );
         });

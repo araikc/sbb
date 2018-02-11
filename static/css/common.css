@@ -117,3 +117,6 @@ div#loading {
     display:none;
 }
 
+.reg-accept > a {
+    white-space: nowrap;
+}

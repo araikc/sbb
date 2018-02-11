@@ -263,8 +263,10 @@ def save_reset_pass():
 			flash('Thank you! You have successfully reset your password.')
 		else:
 			flash('No user found with specified email.', 'warning')
+			return redirect(request.referrer)
 	else:
 		flash_errors(form)
+		return redirect(request.referrer)
 	return redirect('login')
 
 
