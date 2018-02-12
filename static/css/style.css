@@ -2358,7 +2358,7 @@ Social quick access
 }
 
 .SocialQA li:hover {
-    background-color: #22DD66;
+    background-color: #2da567;
 }
 
 
@@ -2527,4 +2527,15 @@ Swhitcher Css
 }
 
 
+.btn-home {
+    color:white;
+    background-color: #22b368;
+    border-color: #22b368;
+}
 
+
+.btn-home:hover {
+    color:white;
+    background-color: #00B356;
+    border-color: #00B356;
+}

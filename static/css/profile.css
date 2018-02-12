@@ -157,8 +157,15 @@ body,html{
 }
  
   .top-navbar .navbar-right > li > a{
+    color:white;
+}
+
+
+  .top-navbar .navbar-right > li > a:hover{
     color:#63cc88;
 }
+
+
 
 .main-area {
   height: 100%;
@@ -512,4 +519,16 @@ input::-webkit-inner-spin-button {
   width:150px;
   line-height: 25px;
   font-size: 16px;
+}
+
+.btn-profile {
+    color: #fff;
+    background-color: #36bb76;
+    border-color: #36bb76;
+}
+
+.btn-profile:hover {
+    color: #fff;
+    background-color: #2da567;
+    border-color: #2da567;
 }
