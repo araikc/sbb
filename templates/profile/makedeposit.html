@@ -31,6 +31,12 @@
 
 </script>
 
+<style type="text/css">
+
+
+
+</style>
+
 <form action="{{ url_for('userprofile.confirm_deposit') }}" method=post class="form-horizontal" id="deposit"> 
 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 <div class="block" style="border:1px">
@@ -45,28 +51,39 @@
 
 		<div class="col-xs-6 deposit-section">
 			<h4>Payment Systems</h4>
+			<div style="margin-top:10px">
 			{% for ps in  paymentSystems %}
-			<label class="radio">
-				<input type="radio" name="paymentSystemId" id="paymentSystemId" value="{{ps.id}}" required>
+			<!-- <label class="radio"> -->
+				<p>
+				<input type="radio" name="paymentSystemId" id="paymentSystemId{{ps.id}}" value="{{ps.id}}" required>
 				<!-- {{ps.name}} -->
+				<label for="paymentSystemId{{ps.id}}">
 				{% if  ps.id == 3 %}
 					<img class="pm-img">
 				{% else %}
 					<img class="bc-img">
 				{% endif %}
-			</label>
+				</label>
+				</p>
+			<!-- </label> -->
 			{% endfor %}
+			</div>
 		</div>
 		<div class="col-xs-6 deposit-section">
 			<h4>Referral bonusses</h4>
-			<label class="radio">
-				<input type="radio" name="paymentSystemId" id="paymentSystemId" value="1" required {% if g.user.account.balance == 0 %} disabled {% endif %}>
-				{{g.user.account.balance}}$
-			</label>
-			<label class="radio">
-				<input type="radio" name="paymentSystemId" id="paymentSystemId" value="2" required {% if g.user.account.bitcoin == 0 %} disabled {% endif %}>
-				{{g.user.account.bitcoin}}Ƀ
-			</label>
+
+
+			<div style="margin-top:10px">
+				<p>
+					<input type="radio" name="paymentSystemId" id="paymentSystemIdusd" value="1" required {% if g.user.account.balance == 0 %} disabled {% endif %}>
+					<label for="paymentSystemIdusd" class="radiotext">{{g.user.account.balance}}<span>$</span>
+				</p>
+				<p>
+					<input type="radio" name="paymentSystemId" id="paymentSystemIdbtc" value="2" required {% if g.user.account.bitcoin == 0 %} disabled {% endif %}>
+					<label for="paymentSystemIdbtc" class="radiotext bit">{{g.user.account.bitcoin}}<span>Ƀ</span>
+				</p>
+			</div>
+
 		</div>
 		<br>
 		<hr style="width:95%; margin-top:110px">

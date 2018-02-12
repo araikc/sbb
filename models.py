@@ -177,6 +177,7 @@ class PaymentSystems(db.Model):
     name = db.Column(db.String(50), nullable=True)
     logo = db.Column(db.String(50), nullable=True)
     url = db.Column(db.String(100), nullable=True)
+    unit = db.Column(db.String(10), nullable=True)
 
     acountInvestments = db.relationship('AccountInvestments', backref='paymentSystem', lazy='dynamic')
     transactions = db.relationship('Transaction', backref='paymentSystem', lazy='dynamic')

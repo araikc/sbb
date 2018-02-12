@@ -111,7 +111,7 @@ def confirm_deposit():
 			dep_act.transactionType = trType
 			dep_act.paymentSystem = ps
 			dep_act.investmentPlan = ip
-			dep_act.unit = "USD"
+			dep_act.unit = ps.unit
 			db.session.add(dep_act)
 			db.session.commit()
 
@@ -245,12 +245,12 @@ def success_deposit():
 
 				# adding investment to current one if exist
 				# if ip.usage == 0:
-				curInv = AccountInvestments.query.filter_by(accountId=current_user.account.id, isActive=1, investmentPlanId=ip.id, paymentSystemId=ps.id, payment_unit=pu).first()
+				curInv = AccountInvestments.query.filter_by(accountId=current_user.account.id, isActive=1, payment_unit=pu).first()
 				
 				if curInv:
 					curInv.isActive = 0
 					curInv.endDatetime = datetime.datetime.now()
-					curInv.lastInvestment = pam
+					#curInv.lastInvestment = pam
 					db.session.add(curInv)
 
 
@@ -261,6 +261,7 @@ def success_deposit():
 					accInv.account = current_user.account
 					accInv.paymentSystem = ps
 					accInv.investmentPlan = ip
+					accInv.lastInvestment = pam
 					accInv.startDatetime = datetime.datetime.now()
 					accInv.pm_batch_num = pbn
 					accInv.payment_unit = pu
@@ -398,12 +399,12 @@ def success_ref_deposit():
 
 				# adding investment to current one if exist
 				# if ip.usage == 0:
-				curInv = AccountInvestments.query.filter_by(accountId=current_user.account.id, isActive=1, investmentPlanId=ip.id, paymentSystemId=ps.id, payment_unit=pu).first()
+				curInv = AccountInvestments.query.filter_by(accountId=current_user.account.id, isActive=1, payment_unit=pu).first()
 				
 				if curInv:
 					curInv.isActive = 0
 					curInv.endDatetime = datetime.datetime.now()
-					curInv.lastInvestment = float(pam)
+					#curInv.lastInvestment = float(pam)
 					db.session.add(curInv)
 
 
@@ -414,7 +415,7 @@ def success_ref_deposit():
 					accInv.account = current_user.account
 					accInv.paymentSystem = ps
 					accInv.investmentPlan = ip
-					curInv.lastInvestment = float(pam)
+					accInv.lastInvestment = float(pam)
 					accInv.startDatetime = datetime.datetime.now()
 					accInv.payment_unit = pu
 					db.session.add(accInv)
