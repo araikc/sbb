@@ -77,13 +77,17 @@ def craete_utils():
 
 
     rbu = PaymentSystems("Ref bonus", "logo", "url")
+    rbu.unit = "USD"
     db.session.add(rbu)
     rbb = PaymentSystems("Ref bonus", "logo", "url")
+    rbb.unit = "BTC"
     db.session.add(rbb)
 
     pm = PaymentSystems("Perfect money", "logo", "url")
+    pm.unit = "USD"
     db.session.add(pm)
     bc = PaymentSystems("BitCoint", "logo", "url")
+    bc.unit = "BTC"
     db.session.add(bc)
 
     wallet = Wallet("Perfect Money", "url")
