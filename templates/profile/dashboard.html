@@ -127,18 +127,18 @@
 				</div>
 				<div class="col-xs-4">
 					<div class="account_detail_section">
-							{% if inv.paymentSystemId == 2 %}
+							{% if inv.paymentSystemId == 2 or inv.paymentSystemId == 4 %}
 								<p class="bit">{{inv.initialInvestment}}<span>Ƀ</span></p>
 							{% else %}
-								<p>{{inv.initialInvestment}}<span>$</span></p>
+								<p class="usd">{{inv.initialInvestment}}<span>$</span></p>
 							{% endif %}
 					</div>
 
 					<div class="account_detail_section">
-							{% if inv.paymentSystemId == 2 %}
+							{% if inv.paymentSystemId == 2 or inv.paymentSystemId == 4 %}
 								<p class="bit">{{inv.currentBalance}}<span>Ƀ</span></p>
 							{% else %}
-								<p>{{inv.currentBalance}}<span>$</span></p>
+								<p class="usd">{{inv.currentBalance}}<span>$</span></p>
 							{% endif %}
 					</div>
 					<div class="account_detail_section">

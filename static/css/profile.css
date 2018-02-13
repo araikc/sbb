@@ -378,6 +378,15 @@ Footer Section CSS
   color: #FF9900 !important;
 }
 
+.usd {
+  color: #63cc88 !important;
+}
+
+.usd > span {
+  color: #63cc88 !important;
+}
+
+
 
 @media (max-width: 700px) {
 

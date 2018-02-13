@@ -4,6 +4,10 @@
       
 <div style="min-width: 400px;">
 	<div class="row">
+		<div class="row">
+			<h2 style="color:#959595;  padding-left:10px">WITHDRAW</h2>
+			<hr style="width:95%">
+		</div>
 	{% if accWallets == None %}
 			<div class="col-xs-12">
 				<h4 style="color:#959595; padding-left:10px; font-size:22px">Please add <a href="{{url_for('userprofile.wallets')}}"> wallets </a> into your account to be able to withdraw</h4>
@@ -16,14 +20,14 @@
 		<div class="block" style="border:1px">
 
 			<div class="row">
-				<div class="col-xs-6">
+				<div class="col-xs-12 col-sm-6 col-md-6">
 					<h3 style="color:#959595;">Current profit</h3>
 					<div style="margin-left:20px">
 						{% if accInvs %}
 						{% for ai in  accInvs %}
 						<p>
 							<input type="radio" name="source" value="ai{{ai.id}}" id="ai{{ai.id}}" required {% if ai.currentBalance - ai.initialInvestment == 0 %} disabled {% endif %}>
-							<label for="ai{{ai.id}}" >{{ai.currentBalance - ai.initialInvestment}}{% if ai.paymentSystemId==3 or ai.paymentSystemId==1 %}${% else %}Ƀ{% endif %}
+							<label for="ai{{ai.id}}"{% if ai.paymentSystemId==2 or ai.paymentSystemId==4 %} class="bit" {% endif %}>{{ai.currentBalance - ai.initialInvestment}}{% if ai.paymentSystemId==3 or ai.paymentSystemId==1 %}${% else %}Ƀ{% endif %}
 						</p>
 						{% endfor %}
 						{% else %}
@@ -31,16 +35,16 @@
 						{% endif %}
 					</div>
 				</div>
-				<div class="col-xs-6">
+				<div class="col-xs-12 col-sm-6 col-md-6">
 					<h3 style="color:#959595;">Referral bonuses</h3>
 					<div style="margin-left:20px">
 						<p>
 							<input type="radio" name="source" id="source1" value="rbusd" required {% if g.user.account.balance == 0 %} disabled {% endif %}>
-							<label for="source1">{{g.user.account.balance}}<span>$</span></p>
+							<label for="source1">{{g.user.account.balance}}<span>$</span></label>
 						</p>
 						<p>
 							<input type="radio" name="source" id="source2" value="rbbtc" required {% if g.user.account.bitcoin == 0 %} disabled {% endif %}>
-							<label class="bit">{{g.user.account.bitcoin}}<span>Ƀ</span></label>
+							<label for="source2" class="bit">{{g.user.account.bitcoin}}<span>Ƀ</span></label>
 						</p>
 					</div>
 				</div>
@@ -68,15 +72,13 @@
 			</div>
 			<div class="row">
 				<hr style="width:95%; margin-top:5px">
-				<div class="col-xs-12">
+				<div class="col-xs-12 col-sm-6 col-md-6">
 					<h3 style="color:#959595;">Amount</h3>
 					<div class="input-amount">
 						<input name="amount" id="amount" type="text" required style="width: 150px;" >
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-xs-12 col-sm-6 col-md-6">
 					<h3 style="color:#959595;">PIN</h3>
 					<div class="input-amount">
 						<input name="pin_number" id="pin_number" value="" type="text" required style="width: 150px;" >
@@ -86,7 +88,7 @@
 			<div class="row">
 				<hr style="width:95%; margin-top:5px">
 				<div class="col-xs-12">
-					<button type="submit" class="center-block btn btn-profile account-btn-middle" style="margin-bottom:40px; margin-top:0px">Withdraw</button>
+					<button type="submit" class="btn btn-profile account-btn-middle" style="margin-bottom:40px; margin-top:0px; margin-left:10px">Withdraw</button>
 				</div>
 			</div>
 			<br>

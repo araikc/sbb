@@ -107,10 +107,10 @@ def inject_finance():
 		invbtc = float(0)
 		ernbtc = float(0)
 		for i in investments:
-			if i.paymentSystemId == 3:
+			if i.paymentSystemId in [1, 3]:
 				invusd += i.initialInvestment
 				ernusd += i.currentBalance - i.initialInvestment
-			elif i.paymentSystemId == 4:
+			elif i.paymentSystemId in [2, 4]:
 				invbtc += i.initialInvestment
 				ernbtc += i.currentBalance - i.initialInvestment
 		return dict(g_invusd=invusd, g_ernusd=ernusd, g_invbtc=invbtc, g_ernbtc=ernbtc)

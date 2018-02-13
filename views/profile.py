@@ -188,6 +188,62 @@ def validate_deposit():
 			return make_response('error', 403)
 
 
+def __make_ref(ref, session):
+	from models import ReferralBonuses
+	if ref:
+		parentAcc = ref.referralAccount
+		refProg = parentAcc.referralProgram
+		perc = int(refProg.level1)
+		refBon = ReferralBonuses(current_user.account.id, pam, float(pam * perc  / 100), 1)
+		refBon.earnedAccount = parentAcc
+		refBon.payed = True
+		session.add(refBon)
+
+		# update balance of parrent account
+		# PM or BC
+		if ps.id in [1, 3]:
+			parentAcc.balance += float(pam * perc  / 100)
+		elif ps.id in [2, 4]:
+			parentAcc.bitcoin += float(pam * perc  / 100)
+		session.add(parentAcc)
+
+		# grand parent account
+		parentRef = Referral.query.filter_by(accountId=parentAcc.id).first()
+		if parentRef:
+			parentAcc = parentRef.referralAccount
+			refProg = parentAcc.referralProgram
+			perc = int(refProg.level2)
+			refBon = ReferralBonuses(current_user.account.id, pam, float(pam * perc  / 100), 1)
+			refBon.earnedAccount = parentAcc
+			refBon.payed = True
+			session.add(refBon)
+
+			# update balance of parrent account
+			if ps.id in [1, 3]:
+				parentAcc.balance += float(pam * perc  / 100)
+			elif ps.id in [2, 4]:
+				parentAcc.bitcoin += float(pam * perc  / 100)
+			session.add(parentAcc)
+
+			# grand grand parent account
+			grandRef = Referral.query.filter_by(accountId=parentAcc.id).first()
+			if grandRef:
+				parentAcc = grandRef.referralAccount
+				refProg = parentAcc.referralProgram
+				perc = int(refProg.level3)
+				refBon = ReferralBonuses(current_user.account.id, pam, float(pam * perc  / 100), 1)
+				refBon.earnedAccount = parentAcc
+				refBon.payed = True
+				session.add(refBon)
+
+				# update balance of parrent account
+				if ps.id in [1, 3]:
+					parentAcc.balance += float(pam * perc  / 100)
+				elif ps.id in [2, 4]:
+					parentAcc.bitcoin += float(pam * perc  / 100)
+				session.add(parentAcc)
+
+
 @userprofile.route('/success_deposit', methods=['POST'])
 @login_required
 @check_confirmed
@@ -286,58 +342,9 @@ def success_deposit():
 
 				# parent account
 				myRef = Referral.query.filter_by(accountId=current_user.account.id).first()
-				if myRef:
-					parentAcc = myRef.referralAccount
-					refProg = parentAcc.referralProgram
-					perc = int(refProg.level1)
-					refBon = ReferralBonuses(current_user.account.id, pam, float(pam * perc  / 100), 1)
-					refBon.earnedAccount = parentAcc
-					refBon.payed = True
-					db.session.add(refBon)
-
-					# update balance of parrent account
-					# PM or BC
-					if ps.id == 3:
-						parentAcc.balance += float(pam * perc  / 100)
-					elif ps.id == 4:
-						parentAcc.bitcoin += float(pam * perc  / 100)
-					db.session.add(parentAcc)
-
-					# grand parent account
-					parentRef = Referral.query.filter_by(accountId=parentAcc.id).first()
-					if parentRef:
-						parentAcc = parentRef.referralAccount
-						refProg = parentAcc.referralProgram
-						perc = int(refProg.level2)
-						refBon = ReferralBonuses(current_user.account.id, pam, float(pam * perc  / 100), 1)
-						refBon.earnedAccount = parentAcc
-						refBon.payed = True
-						db.session.add(refBon)
-
-						# update balance of parrent account
-						if ps.id == 3:
-							parentAcc.balance += float(pam * perc  / 100)
-						elif ps.id == 4:
-							parentAcc.bitcoin += float(pam * perc  / 100)
-						db.session.add(parentAcc)
-
-						# grand grand parent account
-						grandRef = Referral.query.filter_by(accountId=parentAcc.id).first()
-						if grandRef:
-							parentAcc = grandRef.referralAccount
-							refProg = parentAcc.referralProgram
-							perc = int(refProg.level3)
-							refBon = ReferralBonuses(current_user.account.id, pam, float(pam * perc  / 100), 1)
-							refBon.earnedAccount = parentAcc
-							refBon.payed = True
-							db.session.add(refBon)
-
-							# update balance of parrent account
-							if ps.id == 3:
-								parentAcc.balance += float(pam * perc  / 100)
-							elif ps.id == 4:
-								parentAcc.bitcoin += float(pam * perc  / 100)
-							db.session.add(parentAcc)
+				
+				# make referral bonuses
+				__make_ref(myRef, db.session)
 
 				db.session.commit()
 				####
@@ -438,58 +445,9 @@ def success_ref_deposit():
 
 				# parent account
 				myRef = Referral.query.filter_by(accountId=current_user.account.id).first()
-				if myRef:
-					parentAcc = myRef.referralAccount
-					refProg = parentAcc.referralProgram
-					perc = int(refProg.level1)
-					refBon = ReferralBonuses(current_user.account.id, float(pam), float(float(pam) * perc  / 100), 1)
-					refBon.earnedAccount = parentAcc
-					refBon.payed = True
-					db.session.add(refBon)
-
-					# update balance of parrent account
-					# PM or BC
-					if ps.id == 1:
-						parentAcc.balance += float(float(pam) * perc  / 100)
-					elif ps.id == 2:
-						parentAcc.bitcoin += float(float(pam) * perc  / 100)
-					db.session.add(parentAcc)
-
-					# grand parent account
-					parentRef = Referral.query.filter_by(accountId=parentAcc.id).first()
-					if parentRef:
-						parentAcc = parentRef.referralAccount
-						refProg = parentAcc.referralProgram
-						perc = int(refProg.level2)
-						refBon = ReferralBonuses(current_user.account.id, pam, float(float(pam) * perc  / 100), 1)
-						refBon.earnedAccount = parentAcc
-						refBon.payed = True
-						db.session.add(refBon)
-
-						# update balance of parrent account
-						if ps.id == 1:
-							parentAcc.balance += float(float(pam) * perc  / 100)
-						elif ps.id == 2:
-							parentAcc.bitcoin += float(float(pam) * perc  / 100)
-						db.session.add(parentAcc)
-
-						# grand grand parent account
-						grandRef = Referral.query.filter_by(accountId=parentAcc.id).first()
-						if grandRef:
-							parentAcc = grandRef.referralAccount
-							refProg = parentAcc.referralProgram
-							perc = int(refProg.level3)
-							refBon = ReferralBonuses(current_user.account.id, pam, float(float(pam) * perc  / 100), 1)
-							refBon.earnedAccount = parentAcc
-							refBon.payed = True
-							db.session.add(refBon)
-
-							# update balance of parrent account
-							if ps.id == 1:
-								parentAcc.balance += float(float(pam) * perc  / 100)
-							elif ps.id == 2:
-								parentAcc.bitcoin += float(float(pam) * perc  / 100)
-							db.session.add(parentAcc)
+				
+				# make referral bonuses
+				__make_ref(myRef, db.session)
 
 				# TBD tax
 				if ps.id == 1:
