@@ -73,114 +73,136 @@ def contact():
 @home.route('/register', methods=['GET','POST'])
 @logout_required
 def register():
-	#if 'referral' in session:
-	#	print session['referral']
+	from random import randint
 
 	from sbb import application, db
 	from lib.email2 import send_email
 	from models import User, ReferralProgram, Account, Referral
+
+	referral = None
+	if 'referral' in session:
+		referral = session['referral']
+
 	if request.method == 'GET':
+		session['a'] = randint(1, 10)
+		session['b'] = randint(1, 10)
 		referral = None
 		if 'referral' in session:
 			referral = session['referral']
-		return render_template('home/register.html', referral=referral)
+		return render_template('home/register.html', referral=referral, a=session['a'], b=session['b'])
 	form = RegistrationForm(request.form)
 	if form.validate_on_submit():
-		cur = User.query.filter_by(email=form.email.data).first()
-		refUser = None
+		captcha = form.captcha.data.strip()
+		if captcha != '' and int(captcha) == session['a'] + session['b']:
+			cur = User.query.filter_by(username=form.username.data).first()
+			ecur = User.query.filter_by(email=form.email.data).first()
 
-		if cur is None:
+			if cur is None and ecur is None:
 
-			# refereal program 521
-			rp = ReferralProgram.query.filter_by(id=1).first()
+				# refereal program 521
+				rp = ReferralProgram.query.filter_by(id=1).first()
 
-			# Account User
-			account = Account(0, 0)
-			account.referralProgram = rp
-			db.session.add(account)
-			#db.session.commit()
+				# Account User
+				account = Account(0, 0)
+				account.referralProgram = rp
+				db.session.add(account)
+				#db.session.commit()
 
-			user = User(username=form.username.data, password=form.password.data, email=form.email.data)
-			user.account = account
-			if form.fb.data != '':
-				user.fb = form.fb.data
-			if form.skype.data != '':
-				user.skype = form.skype.data
-			user.pin = form.pin_number.data
-			db.session.add(user)
-			#db.session.commit()
+				user = User(username=form.username.data, password=form.password.data, email=form.email.data)
+				user.account = account
+				if form.fb.data != '':
+					user.fb = form.fb.data
+				if form.skype.data != '':
+					user.skype = form.skype.data
+				user.pin = form.pin_number.data
+				db.session.add(user)
+				#db.session.commit()
 
-			# referral account
-			if form.refemail.data and form.refemail.data != form.email.data:
-				refUser = User.query.filter_by(email=form.refemail.data).first()
-				if refUser:
-					referral = Referral(accountId=account.id)
-					referral.referralAccount = refUser.account
-					db.session.add(referral)
-				else:
-					flash("Wrong referral email. Referral email skiped.")
+				# referral account
+				refUsername = form.refemail.data.strip()
+				if refUsername != '':
+					refUser = User.query.filter_by(username=refUsername).first()
+					if refUser:
+						referral = Referral(accountId=account.id)
+						referral.referralAccount = refUser.account
+						db.session.add(referral)
+					else:
+						flash("Wrong referral. Referral data skiped.")
 
-			db.session.commit()
+				db.session.commit()
 
-			token = generate_confirmation_token(user.email, application.config)
-			confirm_url = url_for('home.confirm_email', token=token, _external=True)
-			html = render_template('home/activate_email.html', confirm_url=confirm_url)
-			subject = "Please confirm your email"
-			send_email(user.email, subject, html, application.config)
+				token = generate_confirmation_token(user.email, application.config)
+				confirm_url = url_for('home.confirm_email', token=token, _external=True)
+				html = render_template('home/activate_email.html', confirm_url=confirm_url)
+				subject = "Please confirm your email"
+				send_email(user.email, subject, html, application.config)
 
-			login_user(user)
-			flash('A confirmation email has been sent via email.', 'success')
-			return redirect(url_for('home.unconfirmed'))
+				login_user(user)
+				flash('A confirmation email has been sent via email.', 'success')
+				return redirect(url_for('home.unconfirmed'))
+			else:
+				flash('User with specified data already exists in a system', 'warning')
 		else:
-			flash('User with specified email already exists in a system', 'warning')
+			flash("Wrong captcha")
 	else:
 		flash_errors(form)
-	return render_template('home/register.html')
+	session['a'] = randint(1, 10)
+	session['b'] = randint(1, 10)
+	return render_template('home/register.html', referral=referral, a=session['a'], b=session['b'])
  
 
 @home.route('/login',methods=['GET','POST'])
 @logout_required
 def login():
+	from random import randint
 	from sbb import db
 	from models import User
 	from models import Transaction
 	from models import TransactionType
 	if request.method == 'GET':
-	    return render_template('home/login.html')
+		session['a'] = randint(1, 10)
+		session['b'] = randint(1, 10)
+		return render_template('home/login.html', a=session['a'], b=session['b'])
 	form = LoginForm(request.form)
 	if form.validate_on_submit():
-		email = form.email.data
-		password = form.password.data
-		remember_me = False
-		if 'remember_me' in request.form:
-		    remember_me = True
-		user = User.query.filter_by(email=email).first()
-		tr = TransactionType.query.filter_by(id=1).first()
-		if user is None or not user.check_password(password):
-			flash('Username or Password is invalid' , 'error')
-			if user:
-				login_act = Transaction(
-								date=datetime.now(),
-								amount=None,
-								status=0)
-				login_act.account = user.account
-				login_act.transactionType = tr
-				db.session.add(login_act)
-				db.session.commit()
-			return redirect(url_for('home.login'))
-		login_user(user, remember = remember_me)
-		flash('Logged in successfully')
-		login_act = Transaction(
-								date=datetime.now(),
-								amount=None,
-								status=1)
-		login_act.account = current_user.account
-		login_act.transactionType = tr
-		db.session.add(login_act)
-		db.session.commit()
-		return redirect(request.args.get('next') or url_for('userprofile.dashboard'))
+		captcha = form.captcha.data.strip()
+		if captcha != '' and int(captcha) == session['a'] + session['b']:
+			email = form.email.data
+			password = form.password.data
+			remember_me = False
+			if 'remember_me' in request.form:
+			    remember_me = True
+			user = User.query.filter_by(email=email).first()
+			tr = TransactionType.query.filter_by(id=1).first()
+			if user is None or not user.check_password(password):
+				flash('Username or Password is invalid' , 'error')
+				if user:
+					login_act = Transaction(
+									date=datetime.now(),
+									amount=None,
+									status=0)
+					login_act.account = user.account
+					login_act.transactionType = tr
+					db.session.add(login_act)
+					db.session.commit()
+				return redirect(url_for('home.login'))
+			login_user(user, remember = remember_me)
+			flash('Logged in successfully')
+			login_act = Transaction(
+									date=datetime.now(),
+									amount=None,
+									status=1)
+			login_act.account = current_user.account
+			login_act.transactionType = tr
+			db.session.add(login_act)
+			db.session.commit()
+			return redirect(request.args.get('next') or url_for('userprofile.dashboard'))
+		else:
+			flash("Wrong captcha")
 	flash_errors(form)
-	return redirect(url_for('home.login'))
+	session['a'] = randint(1, 10)
+	session['b'] = randint(1, 10)
+	return render_template('home/login.html', a=session['a'], b=session['b'])
 
 @home.route('/view_reset_pass')
 def view_reset_pass():

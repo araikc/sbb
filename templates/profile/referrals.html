@@ -9,7 +9,7 @@
 <div class="row">
 	<div>
 		<h4 style="color:#959595;">YOUR REFERRAL LINK</h4>
-		<input class="amount-input" type="text" id="js-copyInput" value="{{request.host_url}}?ref={{current_user.email}}" readonly="" style="float:left; width:80% !important;">
+		<input class="amount-input" type="text" id="js-copyInput" value="{{request.host_url}}?ref={{current_user.username}}" readonly="" style="float:left; width:80% !important;">
 		<button class="btn btn-profile btn-large" onClick="copyToClip()" style="height:52px; width:80px">Copy</button>
 	</div>
 </div>
@@ -58,7 +58,7 @@
 			<td>{{ ref.earned }}</td>
 			
 			<!-- <td>{{ ref.status }}</td> -->
-			<td>{{ ref.date }}</td>
+			<td>{{ ref.date | only_date}}<span class="hidden-xs">{{ ref.date | only_time}}</span></td>
 		</tr>
 	{% endfor %}
 	</table>

@@ -8,14 +8,16 @@ csrf = CSRFProtect()
 class LoginForm(Form):
     email = StringField('E-mail', validators=[Email(), DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
+    captcha = StringField('Catpcha', validators=[DataRequired()])
 
 class RegistrationForm(LoginForm):
     password_repeat = PasswordField('Repeat password', validators=[DataRequired(), EqualTo('password'), Length(min=8, max=25)])
     username = StringField('Username', validators=[DataRequired()])
-    refemail = StringField('Referral e-mail', validators=[Optional(), Email()])
+    refemail = StringField('Referral', validators=[Optional()])
     pin_number = StringField('Pin number', validators=[DataRequired(), Regexp(regex="\d{4}", message="PIN number should be number with 4 digits")])
     fb = StringField('Facebook', validators=[Optional()])
     skype = StringField('Skype name', validators=[Optional()])
+    accept = StringField('Accept', validators=[DataRequired()])
 
 class RequestResetPassordForm(Form):
     email = StringField('E-mail', validators=[Email(), DataRequired()])

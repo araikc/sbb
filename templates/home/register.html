@@ -24,7 +24,7 @@
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 
             <div class="form-group">
-              <label for="name" class="cols-sm-2 control-label">Your Name</label>
+              <label for="name" class="cols-sm-2 control-label">Username</label>
               <div class="cols-sm-10">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
@@ -80,11 +80,11 @@
             </div>
 
             <div class="form-group">
-              <label for="confirm" class="cols-sm-2 control-label">Referral email</label>
+              <label for="confirm" class="cols-sm-2 control-label">Referral</label>
               <div class="cols-sm-10">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></span>
-                  <input type="text" class="form-control" name="refemail" id="refemail"  placeholder="Referral email" value="{% if referral %} {{referral}} {% endif  %}"/>
+                  <input type="text" class="form-control" name="refemail" id="refemail"  placeholder="Referral" value="{% if referral %} {{referral}} {% endif  %}"/>
                 </div>
               </div>
             </div>
@@ -123,6 +123,10 @@
             </div>
 
             <div class="form-group">
+                  <div class="col-md-12 col-sm-12 col-xs-12 captcha-new">
+                    <label for="captcha">{{a}}+{{b}}=</label>
+                    <input  type="text" name="captcha" placeholder="Answer">
+                  </div>
                   <button type="submit" class="submit-btn btn btn-lg btn-block login-button">Register</button>
             </div>
 

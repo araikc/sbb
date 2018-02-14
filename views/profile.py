@@ -188,8 +188,9 @@ def validate_deposit():
 			return make_response('error', 403)
 
 
-def __make_ref(ref, session):
+def __make_ref(ref, session, pam, ps):
 	from models import ReferralBonuses
+	from models import Referral
 	if ref:
 		parentAcc = ref.referralAccount
 		refProg = parentAcc.referralProgram
@@ -344,7 +345,7 @@ def success_deposit():
 				myRef = Referral.query.filter_by(accountId=current_user.account.id).first()
 				
 				# make referral bonuses
-				__make_ref(myRef, db.session)
+				__make_ref(myRef, db.session, pam, ps)
 
 				db.session.commit()
 				####
@@ -650,13 +651,18 @@ def confirm_withdraw():
 	form = WithdrawForm(request.form)
 	if form.validate_on_submit():
 		accWalletId = form.accWalletId.data.strip()
-		amount = form.amount.data.strip()
+		amount = float(form.amount.data.strip())
 		source = form.source.data.strip()
 
 		accW = AccountWallets.query.filter(AccountWallets.walletId==accWalletId, AccountWallets.accountId==current_user.account.id).first()
 
 		balance = None
 		if source == 'rbusd':
+			if amount < application.config['MINUSDWITHDRAW']:
+				flash('Min deposit amount is: {0}$'.format(str(application.config['MINUSDWITHDRAW'])))
+				return render_template('profile/withdraw.html', 
+								accWallets=accWallets,
+								accInvs=accInvs)
 			balance = float(current_user.account.balance)
 			if accW.wallet.paymentSystemId == 4:
 				flash('Please make sure that withdraw amout unit and wallet unit are matching')
@@ -664,6 +670,11 @@ def confirm_withdraw():
 								accWallets=accWallets,
 								accInvs=accInvs)
 		elif source == 'rbbtc':
+			if amount < application.config['MINBTCWITHDRAW']:
+				flash('Min deposit amount is: {0}B'.format(str(application.config['MINBTCWITHDRAW'])))
+				return render_template('profile/withdraw.html',
+								accWallets=accWallets,
+								accInvs=accInvs)
 			balance = float(current_user.account.bitcoin)
 			if accW.wallet.paymentSystemId == 3:
 				flash('Please make sure that withdraw amout unit and wallet unit are matching')
@@ -672,6 +683,16 @@ def confirm_withdraw():
 								accInvs=accInvs)
 		elif source.startswith('ai'):
 			accInv = AccountInvestments.query.filter_by(id=float(source[2:])).first()
+			if accInv.paymentSystemId == 4 and amount < application.config['MINBTCWITHDRAW']:
+				flash('Min deposit amount is: {0}B'.format(str(application.config['MINBTCWITHDRAW'])))
+				return render_template('profile/withdraw.html',
+								accWallets=accWallets,
+								accInvs=accInvs)
+			if accInv.paymentSystemId == 3 and amount < application.config['MINUSDWITHDRAW']:
+				flash('Min deposit amount is: {0}$'.format(str(application.config['MINUSDWITHDRAW'])))
+				return render_template('profile/withdraw.html',
+								accWallets=accWallets,
+								accInvs=accInvs)				
 			balance = float(accInv.currentBalance - accInv.initialInvestment)
 			if accInv.paymentSystemId != accW.wallet.paymentSystemId:
 				flash('Please make sure that withdraw amout unit and wallet unit are matching')
@@ -679,12 +700,12 @@ def confirm_withdraw():
 								accWallets=accWallets,
 								accInvs=accInvs)
 
-		if float(amount) <= 0:
+		if amount <= 0:
 			flash('Please specify positive amount')
 			return render_template('profile/withdraw.html', 
 								accWallets=accWallets,
 								accInvs=accInvs)
-		elif balance < float(amount):
+		elif balance < amount:
 			flash('Sepcified withdraw money greater then your balance')
 			return render_template('profile/withdraw.html', 
 								accWallets=accWallets,
