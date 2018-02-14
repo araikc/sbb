@@ -158,13 +158,13 @@ body,html{
  
   .top-navbar .navbar-right > li > a{
     color:white;
+    font-weight: 600;
 }
 
 
   .top-navbar .navbar-right > li > a:hover{
     color:#63cc88;
 }
-
 
 
 .main-area {

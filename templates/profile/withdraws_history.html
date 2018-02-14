@@ -17,19 +17,19 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>DateTime</th>
+				<th>Date<span class="hidden-xs">Time</span></th>
 				<th>Amount</th>
 				<th>Status</th>
 			</tr>
 		</thead>
 	{% for wd in withs %}
 		<tr>
-			<td>{{ wd.dateTime }}</td>
+			<td>{{ wd.dateTime | only_date}} <span class="hidden-xs">{{ wd.dateTime | only_time}}</span></td>
 			<td>{{ wd.amount }} {{wd.wallet.unit}}</td>
 			{% if wd.status == False %}
 			<td>Pending</td>
 			{% else %}
-				<td>Completed</td>
+				<td>Complet</td>
 			{% endif %}
 		</tr>
 	{% endfor %}

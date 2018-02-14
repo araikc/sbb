@@ -10,7 +10,7 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>Investment Plan</th>
+				<th>Plan</th>
 				<th>Start</th>
 				<th>End</th>
 				<th>Deposit</th>
@@ -19,8 +19,8 @@
 	{% for inv in accInvestments %}
 		<tr>
 			<td>{{ inv.investmentPlan.description }}</td>
-			<td>{{ inv.startDatetime }}</td>
-			<td> {% if inv.endDatetime == None%} -- {% else %} {{inv.endDatetime}} {% endif %}</td>
+			<td>{{ inv.startDatetime | only_date }} <span class="hidden-xs">{{ inv.startDatetime | only_time }}</span></td>
+			<td> {% if inv.endDatetime == None%} -- {% else %} {{inv.endDatetime | only_date }} <span class="hidden-xs">{{ inv.endDatetime | only_time }}</span> {% endif %}</td>
 			<td>{{ inv.initialInvestment }} {{inv.payment_unit}}</td>
 		</tr>
 	{% endfor %}

@@ -12,6 +12,8 @@
 		var maxbtc = {{ maxbtc }};
 		var minbtc = {{ minbtc }};
 
+		$('#validrange').text('[ ' + minusd + "$ - " + maxusd + '$ ]');
+
 		$("input[name=paymentSystemId]").change(function() {
 			var ps = document.getElementsByName('paymentSystemId');
 			for (var i = 0, length = ps.length; i < length; i++)
@@ -55,7 +57,7 @@
 			{% for ps in  paymentSystems %}
 			<!-- <label class="radio"> -->
 				<p>
-				<input type="radio" name="paymentSystemId" id="paymentSystemId{{ps.id}}" value="{{ps.id}}" required>
+				<input type="radio" name="paymentSystemId" id="paymentSystemId{{ps.id}}" value="{{ps.id}}" required {% if  ps.id == 3 %} checked {% endif %}>
 				<!-- {{ps.name}} -->
 				<label for="paymentSystemId{{ps.id}}">
 				{% if  ps.id == 3 %}
@@ -96,10 +98,10 @@
 					<input name="amount" id="inv-amount" type="text" required style="width: 150px; font-weight:600" value="10">
 				</div>
 				<div class="row">
-					<span class="profit-estimate" id="validrange" style="font-size: 14px;"></span>
+					<span class="profit-estimate" id="validrange" style="font-size: 14px; margin-left:20px"></span>
 				</div>
 				<div class="profits">
-						<div class="profit-estimate">
+						<div class="profit-estimate" style="font-weight:600; font-size:16px">
 							 Profit after
 						</div>
 					<div class="col-xs-6">

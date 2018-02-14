@@ -11,6 +11,10 @@ def caps(text):
 def odate(text):
     return text.strftime('%Y-%m-%d')
 
+@application.template_filter('only_time')
+def otime(text):
+    return text.strftime('%H:%M:%S')
+
 @application.template_filter('clean_float')
 def cfloat(flot):
     sflot = str(flot)

@@ -10,20 +10,20 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>DateTime</th>
+				<th>Date<span class="hidden-xs">Time</span></th>
 				<th>Activity</th>
 				<th>Status</th>
 			</tr>
 		</thead>
 	{% for act in acts %}
 		<tr>
-			<td>{{ act.execDatetime }}</td>
+			<td>{{ act.execDatetime | only_date}} <span class="hidden-xs">{{ act.execDatetime | only_time}}</span></td>
 			{% if act.transactionTypeId == 3 or act.transactionTypeId == 5 %}
 				<td>{{ act.transactionType.name }} | {{ act.amount }} {{act.unit}}</td>
 				{% if act.status == False%}
 				<td>Pending</td>
 				{% else %}
-					<td>Completed</td>
+					<td>Complet</td>
 				{% endif %}
 			{% else %}
 			<td>{{ act.transactionType.name }}</td>
