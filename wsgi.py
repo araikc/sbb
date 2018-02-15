@@ -17,6 +17,9 @@ curDir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, curDir)
 
 from sbb import application
+from sbb import scheduler
+
+scheduler.start()
 
 #
 # Below for testing only

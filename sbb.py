@@ -80,7 +80,7 @@ def reward_investments():
     	db.session.add(ai)
 	db.session.commit()    
 
-scheduler.start()
+#scheduler.start()
 
 
 ###############################
