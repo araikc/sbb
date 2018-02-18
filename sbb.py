@@ -80,6 +80,11 @@ def reward_investments():
     	db.session.add(ai)
 	db.session.commit()    
 
+
+@scheduler.scheduled_job('cron', id="ping_id", day='*', hour='*', minute='0-59', second=0)
+def ping_mysql():
+    pass 
+
 #scheduler.start()
 
 
