@@ -16,6 +16,8 @@ from pytz import utc
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
+import logging
+logging.basicConfig(filename="application.log", level=logging.DEBUG)
 
 import datetime
 import time
@@ -50,6 +52,8 @@ login_manager.login_view = 'home.login'
 # debuging
 dtb = DebugToolbarExtension(application)
 
+# logger
+logger = logging.getLogger('application')
 
 ########## Scheduler ##########
 
@@ -67,23 +71,23 @@ job_defaults = {
 }
 scheduler = BackgroundScheduler(jobstores=jobstores, executors=executors, job_defaults=job_defaults, timezone=utc)
 
-@scheduler.scheduled_job('cron', id="job_id", day='*', hour=0, minute=0, second=0)
+@scheduler.scheduled_job('cron', id="job_id", day='*', hour='*', minute=0, second=0)
 def reward_investments():
-    #print('Tick! The time is: %s' % datetime.now())
-    from models import AccountInvestments
-    from sbb import db
+	#print('Tick! The time is: %s' % datetime.now())
+	from models import AccountInvestments
+	from sbb import db
 
-    accInvs = AccountInvestments.query.filter_by(isActive=1).all()
-    for ai in accInvs:
-    	perc = ai.investmentPlan.percentage
-    	ai.currentBalance += float(float(ai.initialInvestment/100)*perc)
-    	db.session.add(ai)
-	db.session.commit()    
+	accInvs = AccountInvestments.query.filter_by(isActive=1).all()
+	for ai in accInvs:
+		perc = ai.investmentPlan.percentage
+		ai.currentBalance += float(float(ai.initialInvestment/100)*perc)
+		db.session.add(ai)
+	db.session.commit()
 
 
-@scheduler.scheduled_job('cron', id="ping_id", day='*', hour='*', minute='0-59', second=0)
+@scheduler.scheduled_job('cron', id="ping_id", day='*', hour='*', minute='*', second=0)
 def ping_mysql():
-    pass 
+	pass
 
 #scheduler.start()
 
