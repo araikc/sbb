@@ -2,6 +2,22 @@
 	"use strict";
 
     jQuery(document).ready(function($){
+
+      // When the user clicks on <span> (x), close the modal
+      $('.imgDialogClose').on('click', function() { 
+          var modal = document.getElementById('imgModal');
+          modal.style.display = "none";
+      });
+
+      $('#regNumber').on('click', function() {
+          var modalImg = document.getElementById("img01");
+          var captionText = document.getElementById("caption");
+          captionText.innerHTML = "Company registration number";
+          modalImg.src = "static/img/client1.png";
+          var modal = document.getElementById('imgModal');
+          modal.style.display = "block";
+      });
+
 /*--theme swither activation--*/
         
         // $(window).click(function() {

@@ -1,182 +1,474 @@
 {% extends "layout.html" %}
 {% block main %}
 
+<style>
+#regNumber {
+    cursor: pointer;
+    color: #63cc88;
+}
+
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+</style>
+
      <!--header section start-->
       <section class="breadcrumb-section contact-bg section-padding">
       <div class="container">
           <div class="row">
               <div class="col-md-6 col-md-offset-3 text-center">
                   <h1>Faq</h1>
-                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  </p>
               </div>
           </div>
       </div>
       </section><!--Header section end-->
 
-      <!--faq page content start-->
-    <section class="section-padding padding-top-0 faq-page">
-         <div class="container">
-             <div class="row">
-              <div class="col-md-12">
-              <div class="clearfix"></div>
-              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                <div class="panel panel-default">
-                  <div class="panel-heading" role="tab" id="headingOne">
-                    <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#generalOne" aria-expanded="true" >
-                      What is Loem ipsum ?
-                    </a>
-                  </h4>
-                  </div>
-                  <div id="generalOne" class="panel-collapse collapse in" role="tabpanel" >
-                    <div class="panel-body">
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-                      on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                      raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore VHS.
-                    </div>
-                  </div>
-                </div>
-                <div class="panel panel-default">
-                  <div class="panel-heading" role="tab" id="headingTwo">
-                    <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalTwo" aria-expanded="true" >
-                      Why everyone use lorem ipsum ?
-                    </a>
-                  </h4>
-                  </div>
-                  <div id="generalTwo" class="panel-collapse collapse " role="tabpanel" >
-                    <div class="panel-body">
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-                      on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                      raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore VHS.
-                    </div>
-                  </div>
-                </div>
-                <div class="panel panel-default">
-                  <div class="panel-heading" role="tab" id="headingfive">
-                    <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalThree" aria-expanded="true" >
-                      How Can I get the lorem text ?
-                    </a>
-                  </h4>
-                  </div>
-                  <div id="generalThree" class="panel-collapse collapse " role="tabpanel" >
-                    <div class="panel-body">
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-                      on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                      raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore VHS.
-                    </div>
-                  </div>
-                </div>
-                <div class="panel panel-default">
-                  <div class="panel-heading" role="tab" id="headingFour">
-                    <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalfour" aria-expanded="true" >
-                      What is LoremIpsum text ?
-                    </a>
-                  </h4>
-                  </div>
-                  <div id="generalfour" class="panel-collapse collapse " role="tabpanel" >
-                    <div class="panel-body">
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-                      on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                      raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore VHS.
-                    </div>
-                  </div>
-                </div>
-                <div class="panel panel-default">
-                  <div class="panel-heading" role="tab" id="headingseven">
-                    <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generaleight" aria-expanded="true" >
-                      What is domain ?
-                    </a>
-                  </h4>
-                  </div>
-                  <div id="generaleight" class="panel-collapse collapse " role="tabpanel" >
-                    <div class="panel-body">
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-                      on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                      raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore VHS.
-                    </div>
-                  </div>
-                </div>
-                <div class="panel panel-default">
-                  <div class="panel-heading" role="tab" id="headingnine">
-                    <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalfive" aria-expanded="true">
-                      What Is Hosting?
-                    </a>
-                  </h4>
-                  </div>
-                  <div id="generalfive" class="panel-collapse collapse " role="tabpanel" >
-                    <div class="panel-body">
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-                      on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                      raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore VHS.
-                    </div>
-                  </div>
-                </div>
-                <div class="panel panel-default">
-                  <div class="panel-heading" role="tab" id="headingeight">
-                    <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalsix" aria-expanded="true" >
-                      How Can I Deploy Laravel APPS?
-                    </a>
-                  </h4>
-                  </div>
-                  <div id="generalsix" class="panel-collapse collapse " role="tabpanel" >
-                    <div class="panel-body">
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-                      on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                      raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore VHS.
-                    </div>
-                  </div>
-                </div>
-                <div class="panel panel-default">
-                  <div class="panel-heading" role="tab" id="headingten">
-                    <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalseven" aria-expanded="true">
-                      What the name of best hosting ?
-                    </a>
-                  </h4>
-                  </div>
-                  <div id="generalseven" class="panel-collapse collapse " role="tabpanel" >
-                    <div class="panel-body">
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-                      on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                      raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore VHS.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              </div>
-             </div>
-        </div>
-</section>
 
-    <!--pament method section start-->
-<!--     <section class="section-padding payment-method payment-bg">
-           <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <div class="section-title text-center">
-                         <h2>payment method</h2>
-                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                     </div>
-                </div>
-            </div>
-            <div class="row text-center wow fadeInLeft">
-                <div class="col-md-12">
-                    <div class="payment-logo">
-                        <img src="static/img/client3.png"  alt="Payment Method Logo">
-                        <img src="static/img/client4.png"  alt="Payment Method Logo">
-                        <img src="static/img/client2.png"  alt="Payment Method Logo">
-                        <img src="static/img/client1.png"  alt="Payment Method Logo">
+   <div class="row text-center wow fadeInUp">
+      <div class="col-md-12">
+          <ul class="nav nav-tabs deposit-tabs" >
+              <li class="active"><a href="#general" data-toggle="tab">GENERAL</a></li>
+              <li><a href="#investing" data-toggle="tab">INVESTING</a></li>
+              <li><a href="#investers" data-toggle="tab">REFERRAL</a></li>
+              <li><a href="#investers" data-toggle="tab">OTHER</a></li>
+          </ul>
+          <div class="tab-content">
+              <div class="tab-pane fade in active" id="general">
+                <section class="section-padding padding-top-0 faq-page" style="padding-top:50px">
+                     <div class="container">
+                         <div class="row">
+                          <div class="col-md-12">
+                          <div class="clearfix"></div>
+                          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#generalOne" aria-expanded="true" >
+                                   What is Solarbit?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="generalOne" class="panel-collapse collapse in" role="tabpanel" >
+                                <div class="panel-body">
+                                  Solarbit is an online investment platform that was developed by Solarbit Limited. It is registered in the UK (registration number <span id="regNumber">#10929901</span>) and regulated under the financial laws of the Great Britain. This information can be verified on the British government registrar’s <a href="http://googl.com" target="_blank">website</a>. Our legal address is: TBD
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalTwo" aria-expanded="true" >
+                                  What do I need to do to become a client of Solarbit Limited?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="generalTwo" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  To become a client of Solarbit Limited you need to open an account. Registering an account is completely free and will take only a few minutes. After this you can officially become a member and will be able to execute your investment strategies. To learn more about this, please visit this page <a href="/about" target="_blank"> Get Started</a>.
+                                  Please note that by agreeing to the Terms of Use during the registration you automatically confirm that you are of legal age in your country of residence and that by using our platform you don’t violate any laws of your country of residence.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingfive">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalThree" aria-expanded="true" >
+                                  Can I have several open accounts in the system?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="generalThree" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  Each investor can legally register only one account, where he/she can create an unlimited number of deposits. Registering multiple accounts is prohibited. We will freeze any funds and block access to all such accounts. In case of suspected fraud or suspected creation of multiple accounts, Solarbit Limited reserves the right to block such accounts or prevent account access for violating investors.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingFour">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalfour" aria-expanded="true" >
+                                  How can I access the account?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="generalfour" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  If you are a registered user of Solarbit Limited, please click the <a href="login" target="_blank" >“Login”</a> button at the top of the website, enter your username and password in the appropriate fields and click "Log in" button. You will be automatically redirected to your account right away. If you have not registered yet, you should <a href="register" target="_blank"> register</a> a new account first.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingseven">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generaleight" aria-expanded="true" >
+                                  What should I do immediately after accessing my account?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="generaleight" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  You can explore the system functions, set up your personal information and specify your payment system details. You can enter your e-wallet details by clicking the <a href="wallets" target="_blank"> "Wallets"</a> button. Please note that payment details are saved permanently, and you can change them only by contacting our customer support. This is a precaution, to protect your investment in case of unauthorized access to your accounts.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingnine">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalfive" aria-expanded="true">
+                                  What if I can't log into my account because I forgot my password?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="generalfive" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  You can use password restore function - we will send you an email to your registered email with detailed instructions and a password reset/change form. If you did not receive the email, please contact us via send message to our customer support from <a href="contact" target="_blank">contacts</a> page or directly to support@solarbit.biz.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingeight">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalsix" aria-expanded="true" >
+                                  I can't log in into my account. What could cause this problem?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="generalsix" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  Sometimes these problems are caused by errors of your web browser. There are no reasons to worry, please wait a few minutes and then try to log in again. Failing that please clear your web browser cache. If the problem persists, please contact us via <a href="contact" target="_blank">contacts</a> page or send message to our customer support at support@solarbit.biz.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingten">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalseven" aria-expanded="true">
+                                  How secure is your website and my account data?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="generalseven" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  We have a wide range of security measures to protect your account. Our website is protected against DDoS attacks, all transferred data are SSL-encrypted. We use a licensed script for transactions together with online security certificates, you are able to see full list on our main page. Our website is located on a dedicated server.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                         </div>
                     </div>
-                </div>
-            </div>
-         </div>
-    </section> --><!--pament method section end-->
+                </section>
+              </div>
+              
+              <div class="tab-pane fade in" id="investing">
+                <section class="section-padding padding-top-0 faq-page" style="padding-top:50px">
+                     <div class="container">
+                         <div class="row">
+                          <div class="col-md-12">
+                          <div class="clearfix"></div>
+                          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#invOne" aria-expanded="true" >
+                                   Which e-currencies do you accept?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="invOne" class="panel-collapse collapse in" role="tabpanel" >
+                                <div class="panel-body">
+                                  We accept:
+                                      Bitcoin
+                                      AdvCash
+                                      Payeer
+                                      Perfect Money
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#invTwo" aria-expanded="true" >
+                                  What is the minimum/maximum amount that I can invest?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="invTwo" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  The minimum amount of investment is only 0.005 BTC, 20 USD.
+                                  The maximum amount is only limited by your own resources. Each investor can have an unlimited number of deposits.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingfive">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#invThree" aria-expanded="true" >
+                                  What is the minimum/maximum amount that I can cash out?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="invThree" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  There are no maximum limits on cash-outs, minimal amount is 0.005 BTC, 20 USD.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingFour">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#invfour" aria-expanded="true" >
+                                  How can I top up my account and create a deposit in the Solarbit Limited?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="invfour" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  Navigate to Make Deposit page from left menu bar then you can select the top-up method which is the most convenient for you, enter the desired amount, and complete the transfer. The deposit will be registered automatically.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingseven">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#inveight" aria-expanded="true" >
+                                  How soon will my deposit be added to my account?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="inveight" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  Your deposit will be created automatically after 3 confirmations in Blockchain network in case of BTC and imediatelly by using USD.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingnine">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#invfive" aria-expanded="true">
+                                  Can I invest several deposits at once?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="invfive" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  Yes, you can have an unlimited number of deposits and all of them will be proccessed under current investment plan.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingeight">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#invsix" aria-expanded="true" >
+                                  Can I deposit directly from my referral bonuses?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="invsix" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  You can make a deposit from your referral bonusses. Simply log into your member account, click <a href="makedeposit" target="_blank"> "Make Deposit"</a> and invest.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingten">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#invseven" aria-expanded="true">
+                                  After I make a withdrawal request, when will the funds be available on my e-currency account?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="invseven" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  As a rule, we’re trying to process withdrawals as fast as possible. Your funds will be available in a few hours. Maximum processing time is 72 hours.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingten">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#invseven1" aria-expanded="true">
+                                  What could be the reason for the delay more than 72 hours?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="invseven1" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  There can be several reasons for the delay:
+                                  • Your e-wallet data is either missing or incorrect.
+                                  • In rare cases (e.g. force majeure, technical failure, suspicion of fraud), the payment may take more than 72 hours to process.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingten">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#invseven2" aria-expanded="true">
+                                  How can I check my account balance?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="invseven2" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  You can access your account information 24/7 on your member account page.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingten">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#invseven3" aria-expanded="true">
+                                  No money has been credited to my wallet. What can I do?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="invseven3" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  You should immediately contact our customer support at support@solarbit.biz or via contact page.
+                                </div>
+                              </div>
+                            </div>                                                        
+                          </div>
+                          </div>
+                         </div>
+                    </div>
+                </section>
+              </div>
+
+              <div class="tab-pane fade in" id="investers">
+                <section class="section-padding padding-top-0 faq-page" style="padding-top:50px">
+                     <div class="container">
+                         <div class="row">
+                          <div class="col-md-12">
+                          <div class="clearfix"></div>
+                          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#generalOne" aria-expanded="true" >
+                                   What is Solarbit?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="generalOne" class="panel-collapse collapse in" role="tabpanel" >
+                                <div class="panel-body">
+                                  Solarbit is an online investment platform that was developed by Solarbit Limited. It is registered in the UK (registration number <span id="regNumber">#10929901</span>) and regulated under the financial laws of the Great Britain. This information can be verified on the British government registrar’s <a href="http://googl.com" target="_blank">website</a>. Our legal address is: TBD
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalTwo" aria-expanded="true" >
+                                  What do I need to do to become a client of Solarbit Limited?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="generalTwo" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  To become a client of Solarbit Limited you need to open an account. Registering an account is completely free and will take only a few minutes. After this you can officially become a member and will be able to execute your investment strategies. To learn more about this, please visit this page <a href="/about" target="_blank"> Get Started</a>.
+                                  Please note that by agreeing to the Terms of Use during the registration you automatically confirm that you are of legal age in your country of residence and that by using our platform you don’t violate any laws of your country of residence.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingfive">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalThree" aria-expanded="true" >
+                                  Can I have several open accounts in the system?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="generalThree" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  Each investor can legally register only one account, where he/she can create an unlimited number of deposits. Registering multiple accounts is prohibited. We will freeze any funds and block access to all such accounts. In case of suspected fraud or suspected creation of multiple accounts, Solarbit Limited reserves the right to block such accounts or prevent account access for violating investors.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingFour">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalfour" aria-expanded="true" >
+                                  How can I access the account?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="generalfour" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  If you are a registered user of Solarbit Limited, please click the <a href="login" target="_blank" >“Login”</a> button at the top of the website, enter your username and password in the appropriate fields and click "Log in" button. You will be automatically redirected to your account right away. If you have not registered yet, you should <a href="register" target="_blank"> register</a> a new account first.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingseven">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generaleight" aria-expanded="true" >
+                                  What should I do immediately after accessing my account?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="generaleight" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  You can explore the system functions, set up your personal information and specify your payment system details. You can enter your e-wallet details by clicking the <a href="wallets" target="_blank"> "Wallets"</a> button. Please note that payment details are saved permanently, and you can change them only by contacting our customer support. This is a precaution, to protect your investment in case of unauthorized access to your accounts.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingnine">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalfive" aria-expanded="true">
+                                  What if I can't log into my account because I forgot my password?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="generalfive" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  You can use password restore function - we will send you an email to your registered email with detailed instructions and a password reset/change form. If you did not receive the email, please contact us via send message to our customer support from <a href="contact" target="_blank">contacts</a> page or directly to support@solarbit.biz.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingeight">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalsix" aria-expanded="true" >
+                                  I can't log in into my account. What could cause this problem?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="generalsix" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  Sometimes these problems are caused by errors of your web browser. There are no reasons to worry, please wait a few minutes and then try to log in again. Failing that please clear your web browser cache. If the problem persists, please contact us via <a href="contact" target="_blank">contacts</a> page or send message to our customer support at support@solarbit.biz.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading" role="tab" id="headingten">
+                                <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#generalseven" aria-expanded="true">
+                                  How secure is your website and my account data?
+                                </a>
+                              </h4>
+                              </div>
+                              <div id="generalseven" class="panel-collapse collapse " role="tabpanel" >
+                                <div class="panel-body">
+                                  We have a wide range of security measures to protect your account. Our website is protected against DDoS attacks, all transferred data are SSL-encrypted. We use a licensed script for transactions together with online security certificates, you are able to see full list on our main page. Our website is located on a dedicated server.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                         </div>
+                    </div>
+                </section>
+              </div>
+
+          </div>
+      </div>
+  </div>
 
 
 {% endblock %}
