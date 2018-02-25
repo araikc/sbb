@@ -71,7 +71,7 @@ job_defaults = {
 }
 scheduler = BackgroundScheduler(jobstores=jobstores, executors=executors, job_defaults=job_defaults, timezone=utc)
 
-@scheduler.scheduled_job('cron', id="job_id", day='*', hour='*', minute=0, second=0)
+@scheduler.scheduled_job('cron', id="job_id", day='*', hour=0, minute=0, second=0, start_date='2018-02-24 00:00:00')
 def reward_investments():
 	#print('Tick! The time is: %s' % datetime.now())
 	from models import AccountInvestments
@@ -84,13 +84,7 @@ def reward_investments():
 		db.session.add(ai)
 	db.session.commit()
 
-
-@scheduler.scheduled_job('cron', id="ping_id", day='*', hour='*', minute='*', second=0)
-def ping_mysql():
-	pass
-
-#scheduler.start()
-
+scheduler.start()
 
 ###############################
 
