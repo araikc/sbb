@@ -27,6 +27,14 @@ def service():
 def terms():
 		return render_template('home/terms.html')
 
+@home.route('/privacy')
+def privacy():
+		return render_template('home/privacy.html')
+
+@home.route('/antispam')
+def antispam():
+		return render_template('home/antispam.html')
+
 @home.route('/about')
 def about():
 		return render_template('home/about.html')
