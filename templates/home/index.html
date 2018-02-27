@@ -1,5 +1,13 @@
 {% extends "layout.html" %}
 {% block main %}
+
+<style>
+    #regNumber {
+        cursor: pointer;
+        color: #63cc88;
+    }
+</style>
+
     <!--header section start-->
 	<section class="header-section ">
     	<div class="head-slider">
@@ -43,7 +51,7 @@
                 <div class="col-md-6 col-md-offset-3">
                     <div class="section-title text-center">
                          <h2>ABOUT US</h2>
-                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                         <br>
                      </div>
                 </div>
             </div>
@@ -54,39 +62,53 @@
                     
                     <div class="col-xs-6 index-about-us">
                         <div class="row" style="padding-left:20px;padding-right:30px;">
-                            <h2 style="color:#959595;  padding-left:10px; font-size:22px; ">We</h2>
+                            <h2 style="color:#959595;  padding-left:10px; font-size:22px; ">Solarbit</h2>
                         </div>
                         <div class="">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Solarbit was founded at the end of 2012. The founders of our company are specialists from various fields who got to know each other by using the same platform while investing in cryptocurrency and business development...</p>
                         </div>
                         <div class="profit-estimate">
                             <a href="{{url_for('home.about')}}" class="btn btn-home">More details</a>
                         </div>
+                        <div class="profit-estimate">
+                            <br>
+                            <p>Invest your money with professionals and join the successful investor community ad SolarBit.</p>
+                            <div style="border:2px dashed gray; padding:10px; height:90px">
+                                <div style="float:left">
+                                    <img src="static/img/uklogo.gif" style="height:70px; width:70px;">
+                                </div>
+                                <div style="font-size:16px; line-height:1; padding-left:10px">
+                                    <b>REGISTERED UK COMPANY</b>
+                                    <p>SolarBit is registered in the UK.</p>
+                                    <p>Company number is: <span id="regNumber">#111111</span></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                    <div class="col-xs-2 index-plan-percent">
                         <div class="row" style="padding-left:20px;padding-right:30px;">
-                            <h2 style="color:#959595;  padding-left:10px; font-size:22px;" >Daily</h2>
+                            <h2 style="color:#959595;  padding-left:30px; font-size:22px;" > Daily</h2>
                         </div>
                         <div class="numberCircle">3%</div>
                     </div>                    
                     <div class="col-xs-4 current-plan" >
                         <div class="row" style="padding-left:20px;padding-right:30px;">
-                            <h2 style="color:#959595;  padding-left:10px; font-size:22px;">Current plan</h2>
+                            <h2 style="color:#959595;  padding-left:10px; font-size:28px;">Current plan</h2>
                         </div>
-                        <h5 style="color:#959595;  padding-left:10px; font-size:14px; float:left">Percent</h5>
-                        <h5 style="color:#63cc88;  padding-left:10px; font-size:14px; text-align:right">3%</h5>
+                        <h5 style="color:#959595;  padding-left:10px; font-size:18px; float:left">Percent</h5>
+                        <h5 style="color:#22b368;  padding-left:10px; font-size:18px; text-align:right">3%</h5>
                         <hr style="width:95%;  margin-top:-30px; border: 1px solid #e4e4e4;">  
-                        <h5 style="color:#959595;  padding-left:10px; font-size:14px; float:left">Withdraw</h5>
-                        <h5 style="color:#63cc88;  padding-left:10px; font-size:14px; text-align:right">Manual</h5>
+                        <h5 style="color:#959595;  padding-left:10px; font-size:18px; float:left">Withdraw</h5>
+                        <h5 style="color:#22b368;  padding-left:10px; font-size:18px; text-align:right">Manual</h5>
                         <hr style="width:95%;  margin-top:-30px; border: 1px solid #e4e4e4;">   
-                        <h5 style="color:#959595;  padding-left:10px; font-size:14px; float:left">Withdraw period</h5>
-                        <h5 style="color:#63cc88;  padding-left:10px; font-size:14px; text-align:right">24h</h5>
+                        <h5 style="color:#959595;  padding-left:10px; font-size:18px; float:left">Withdraw period</h5>
+                        <h5 style="color:#22b368;  padding-left:10px; font-size:18px; text-align:right">24h</h5>
                         <hr style="width:95%;  margin-top:-30px; border: 1px solid #e4e4e4;">   
-                        <h5 style="color:#959595;  padding-left:10px; font-size:14px; float:left">Deposit duration</h5>
-                        <h5 style="color:#63cc88;  padding-left:10px; font-size:14px; text-align:right">Unlimit</h5>
+                        <h5 style="color:#959595;  padding-left:10px; font-size:18px; float:left">Deposit duration</h5>
+                        <h5 style="color:#22b368;  padding-left:10px; font-size:18px; text-align:right">Unlimit</h5>
                         <hr style="width:95%;  margin-top:-30px; border: 1px solid #e4e4e4;">
-                        <h5 style="color:#959595;  padding-left:10px; font-size:14px; float:left">Return deposit body</h5>
-                        <h5 style="color:#63cc88;  padding-left:10px; font-size:14px; text-align:right">No</h5>
+                        <h5 style="color:#959595;  padding-left:10px; font-size:18px; float:left">Return deposit body</h5>
+                        <h5 style="color:#22b368;  padding-left:10px; font-size:18px; text-align:right">No</h5>
                     </div>
                     <hr style="width:95%; margin-top:90px">
             </div>
@@ -180,6 +202,7 @@
                            <h4>REFERRAL SYSTEM</h4>
                             <p>We offer a Three level affiliate program as an advanced earning option for you!</p>
                             <br>
+                            <br>
                         </div>
                         <div class="column-right last wow fadeInRight">
                               <div class="what-icon">
@@ -189,6 +212,28 @@
                             <p>We work on the principe of Minimum Risk Maximum Return, to get the best out of the market for you!</p>
                         </div>
                     </div>
+                     <div class="what-we-do-wrapper">
+                        <div class="column-left last wow fadeInLeft">
+                        <div class="what-icon">
+                            <img src="static/img/profit.jpg" alt="Top Sponsor">
+                           </div>
+                           <h4>MAXIMUM PROFIT</h4>
+                            <p>Your capital investment with SolarBit gets you 3% guaranted daily net profit!</p>
+                        </div>
+                        <div class="column-center last"><div class="what-icon">
+                               <img src="static/img/endless.png" alt="Top Sponsor">
+                           </div>
+                           <h4>ENDLESS INCOME</h4>
+                            <p>Having invested once, your income is streaming at your wallet daily. Lifetime ...</p>
+                        </div>
+                        <div class="column-right last wow fadeInRight">
+                              <div class="what-icon">
+                               <img src="static/img/partners.png" alt="Top Sponsor">
+                           </div>
+                           <h4>STRONG PARTNERS</h4>
+                            <p>Invite your friends and colleagues, help SolarBit grow bigger and get 10% bonus from all investments made by your affiliates.</p>
+                        </div>
+                    </div>                    
                  </div>
              </div>
         </div>
