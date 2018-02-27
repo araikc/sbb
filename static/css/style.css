@@ -2514,6 +2514,11 @@ Swhitcher Css
     }*/
 }
 
+.regCompany {
+    font-size:16px; 
+    line-height:1;
+}
+
 @media (max-width: 425px) { 
     .numberCircle {
         margin-left:33%;
@@ -2524,6 +2529,9 @@ Swhitcher Css
     .numberCircle {
         margin-left:28%;
     }
+    .regCompany {
+        font-size:14px; 
+    }    
 }
 
 
