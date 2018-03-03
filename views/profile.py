@@ -537,9 +537,19 @@ def referrals():
 	from models import Account
 	from models import ReferralBonuses
 	from models import ReferralProgram
+	from models import AccountInvestments
 
 	rp1 = ReferralProgram.query.filter_by(id=1).first()
 	rp2 = ReferralProgram.query.filter_by(id=2).first()
+
+	usdInv = AccountInvestments.query.filter_by(accountId=current_user.account.id, isActive=1, payment_unit="USD").first()
+	btcInv = AccountInvestments.query.filter_by(accountId=current_user.account.id, isActive=1, payment_unit="USD").first()
+
+	allowVIP = False
+	if usdInv != None and float(usdInv.initialInvestment) >= 125:
+		allowVIP = True
+	elif btcInv != None and float(usdInv.initialInvestment) >= 0.0125:
+		allowVIP = True
 
 	data = []
 	for rb in current_user.account.referralBonuses.order_by(ReferralBonuses.dateTime.desc()).limit(5):
@@ -554,7 +564,8 @@ def referrals():
 	return render_template('profile/referrals.html', 
 							referrals=data,
 							refprog=rp1, 
-							viprefprog=rp2)
+							viprefprog=rp2,
+							allowVIP=allowVIP)
 
 @userprofile.route('/wallets', methods=['GET', 'POST'])
 @login_required
@@ -615,7 +626,6 @@ def wallets():
 @login_required
 @check_confirmed
 def withdraw():
-	from sbb import db
 	from models import Wallet
 	from models import AccountInvestments
 
@@ -822,7 +832,7 @@ def make_withdraw():
 			#return render_template('profile/withdraws_history.html',
 			#					withs=withs,
 			#					sent=True)
-			flash("You have successfully sent withdraw request. Our backoffice team will withdraw to you wallet during 12 hours.")
+			flash("You have successfully sent withdraw request. Our backoffice team will withdraw to you wallet during 24 hours.")
 			return redirect(url_for('userprofile.withdraws_history'))
 	else:
 		flash('Please recheck your input data')

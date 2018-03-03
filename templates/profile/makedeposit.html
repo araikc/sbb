@@ -16,17 +16,29 @@
 
 		$("input[name=paymentSystemId]").change(function() {
 			var ps = document.getElementsByName('paymentSystemId');
+			var sign = "$";
 			for (var i = 0, length = ps.length; i < length; i++)
 			{
 				if (ps[i].checked && (ps[i].value == 4 || ps[i].value == 2)) 
 				{
 					$('#validrange').text('[ ' + minbtc + "Ƀ - " + maxbtc + 'Ƀ ]');
+					sign = "Ƀ";
 				}
 				else if (ps[i].checked && (ps[i].value == 1 || ps[i].value == 3))
 				{
 					$('#validrange').text('[ ' + minusd + "$ - " + maxusd + '$ ]');
+					sign = "$";
 				}
 			}
+			var cur1 = $('#prof-value1').text();
+			cur1 = cur1.substring(1, cur1.length);
+			var cur2 = $('#prof-value1').text();
+			cur2 = cur2.substring(1, cur2.length);
+			var cur3 = $('#prof-value1').text();
+			cur3 = cur3.substring(1, cur3.length);			
+			$('#prof-value1').text(sign.concat(cur1));
+			$('#prof-value2').text(sign.concat(cur2));
+			$('#prof-value3').text(sign.concat(cur3));
 		});
 
     });
@@ -117,13 +129,13 @@
 					</div>
 					<div class="col-xs-6">
 						<div class="profit-estimate">
-							<span id="prof-value1" class="profit1">0.3</span>
+							<span id="prof-value1" class="profit1">$ 0.3</span>
 						</div>
 						<div class="profit-estimate">
-							<span id="prof-value2" class="profit2">9</span>
+							<span id="prof-value2" class="profit2">$ 9</span>
 						</div>
 						<div class="profit-estimate">
-							<span id="prof-value3" class="profit3">109.5</span>
+							<span id="prof-value3" class="profit3">$ 109.5</span>
 						</div>
 					</div>
 				</div>

@@ -17,21 +17,37 @@
 <div class="row">
 	<div class="col-xs-6">
 		<div {% if g.user.account.referralProgramId == 1 %} class="referr-prog-active" {% else %} class="referr-prog" {% endif %}><i class="fa fa-users"></i>
-		<p style="font-size:16px; font-weight:600">Referral program</p>
-		<p style="font-size:12px; font-weight:600">Invite your friends to register new account with your referral link and start to earn money for free.</p>
-		<p style="font-size:12px; font-weight:600">{{ refprog.level1 }}% of amount invested by your referred friend.</p>
-		<p style="font-size:12px; font-weight:600">{{ refprog.level2 }}% of amount invested by your 2nd layer friend.</p>
-		<p style="font-size:12px; font-weight:600">{{ refprog.level3 }}% of amount invested by your 3th layer friend.</p>
+			<p style="font-size:16px; font-weight:600">Referral program</p>
+			<div class="hidden-xs">
+				<p style="font-size:12px; font-weight:600">Invite your friends to register new account with your referral link and start to earn money for free.</p>
+				<p style="font-size:12px; font-weight:600">{{ refprog.level1 }}% of amount invested by your referred friend.</p>
+				<p style="font-size:12px; font-weight:600">{{ refprog.level2 }}% of amount invested by your 2nd layer friend.</p>
+				<p style="font-size:12px; font-weight:600">{{ refprog.level3 }}% of amount invested by your 3th layer friend.</p>
+			</div>
+			<div class="hidden-md hidden-sm hidden-lg">
+				<p style="font-size:12px; font-weight:600">Invite your friends to earn money for free.</p>
+				<p style="font-size:12px; font-weight:600">{{ refprog.level1 }}%-{{ refprog.level2 }}%-{{ refprog.level3 }}%</p>
+			</div>
 		</div>
 		
 	</div>
 	<div class="col-xs-6">
 		<div {% if g.user.account.referralProgramId == 1 %} class="referr-prog" {% else %} class="referr-prog-active" {% endif %}><i class="fa fa-users"></i>
-		<p style="font-size:16px; font-weight:600">VIP Referral program</p>
-		<p style="font-size:12px; font-weight:600">Deposit min 500$ and join VIP referral program.</p>
-		<p style="font-size:12px; font-weight:600">{{ viprefprog.level1 }}% of amount invested by your referred friend.</p>
-		<p style="font-size:12px; font-weight:600">{{ viprefprog.level2 }}% of amount invested by your 2nd layer friend.</p>
-		<p style="font-size:12px; font-weight:600">{{ viprefprog.level3 }}% of amount invested by your 3th layer friend.</p>
+			<div class="hidden-xs">
+				<p style="font-size:16px; font-weight:600">VIP Referral program</p>
+				<p style="font-size:12px; font-weight:600">Deposit min 125$ (or 0.0125Ƀ) and join VIP referral program (email request).</p>
+				<p style="font-size:12px; font-weight:600">{{ viprefprog.level1 }}% of amount invested by your referred friend.</p>
+				<p style="font-size:12px; font-weight:600">{{ viprefprog.level2 }}% of amount invested by your 2nd layer friend.</p>
+				<p style="font-size:12px; font-weight:600">{{ viprefprog.level3 }}% of amount invested by your 3th layer friend.</p>
+			</div>
+			<div class="hidden-md hidden-sm hidden-lg">
+				<p style="font-size:16px; font-weight:600">VIP program</p>
+				<p style="font-size:12px; font-weight:600">Deposit min 125$(or 0.0125Ƀ) and join VIP program (email request).</p>
+				<p style="font-size:12px; font-weight:600">{{ viprefprog.level1 }}%-{{ viprefprog.level2 }}%-{{ viprefprog.level3 }}%</p>
+			</div>
+			{% if g.user.account.referralProgramId == 1 %}
+				<a class="btn btn-profile btn-small" {% if not allowVIP %} href="" disabled {% else %} href=" {{ url_for('home.contact') }} " {% endif %}>Join</a>
+			{% endif %}
 		</div>
 	</div>
 	<hr style="width:95%; margin-top:5px">
