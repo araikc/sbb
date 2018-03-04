@@ -10,7 +10,7 @@ from forms import csrf
 from werkzeug.contrib.fixers import ProxyFix
 from views.home import home
 from views.profile import userprofile
-from views.admin import MyAdminIndexView, UserModelView, AccountModelView, WithdrawModelView
+from views.admin import MyAdminIndexView, UserModelView, AccountModelView, WithdrawModelView, PageDataModelView
 
 from pytz import utc
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -127,6 +127,8 @@ from models import Account
 admin.add_view(AccountModelView(Account, db.session))
 from models import Withdraws
 admin.add_view(WithdrawModelView(Withdraws, db.session))
+from models import PageData
+admin.add_view(PageDataModelView(PageData, db.session))
 
 # register views
 application.register_blueprint(home)

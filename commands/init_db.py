@@ -12,6 +12,7 @@ from models import PaymentSystems
 from models import InvestmentPlan
 from models import AccountWallets
 from models import TransactionType
+from models import PageData
 
 
 
@@ -26,6 +27,18 @@ def init_db():
     db.drop_all()
     db.create_all()
     create_admin_users()
+    create_page_data()
+
+
+def create_page_data():
+    members = PageData('members', "300")
+    invs = PageData('invested', "1200")
+    wths = PageData('withdraw', "300")
+
+    db.session.add(members)
+    db.session.add(invs)
+    db.session.add(wths)
+    db.session.commit()
 
 
 def create_admin_users():
@@ -69,7 +82,7 @@ def create_user(account):
 def craete_utils():
 
     # refereal program
-    rp = ReferralProgram("10-1-1", 10, 2, 1)
+    rp = ReferralProgram("10-1-1", 10, 1, 1)
     db.session.add(rp)
     rp1 = ReferralProgram("15-2-1", 15, 2, 1)
     db.session.add(rp1)

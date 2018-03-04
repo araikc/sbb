@@ -14,10 +14,16 @@ def index():
 	# if current_user.is_authenticated:
 	# 	return redirect(url_for('userprofile.dashboard'))
 	# else:
+	from models import PageData
+
+	members = PageData.query.filter_by(name='members').first()
+	invested = PageData.query.filter_by(name='invested').first()
+	withdraw = PageData.query.filter_by(name='withdraw').first()
+
 	ref = request.args.get('ref')
 	if ref != None:
 		session['referral'] = ref
-	return render_template('home/index.html')
+	return render_template('home/index.html', members=members.value, invested=invested.value, withdraw=withdraw.value)
 
 @home.route('/service')
 def service():

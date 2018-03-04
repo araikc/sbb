@@ -285,8 +285,13 @@ class Withdraws(db.Model):
         self.walletId=walletId
 
 
+class PageData(db.Model):
+    __tablename__ = "pagedata"
 
+    name  = db.Column(db.String(30), primary_key=True)
+    value = db.Column(db.String(50), nullable=False, default='')
 
-
-
+    def __init__(self, name, value):
+        self.name=name
+        self.value=value
 

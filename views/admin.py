@@ -132,3 +132,10 @@ class WithdrawModelView(sqla.ModelView):
     def is_accessible(self):
         return g.user.is_authenticated and g.user.role == 'admin'
 
+
+class PageDataModelView(sqla.ModelView):
+
+    def is_accessible(self):
+        return g.user.is_authenticated and g.user.role == 'admin'
+
+    column_display_pk = True
