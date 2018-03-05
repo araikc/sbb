@@ -35,14 +35,14 @@
 		<div {% if g.user.account.referralProgramId == 1 %} class="referr-prog" {% else %} class="referr-prog-active" {% endif %}><i class="fa fa-users"></i>
 			<div class="hidden-xs">
 				<p style="font-size:16px; font-weight:600">VIP Referral program</p>
-				<p style="font-size:12px; font-weight:600">Deposit min 125$ (or 0.0125Ƀ) and join VIP referral program (email request).</p>
+				<p style="font-size:12px; font-weight:600">Deposit min 125<span class="fa fa-usd"></span> (or 0.0125<span class="fa fa-btc"></span>) and join VIP referral program (email request).</p>
 				<p style="font-size:12px; font-weight:600">{{ viprefprog.level1 }}% of amount invested by your referred friend.</p>
 				<p style="font-size:12px; font-weight:600">{{ viprefprog.level2 }}% of amount invested by your 2nd layer friend.</p>
 				<p style="font-size:12px; font-weight:600">{{ viprefprog.level3 }}% of amount invested by your 3th layer friend.</p>
 			</div>
 			<div class="hidden-md hidden-sm hidden-lg">
 				<p style="font-size:16px; font-weight:600">VIP program</p>
-				<p style="font-size:12px; font-weight:600">Deposit min 125$(or 0.0125Ƀ) and join VIP program (email request).</p>
+				<p style="font-size:12px; font-weight:600">Deposit min 125<span class="fa fa-usd"></span>(or 0.0125<span class="fa fa-btc"></span>) and join VIP program (email request).</p>
 				<p style="font-size:12px; font-weight:600">{{ viprefprog.level1 }}%-{{ viprefprog.level2 }}%-{{ viprefprog.level3 }}%</p>
 			</div>
 			{% if g.user.account.referralProgramId == 1 %}

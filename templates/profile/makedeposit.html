@@ -30,15 +30,15 @@
 					sign = "$";
 				}
 			}
-			var cur1 = $('#prof-value1').text();
-			cur1 = cur1.substring(1, cur1.length);
-			var cur2 = $('#prof-value1').text();
-			cur2 = cur2.substring(1, cur2.length);
-			var cur3 = $('#prof-value1').text();
-			cur3 = cur3.substring(1, cur3.length);			
-			$('#prof-value1').text(sign.concat(cur1));
-			$('#prof-value2').text(sign.concat(cur2));
-			$('#prof-value3').text(sign.concat(cur3));
+
+			if (sign == '$') {
+				$('.cur-sign').removeClass('fa-btc');
+				$('.cur-sign').addClass('fa-usd');
+			} else {
+				$('.cur-sign').removeClass('fa-usd');
+				$('.cur-sign').addClass('fa-btc');
+			} 
+
 		});
 
     });
@@ -90,11 +90,11 @@
 			<div style="margin-top:10px">
 				<p>
 					<input type="radio" name="paymentSystemId" id="paymentSystemIdusd" value="1" required {% if g.user.account.balance == 0 %} disabled {% endif %}>
-					<label for="paymentSystemIdusd" class="radiotext">{{g.user.account.balance}}<span>$</span>
+					<label for="paymentSystemIdusd" class="radiotext">{{g.user.account.balance}}<span class="fa fa-usd"></span>
 				</p>
 				<p>
 					<input type="radio" name="paymentSystemId" id="paymentSystemIdbtc" value="2" required {% if g.user.account.bitcoin == 0 %} disabled {% endif %}>
-					<label for="paymentSystemIdbtc" class="radiotext bit">{{g.user.account.bitcoin}}<span>Ƀ</span>
+					<label for="paymentSystemIdbtc" class="radiotext bit">{{g.user.account.bitcoin}}<span class="fa fa-btc"></span>
 				</p>
 			</div>
 
@@ -129,13 +129,13 @@
 					</div>
 					<div class="col-xs-6">
 						<div class="profit-estimate">
-							<span id="prof-value1" class="profit1">$ 0.3</span>
+							<span class="fa fa-usd cur-sign"></span><span id="prof-value1" class="profit1">0.3</span>
 						</div>
 						<div class="profit-estimate">
-							<span id="prof-value2" class="profit2">$ 9</span>
+							<span class="fa fa-usd cur-sign"></span><span id="prof-value2" class="profit2">9</span>
 						</div>
 						<div class="profit-estimate">
-							<span id="prof-value3" class="profit3">$ 109.5</span>
+							<span class="fa fa-usd cur-sign"></span><span id="prof-value3" class="profit3">109.5</span>
 						</div>
 					</div>
 				</div>

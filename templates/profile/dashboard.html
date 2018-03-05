@@ -19,8 +19,8 @@
 				</div>
 				<div class="col-xs-6">
 					<div class="account_numbers">
-						<p>{{g_invusd}}<span>$</span></p>
-						<p  class="bit">{{g_invbtc}}<span>Ƀ</span></p>
+						<p>{{g_invusd}}<span class="fa fa-usd"></span></p>
+						<p  class="bit">{{g_invbtc}}<span class="fa fa-btc"></span></p>
 					</div>
 				</div>
 				<div>
@@ -37,8 +37,8 @@
 				</div>
 				<div class="col-xs-6">
 					<div class="account_numbers">
-						<p>{{w_amount_usd}}<span>$</span></p>
-						<p  class="bit">{{w_amount_btc}}<span>Ƀ</span></p>
+						<p>{{w_amount_usd}}<span class="fa fa-usd"></span></p>
+						<p  class="bit">{{w_amount_btc}}<span class="fa fa-btc"></span></p>
 					</div>
 				</div>
 				<div>
@@ -56,8 +56,8 @@
 				</div>
 				<div class="col-xs-6">
 					<div class="account_numbers">
-						<p>{{g.user.account.balance}}<span>$</span></p>
-						<p  class="bit">{{g.user.account.bitcoin}}<span>Ƀ</span></p>
+						<p>{{g.user.account.balance}}<span class="fa fa-usd"></span></p>
+						<p  class="bit">{{g.user.account.bitcoin}}<span class="fa fa-btc"></span></p>
 					</div>
 				</div>
 				<div>
@@ -75,8 +75,8 @@
 				</div>
 				<div class="col-xs-6">
 					<div class="account_numbers">
-						<p>{{g_ernusd}}<span>$</span></p>
-						<p  class="bit">{{g_ernbtc}}<span>Ƀ</span></p>
+						<p>{{g_ernusd}}<span class="fa fa-usd"></span></p>
+						<p  class="bit">{{g_ernbtc}}<span class="fa fa-btc"></span></p>
 					</div>
 				</div>
 <!-- 				<div>
@@ -128,17 +128,17 @@
 				<div class="col-xs-4">
 					<div class="account_detail_section">
 							{% if inv.paymentSystemId == 2 or inv.paymentSystemId == 4 %}
-								<p class="bit">{{inv.initialInvestment}}<span>Ƀ</span></p>
+								<p class="bit">{{inv.initialInvestment}}<span class="fa fa-btc"></span></p>
 							{% else %}
-								<p class="usd">{{inv.initialInvestment}}<span>$</span></p>
+								<p class="usd">{{inv.initialInvestment}}<span class="fa fa-usd"></span></p>
 							{% endif %}
 					</div>
 
 					<div class="account_detail_section">
 							{% if inv.paymentSystemId == 2 or inv.paymentSystemId == 4 %}
-								<p class="bit">{{inv.currentBalance}}<span>Ƀ</span></p>
+								<p class="bit">{{inv.currentBalance}}<span class="fa fa-btc"></span></p>
 							{% else %}
-								<p class="usd">{{inv.currentBalance}}<span>$</span></p>
+								<p class="usd">{{inv.currentBalance}}<span class="fa fa-usd"></span></p>
 							{% endif %}
 					</div>
 					<div class="account_detail_section">

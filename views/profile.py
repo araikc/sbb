@@ -850,8 +850,17 @@ def withdraws_history():
 
 	withs = current_user.account.withdraws.order_by(Withdraws.dateTime.desc()).limit(5)
 
-	if request.method == 'GET':
-		return render_template('profile/withdraws_history.html', 
+	return render_template('profile/withdraws_history.html', 
 								withs=withs,
 								sent=False)
+
+
+@userprofile.route('/banners', methods=['GET'])
+@login_required
+@check_confirmed
+def banners():
+
+	return render_template('profile/banners.html')
+
+
 
