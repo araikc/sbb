@@ -57,27 +57,19 @@
 		</div> 
 	</div>
 
-	<!-- <div class="alerts"> -->
 	{% with messages = get_flashed_messages() %}
 	  {% if messages %}
-	    <!-- <ul class="flash"> -->
 	    {% for message in messages %}
 	    <div class="alert alert-info fade in alert-dismissable" id="flash-alert">
 	    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
 		  <strong>Info!</strong> {{message}}
 		</div>
-	      <!-- <li>{{ message }}</li> -->
 	    {% endfor %}
-	    <!-- </ul> -->
 	  {% endif %}
 	{% endwith %}
-	<!-- </div> -->
 
 	<div class="main-area">
 		<nav class="navbar navbar-default sidebar" role="navigation">
-<!-- 				<div class="close_menu">
-		      		<span class="showopacity glyphicon glyphicon-transfer"></span>
-		      	</div> -->
 		    <div class="container-fluid">
 		      <ul class="nav left-side-nav">
 
@@ -96,38 +88,8 @@
 
 		<div class="main">
 			{% block body %}{% endblock %}
-<!-- 		    <footer class="footer-section section-padding padding-bottom-0 text-center">
-		           <div class="container">
-		               <div class="row ">
-		                   <div class="col-md-6 col-md-offset-3">
-		                       <div class="footer-logo">
-		                           <a href="index.html"><img src="static/img/footer-logo.png" alt="Footer Logo"></a>
-		                       </div>
-		                       <p class="footer-text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-		                   </div>
-		               </div>
-		               <div class="row">
-		               <div class="col-md-4 col-md-offset-4">
-		                  <div class="footer-social-link">
-		                      <h3>Follow Us on</h3>
-		                      <div class="social-link">
-		                          <a href=""><i class="fa fa-facebook"></i></a>
-		                          <a href=""><i class="fa fa-twitter"></i></a>
-		                          <a href=""><i class="fa fa-behance"></i></a>
-		                          <a href=""><i class="fa fa-instagram"></i></a>
-		                          <a href=""><i class="fa fa-pinterest"></i></a>
-		                      </div>
-		                  </div>
-		               </div>
-		               </div>
-		           </div>
-
-		    </footer> -->
 		</div>
 	</div>
-<!-- 	<div class="footer-bottom">
-       <p class="copyright-text">COPY RIGHTS &copy; 2018. ALL RIGHTS RESERVED </p>
-   	</div> -->
 
 <script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
 <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
