@@ -467,15 +467,15 @@ input::-webkit-inner-spin-button {
     margin-left:10px;
 }
 
-.profit-estimate > span.profit1 {
+.profit-estimate > span#prof-value1 {
     font-size: 16px;
     font-weight: 400;
 }
-.profit-estimate > span.profit2 {
+.profit-estimate > span#prof-value2 {
     font-size: 22px;
     font-weight: 500;
 }
-.profit-estimate > span.profit3 {
+.profit-estimate > span#prof-value3 {
     font-size: 24px;
     font-weight: 600;
 }
