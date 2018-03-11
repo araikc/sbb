@@ -252,7 +252,7 @@ input[type="email"] {
 
 .slicknav_menu{
         display: none;
-        background: #00B356;
+        background: #444;
     }
 
 .about-community .section-title p {
@@ -419,7 +419,7 @@ Main Menu CSS
 }
 
 .main-menu.nav-fixed .logo img {
-    height: 50px;
+    /*height: 50px;*/
 }
 
 .main-menu.nav-fixed ul li {
@@ -484,7 +484,7 @@ Main Menu CSS
       background: transparent;
       position: absolute;
       left: 4px;
-      top: 3px;
+      top: 8px;
       width: 134px;
       display: none;
     }
@@ -1545,7 +1545,7 @@ Footer Section CSS
     padding-bottom: 24px;
 }
 .footer-logo img {
-    height: 80px;
+    /*height: 80px;*/
 }
 
 .not-active {

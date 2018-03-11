@@ -102,7 +102,7 @@
 
     <!--mobile logo -->
     <div class="mobile-logo">
-        <a href="{{url_for('home.index')}}"><img src="static/img/mobile-logo.png" alt="Logo Image Will Be Here"></a>
+        <a href="{{url_for('home.index')}}"><img src="static/img/mobile-logo.png" alt="SolarBit"></a>
     </div>
 
 	 <!--main menu start-->
@@ -111,29 +111,29 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="logo">
-                        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="Logo Image Will Be Here"></a> -->
-                        <a href="{{url_for('home.index')}}">SolarBit</a>
+                    <!-- <a href="index.html"><img src="assets/img/logo.png" alt="Logo Image Will Be Here"></a> -->
+                    <a href="{{url_for('home.index')}}"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="SolarBit"></a>
                     </div>
                     
-    <div class="select-language big-lang" id="lang-select">
-        <div class="language-href"><a href="javascript:void(0);"><i class="flag flag_en"></i>ENG</a></div>
-        <div class="language-tab">
-            <ul class="language-list">
-                <li>
-                    <a href="?language=en"><i class="flag flag_en"></i>ENG</a>
-                </li>
-                <li>
-                    <a  class="disabled" href="?language=ru"><i class="flag flag_ru"></i>RUS</a>
-                </li>
-                <li>
-                    <a class="disabled" href="?language=de"><i class="flag flag_de"></i>DEU</a>
-                </li>
-                <li>
-                    <a class="disabled" href="?language=es"><i class="flag flag_ge"></i>ESP</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+                    <div class="select-language big-lang" id="lang-select">
+                        <div class="language-href"><a href="javascript:void(0);"><i class="flag flag_en"></i>ENG</a></div>
+                        <div class="language-tab">
+                            <ul class="language-list">
+                                <li>
+                                    <a href="?language=en"><i class="flag flag_en"></i>ENG</a>
+                                </li>
+                                <li>
+                                    <a  class="disabled" href="?language=ru"><i class="flag flag_ru"></i>RUS</a>
+                                </li>
+                                <li>
+                                    <a class="disabled" href="?language=de"><i class="flag flag_de"></i>DEU</a>
+                                </li>
+                                <li>
+                                    <a class="disabled" href="?language=es"><i class="flag flag_ge"></i>ESP</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-8 text-right">
                     
@@ -223,7 +223,7 @@
              <div class="col-xs-3 footer-delimeter">
                 <div style=" border-right:1px solid #7e7b79;">
                   <div class="footer-logo">
-                      <a href="index.html"><img src="static/img/footer-logo.png" alt="Footer Logo"></a>
+                      <a href="index.html"><img src="static/img/logo.png" alt="Footer Logo"></a>
                   </div>
                     <div style="text-align:left">
                       <p style="font-size:16px; font-weight:500; color:white; font-family:'Poppins', sans-serif; margin-bottom: 0px;">150 New Bond Street, Mayfair, London, <br> United Kingdom, W1S 2TU</p>
