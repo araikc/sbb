@@ -18,9 +18,8 @@
         <div class="row">
              <div class="col-md-6 col-md-offset-3">
       <div class="main-login main-center">
-        <a href="index.html"><img src="assets/img/logo.png" alt="Logo Image Will Be Here"></a>
+        <a href="index.html"><img src="static/img/logo.png" alt="Logo Image Will Be Here"></a>
           <form action="{{ url_for('home.register') }}" method=post class="form-horizontal">
-            <h2>Sign up for SolarBit </h2>
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 
             <div class="form-group">

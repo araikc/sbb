@@ -18,7 +18,7 @@
     <div class="row">
        <div class="col-md-6 col-md-offset-3">
          <div class="main-login main-center">
-        <a href="index.html"><img src="assets/img/logo.png" alt="Logo Image Will Be Here"></a>
+        <a href="index.html"><img src="static/img/logo.png" alt="Logo Image Will Be Here"></a>
           <form action="{{url_for('home.send_reset_pass')}}" method=post class="form-horizontal">
             <p>Please specify email and we will send you a link to reset password</p>
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
