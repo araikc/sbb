@@ -27,7 +27,7 @@
 						{% for ai in  accInvs %}
 						<p>
 							<input type="radio" name="source" value="ai{{ai.id}}" id="ai{{ai.id}}" required {% if ai.currentBalance - ai.initialInvestment == 0 %} disabled {% endif %}>
-							<label for="ai{{ai.id}}"{% if ai.paymentSystemId==2 or ai.paymentSystemId==4 %} class="bit" {% endif %}>{{ai.currentBalance - ai.initialInvestment}}{% if ai.paymentSystemId==3 or ai.paymentSystemId==1 %}<span class="fa fa-usd"></span>{% else %}<span class="fa fa-btc"></span>{% endif %}
+							<label for="ai{{ai.id}}"{% if ai.paymentSystemId==2 or ai.paymentSystemId==4 %} class="bit" {% endif %} {% if ai.currentBalance - ai.initialInvestment == 0 %} style="opacity:0.5" {% endif %}>{{ai.currentBalance - ai.initialInvestment}}{% if ai.paymentSystemId==3 or ai.paymentSystemId==1 %}<span class="fa fa-usd"></span>{% else %}<span class="fa fa-btc"></span>{% endif %}
 						</p>
 						{% endfor %}
 						{% else %}
@@ -40,11 +40,11 @@
 					<div style="margin-left:20px">
 						<p>
 							<input type="radio" name="source" id="source1" value="rbusd" required {% if g.user.account.balance == 0 %} disabled {% endif %}>
-							<label for="source1">{{g.user.account.balance}}<span class="fa fa-usd"></span></label>
+							<label for="source1" {% if g.user.account.balance == 0 %} style="opacity:0.5" {% endif %}>{{g.user.account.balance}}<span class="fa fa-usd"></span></label>
 						</p>
 						<p>
 							<input type="radio" name="source" id="source2" value="rbbtc" required {% if g.user.account.bitcoin == 0 %} disabled {% endif %}>
-							<label for="source2" class="bit">{{g.user.account.bitcoin}}<span class="fa fa-btc"></span></label>
+							<label for="source2" class="bit" {% if g.user.account.bitcoin == 0 %} style="opacity:0.5" {% endif %}>{{g.user.account.bitcoin}}<span class="fa fa-btc"></span></label>
 						</p>
 					</div>
 				</div>

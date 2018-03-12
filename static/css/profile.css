@@ -251,6 +251,10 @@ body,html{
   color: #868886;
 }
 
+.disabled-obj {
+  opacity: 0.5;
+}
+
 @media (max-width: 600px) {
   .pm-img {
     content:url("/static/img/perfectmoneyicon.png");
