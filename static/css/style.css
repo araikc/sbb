@@ -838,7 +838,27 @@ What We Do CSS
 	}
 }
 
+/*@media (max-width: 768px) {
+    .mycontainer {
+        width: 100% !important;
+    }
+}*/
+
+.logoClass {
+    width: 150px;
+    height: 30px;
+    content:url("/static/img/logo.png");
+}
   
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .logoClass {
+        width: 30px;
+        height: 30px;
+        content:url("/static/img/fevicon.png");
+    }
+}
+
 /*==================
 Service Section CSS
 ===================*/
