@@ -4,7 +4,49 @@
 <div class="row">
 	<h2 style="color:#959595;  padding-left:10px">BANNERS</h2>
 	<hr style="width:100%">
+
+	<div class="bannerItem">
+		<div style="margin-bottom:10px">
+			<img src="{{ url_for('static', filename='img/banner_125x125 pix.png') }}">
+		</div>
+		<input class="amount-input" type="text" id="copyInput1" value='<a href="{{url}}?ref={{current_user.username}}"><img src="{{url}}static/img/banner_125x125 pix.png"></a>' readonly="" style="width:80% !important;">
+		<button class="btn btn-profile btn-small" onClick="copyToClip('copyInput1')" style="height:52px; width:80px">Copy</button>
+		<hr style="width:90%">
+	</div>
+	<div class="bannerItem">
+		<div style="margin-bottom:10px">
+			<img src="{{ url_for('static', filename='img/banner_250x300 pix.png') }}">
+		</div>
+		<input class="amount-input" type="text" id="copyInput2" value='<a href="{{url}}?ref={{current_user.username}}"><img src="{{url}}static/img/banner_250x300 pix.png"></a>' readonly="" style="width:80% !important;">
+		<button class="btn btn-profile btn-small" onClick="copyToClip('copyInput2')" style="height:52px; width:80px">Copy</button>
+		<hr style="width:90%">
+	</div>
+	<div class="bannerItem">
+		<div style="margin-bottom:10px">
+			<img src="{{ url_for('static', filename='img/banner_468x60 pix.png') }}">
+		</div>
+		<input class="amount-input" type="text" id="copyInput3" value='<a href="{{url}}?ref={{current_user.username}}"><img src="{{url}}static/img/banner_468x60 pix.png"></a>' readonly="" style="width:80% !important;">
+		<button class="btn btn-profile btn-small" onClick="copyToClip('copyInput3')" style="height:52px; width:80px">Copy</button>
+		<hr style="width:90%">
+	</div>
+	<div class="bannerItem">
+		<div style="margin-bottom:10px">
+			<img src="{{ url_for('static', filename='img/banner_600x160 pix.png') }}">
+		</div>
+		<input class="amount-input" type="text" id="copyInput3" value='<a href="{{url}}?ref={{current_user.username}}"><img src="{{url}}static/img/banner_600x160 pix.png"></a>' readonly="" style="width:80% !important;">
+		<button class="btn btn-profile btn-small" onClick="copyToClip('copyInput3')" style="height:52px; width:80px">Copy</button>
+		<hr style="width:90%">
+	</div>
+	<div class="bannerItem">
+		<div style="margin-bottom:10px">
+			<img src="{{ url_for('static', filename='img/banner_728x90 pix.png') }}">
+		</div>
+		<input class="amount-input" type="text" id="copyInput3" value='<a href="{{url}}?ref={{current_user.username}}"><img src="{{url}}static/img/banner_728x90 pix.png"></a>' readonly="" style="width:80% !important;">
+		<button class="btn btn-profile btn-small" onClick="copyToClip('copyInput3')" style="height:52px; width:80px">Copy</button>
+		<hr style="width:90%">
+	</div>
 </div>
 
+<script src="{{ url_for('static', filename='js/common.js')}}"></script>
 
 {% endblock %}

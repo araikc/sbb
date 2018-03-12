@@ -859,8 +859,8 @@ def withdraws_history():
 @login_required
 @check_confirmed
 def banners():
-
-	return render_template('profile/banners.html')
+	url = request.url_root
+	return render_template('profile/banners.html', url=url)
 
 
 
