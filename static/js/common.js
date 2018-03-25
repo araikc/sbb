@@ -1,7 +1,14 @@
-function copyToClip() {
-  var copyText = document.getElementById("js-copyInput");
-  copyText.select();
-  document.execCommand("Copy");
+function copyToClip(name) {
+  if (name == undefined || name == '') {
+   	var copyText = document.getElementById("js-copyInput");
+  	copyText.select();
+  	document.execCommand("Copy"); 	
+  } else {
+  	var copyText = document.getElementById(name);
+  	copyText.select();
+  	document.execCommand("Copy"); 	
+  }
+
 }
 
 // function preloader(){
