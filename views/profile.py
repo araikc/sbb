@@ -139,11 +139,16 @@ def confirm_deposit():
 @userprofile.route('/validate_deposit', methods=['POST'])
 @csrf.exempt
 def validate_deposit():
+	from sbb import logger
 	if request.method == 'POST':
 
-		req_ip = request.remote_addr
+		if request.headers.getlist("X-Forward-For"):
+			req_ip = request.headers.getlist("X-Forward-For")[0]
+		else:
+			req_ip = request.remote_addr
 
 		if str(req_ip) not in ['77.109.141.170', '91.205.41.208', '94.242.216.60', '78.41.203.75']:
+			#logger.info('step 3')
 			return make_response('error', 400)
 
 		form = request.form
@@ -156,7 +161,6 @@ def validate_deposit():
 		pracc = form.get('PAYER_ACCOUNT', None)
 		ts = form.get('TIMESTAMPGMT', None)
 		v2 = form.get('V2_HASH', None)
-
 
 		if pid and pyacc and pam and pu and pbn and pracc and ts and v2:
 			from sbb import application
