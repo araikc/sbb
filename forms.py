@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm as Form
-from wtforms import StringField, PasswordField, TextAreaField, SelectField, RadioField, TextField, FieldList, FormField, IntegerField
+from wtforms import BooleanField, StringField, PasswordField, TextAreaField, SelectField, RadioField, TextField, FieldList, FormField, IntegerField
 from wtforms.validators import Length, Email, DataRequired, EqualTo, NumberRange, Optional, Regexp
 from flask_wtf.csrf import CSRFProtect
 
@@ -17,7 +17,7 @@ class RegistrationForm(LoginForm):
     pin_number = StringField('Pin number', validators=[DataRequired(), Regexp(regex="\d{4}", message="PIN number should be number with 4 digits")])
     fb = StringField('Facebook', validators=[Optional()])
     skype = StringField('Skype name', validators=[Optional()])
-    accept = StringField('Accept', validators=[DataRequired()])
+    accept = BooleanField('Accept', validators=[DataRequired()])
 
 class RequestResetPassordForm(Form):
     email = StringField('E-mail', validators=[Email(), DataRequired()])
