@@ -210,7 +210,7 @@ def login():
 			login_act.transactionType = tr
 			db.session.add(login_act)
 			db.session.commit()
-			return redirect(request.args.get('next') or url_for('userprofile.dashboard'))
+			return redirect(request.args.get('next') or url_for('userprofile.dashboard', _external=True, _scheme='https'))
 		else:
 			flash("Wrong captcha")
 	flash_errors(form)
