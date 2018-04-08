@@ -15,7 +15,7 @@
 	<!-- Perfect money data -->
     <input type="hidden" name="PAYMENT_AMOUNT" value="{{amount}}">
     <input type="hidden" name="PAYMENT_UNITS" value="{{unit}}">
-    <input type="hidden" name="PAYMENT_URL" value="{{request.host_url}}success_ref_deposit">
+    <input type="hidden" name="PAYMENT_URL" value="{{dn}}success_ref_deposit">
     <input type="hidden" name="PAYMENT_URL_METHOD" value="POST">
     <input type="hidden" name="SUGGESTED_MEMO" value="Invoice {{depId}}, {{g.user.username}}">
     <input type="hidden" name="PAYMENT_ID" value="{{depId}}">

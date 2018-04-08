@@ -121,14 +121,16 @@ def confirm_deposit():
 										paymentSystem=ps,
 										amount=amount,
 										depId=dep_act.id,
-										unit=dep_act.unit)
+										unit=dep_act.unit,
+dn=application.config['DOMAIN_NAME'])
 			else:
 				return render_template('profile/confirm_deposit.html',
 										invPlan=ip,
 										paymentSystem=ps,
 										amount=amount,
 										depId=dep_act.id,
-										unit=dep_act.unit)
+										unit=dep_act.unit,
+dn=application.config['DOMAIN_NAME'])
 		else:
 			flash('Invalid data supplied in deposit form {} - {}'.format(psid, amount))
 			return redirect(url_for('userprofile.makedeposit'))

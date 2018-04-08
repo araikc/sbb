@@ -20,6 +20,7 @@ class Config(object):
     MAIL_DEFAULT_SENDER = "info@solarbit.biz"
 
 class ProductionConfig(Config):
+    DOMAIN_NAME = "https://www.solarbit.biz"
     DEBUG = False
     MAIL_SERVER = "smtp.zoho.com"
     MAIL_PORT = 465
@@ -45,6 +46,7 @@ class ProductionConfig(Config):
     # MINBTCDEPOSIT = 0.0025
 
 class DevelopConfig(Config):
+    DOMAIN_NAME = "http://127.0.0.1"
     DEBUG = False
     ASSETS_DEBUG = True
     MAIL_SERVER = "smtp.zoho.com"
