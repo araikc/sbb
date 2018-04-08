@@ -74,7 +74,7 @@ def contact():
 				from lib.email2 import send_email
 				html = render_template('home/contact_email.html', name=name, email=email, message=message)
 				subject = "Contact email: {}".format(name)
-				send_email("info@solarbit.biz", subject, html, application.config)
+				send_email("admin@solarbit.biz", subject, html, application.config)
 			else:
 				flash("Please fill all fields.")
 		else:
