@@ -3,6 +3,14 @@
 
     jQuery(document).ready(function($){
 
+        $("#pin_number").keyup(function(e){
+          var txtVal = $(this).val();  
+           if(txtVal.length>4)
+           {
+               $(this).val(txtVal.substring(0,4) )
+           }
+        });
+
       // When the user clicks on <span> (x), close the modal
       $('.imgDialogClose').on('click', function() { 
           var modal = document.getElementById('imgModal');
