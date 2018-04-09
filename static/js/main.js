@@ -53,15 +53,30 @@
         });
 
         $("#calc-amount").on("change paste keyup", function() {
-           $('#calc-out').text( ($('#calc-amount').val()/100) * $('#calc-percent').val() * $('#calc-days').val() );
+          var perc = $('#calc-percent').val();
+           var p = perc.slice(-1);
+           if (p === '%') {
+            perc = perc.slice(0, perc.length-1);
+           }
+           $('#calc-out').text( ($('#calc-amount').val()/100) * perc * $('#calc-days').val() );
         });
 
         $("#calc-percent").on("change paste keyup", function() {
-           $('#calc-out').text(($('#calc-amount').val()/100)*$('#calc-percent').val()*$('#calc-days').val());
+          var perc = $('#calc-percent').val();
+           var p = perc.slice(-1);
+           if (p === '%') {
+            perc = perc.slice(0, perc.length-1);
+           }
+           $('#calc-out').text(($('#calc-amount').val()/100)*perc*$('#calc-days').val());
         });
 
         $("#calc-days").on("change paste keyup", function() {
-           $('#calc-out').text(($('#calc-amount').val()/100)*$('#calc-percent').val()*$('#calc-days').val());
+          var perc = $('#calc-percent').val();
+           var p = perc.slice(-1);
+           if (p === '%') {
+            perc = perc.slice(0, perc.length-1);
+           }
+           $('#calc-out').text(($('#calc-amount').val()/100)*perc*$('#calc-days').val());
         });
 
         $(document).on('click','.left-menu-btn',function(){
