@@ -615,13 +615,13 @@ def wallets():
 					else:
 						# remove wallet
 						AccountWallets.query.filter_by(accountId=current_user.account.id, walletId=wallet.id).delete()
-
-
 				w['value'] = www
 			db.session.commit()
+			flash('Wallets successfully saved!')
 			return render_template('profile/wallets.html', 
 									wallets=wlist)
 		else:
+			flash('Something goes wrong. Please try again.')
 			return render_template('profile/wallets.html', 
 								wallets=wlist)
 	else:
