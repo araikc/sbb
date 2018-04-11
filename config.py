@@ -15,7 +15,7 @@ class Config(object):
     DEBUG_TB_INTERCEPT_REDIRECTS = False
     TEMPLATES_AUTO_RELOAD = True
     SESSION_TIMEOUT = 30
-    ADMIN_EMAIL = "info@solarbit.biz"
+    ADMIN_EMAIL = "admin@solarbit.biz"
     SECURITY_PASSWORD_SALT = "112233445566778899"
     MAIL_DEFAULT_SENDER = "info@solarbit.biz"
 
