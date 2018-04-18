@@ -220,7 +220,7 @@ def __make_ref(ref, session, pam, ps):
 			parentAcc = parentRef.referralAccount
 			refProg = parentAcc.referralProgram
 			perc = int(refProg.level2)
-			refBon = ReferralBonuses(current_user.account.id, pam, float(pam * perc  / 100), 1)
+			refBon = ReferralBonuses(current_user.account.id, pam, float(pam * perc  / 100), 2)
 			refBon.earnedAccount = parentAcc
 			refBon.payed = True
 			session.add(refBon)
@@ -238,7 +238,7 @@ def __make_ref(ref, session, pam, ps):
 				parentAcc = grandRef.referralAccount
 				refProg = parentAcc.referralProgram
 				perc = int(refProg.level3)
-				refBon = ReferralBonuses(current_user.account.id, pam, float(pam * perc  / 100), 1)
+				refBon = ReferralBonuses(current_user.account.id, pam, float(pam * perc  / 100), 3)
 				refBon.earnedAccount = parentAcc
 				refBon.payed = True
 				session.add(refBon)
